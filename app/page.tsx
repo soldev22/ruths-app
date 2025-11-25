@@ -6,7 +6,7 @@ export default function Home() {
       </h1>
 
       <p className="mt-4 text-lg">
-        If you see this deployed on Vercel, plumbing works end-to-end.
+        If you see this deployed on Vercel, from github.
       </p>
     </main>
   );
