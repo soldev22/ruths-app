@@ -15,7 +15,7 @@ export default function AuthPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -32,18 +32,22 @@ export default function AuthPage() {
       });
 
       const data = await res.json();
+      console.log("Auth response:", res.status, data);
 
       if (!res.ok) {
         setError(data.error || "Something went wrong");
       } else {
         if (mode === "login") {
-          setMessage("Login successful!");
-          // TODO: redirect to dashboard
+          setMessage("✅ Login successful. Redirecting…");
+          // Instant redirect to home (which will greet the user)
+          window.location.href = "/";
         } else {
-          setMessage("Account created! You can now log in.");
+          setMessage("✅ Account created! Switch to Log In and sign in.");
+          setMode("login");
         }
       }
     } catch (err) {
+      console.error("Auth error", err);
       setError("Network error");
     } finally {
       setLoading(false);
@@ -61,33 +65,43 @@ export default function AuthPage() {
         {/* Toggle */}
         <div className="flex mb-6">
           <button
-            className={`flex-1 py-2 rounded-l-lg border ${
+            type="button"
+            className={`flex-1 py-2 rounded-l-lg border text-sm font-medium ${
               mode === "login"
                 ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-700"
+                : "bg-white text-gray-700 border-gray-300"
             }`}
-            onClick={() => setMode("login")}
+            onClick={() => {
+              setMode("login");
+              setError(null);
+              setMessage(null);
+            }}
           >
             Log In
           </button>
 
           <button
-            className={`flex-1 py-2 rounded-r-lg border ${
+            type="button"
+            className={`flex-1 py-2 rounded-r-lg border text-sm font-medium ${
               mode === "register"
                 ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-700"
+                : "bg-white text-gray-700 border-gray-300"
             }`}
-            onClick={() => setMode("register")}
+            onClick={() => {
+              setMode("register");
+              setError(null);
+              setMessage(null);
+            }}
           >
             Register
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Show name only for register */}
+          {/* Name only for register */}
           {mode === "register" && (
             <input
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border rounded-lg px-3 py-2 text-sm"
               placeholder="Name (optional)"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -95,7 +109,7 @@ export default function AuthPage() {
           )}
 
           <input
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded-lg px-3 py-2 text-sm"
             placeholder="Email"
             type="email"
             required
@@ -104,7 +118,7 @@ export default function AuthPage() {
           />
 
           <input
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded-lg px-3 py-2 text-sm"
             placeholder="Password"
             type="password"
             required
@@ -115,21 +129,30 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white rounded-lg py-2 font-semibold disabled:opacity-60"
+            className="w-full bg-blue-600 text-white rounded-lg py-2 font-semibold disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {loading
-              ? mode === "login"
-                ? "Logging in..."
-                : "Creating account..."
-              : mode === "login"
-              ? "Log In"
-              : "Register"}
+            {loading ? (
+              <>
+                <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                <span className="text-sm">
+                  {mode === "login" ? "Logging in..." : "Creating account..."}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm">
+                {mode === "login" ? "Log In" : "Register"}
+              </span>
+            )}
           </button>
         </form>
 
-        {/* Messages */}
-        {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
-        {message && <p className="mt-4 text-sm text-green-600">{message}</p>}
+        {/* Error / success messages */}
+        {error && (
+          <p className="mt-4 text-sm text-red-600 text-center">{error}</p>
+        )}
+        {message && (
+          <p className="mt-4 text-sm text-green-600 text-center">{message}</p>
+        )}
       </div>
     </main>
   );

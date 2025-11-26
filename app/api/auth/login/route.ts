@@ -21,11 +21,6 @@ export async function POST(req: Request) {
 
     const user = await User.findOne({ email });
 
-    console.log("LOGIN ATTEMPT", {
-      email,
-      userExists: !!user,
-    });
-
     if (!user) {
       return NextResponse.json(
         { error: "Invalid email or password" },
@@ -35,12 +30,6 @@ export async function POST(req: Request) {
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    console.log("PASSWORD CHECK", {
-      email,
-      isMatch,
-      storedPasswordSample: String(user.password).slice(0, 15) + "...",
-    });
-
     if (!isMatch) {
       return NextResponse.json(
         { error: "Invalid email or password" },
@@ -48,22 +37,27 @@ export async function POST(req: Request) {
       );
     }
 
-    const token = jwt.sign(
-      { userId: user._id.toString() },
-      JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ userId: user._id.toString() }, JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
-    return NextResponse.json(
+    const res = NextResponse.json(
       {
         message: "Login successful",
-        token,
-        userId: user._id.toString(),
-        email: user.email,
-        name: user.name ?? null,
       },
       { status: 200 }
     );
+
+    // ✅ Set httpOnly cookie for auth
+    res.cookies.set("auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    return res;
   } catch (err) {
     console.error("Login error:", err);
     return NextResponse.json(
