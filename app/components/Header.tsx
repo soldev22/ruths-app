@@ -37,6 +37,12 @@ export default function Header() {
       <Link href="/" className="text-xl font-bold">
         Ruth’s Screening Tool
       </Link>
+<Link
+  href="/case/new"
+  className="text-sm underline underline-offset-4"
+>
+  New case
+</Link>
 
       {user ? (
         <div className="flex items-center gap-4">
