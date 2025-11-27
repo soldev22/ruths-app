@@ -26,7 +26,7 @@ const SectionAnswerSchema = new Schema<SectionAnswer>({
 const DyslexiaScreeningSchema = new Schema<DyslexiaScreeningDocument>(
   {
     screeningId: { type: String, required: true, unique: true },
-    caseId: { type: String },
+    caseId: { type: String },              // 👈 THIS is the missing field
     pupilId: { type: String },
     assessorId: { type: String },
     sections: { type: [SectionAnswerSchema], default: [] },

@@ -14,10 +14,12 @@ export async function POST(req: NextRequest) {
       screeningId,
       sectionId,
       answers,
-      caseId,      // 👈 new
+      caseId,
       pupilId,
       assessorId,
     } = body;
+
+    console.log("API received payload:", body);
 
     if (!sectionId || !answers) {
       return NextResponse.json(
@@ -31,7 +33,6 @@ export async function POST(req: NextRequest) {
     let screening = await DyslexiaScreening.findOne({ screeningId: idToUse });
 
     if (!screening) {
-      // first time this screening is saved
       screening = new DyslexiaScreening({
         screeningId: idToUse,
         caseId: caseId || undefined,
@@ -40,7 +41,6 @@ export async function POST(req: NextRequest) {
         sections: [],
       });
     } else {
-      // if we get a caseId later and it's not set yet, attach it
       if (caseId && !screening.caseId) {
         screening.caseId = caseId;
       }
