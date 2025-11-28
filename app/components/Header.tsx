@@ -12,18 +12,22 @@ interface MeResponse {
 
 export default function Header() {
   const [user, setUser] = useState<MeResponse | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function loadUser() {
       try {
         const res = await fetch("/api/auth/me");
-        if (!res.ok) return; // not logged in
-        const data = await res.json();
-        setUser(data);
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data);
+        }
       } catch {
-        /* ignore */
+        // ignore errors
       }
+      setLoaded(true);
     }
+
     loadUser();
   }, []);
 
@@ -37,16 +41,19 @@ export default function Header() {
       <Link href="/" className="text-xl font-bold">
         Ruth’s Screening Tool
       </Link>
-<Link
-  href="/case/new"
-  className="text-sm underline underline-offset-4"
->
-  New case
-</Link>
 
-      {user ? (
-        <div className="flex items-center gap-4">
+      {/* ONLY SHOW THIS AREA IF LOGGED IN */}
+      {loaded && user && (
+        <div className="flex items-center gap-6">
+          <Link
+            href="/protected/case/new"
+            className="text-sm underline underline-offset-4"
+          >
+            New case
+          </Link>
+
           <span className="text-sm">Hi, {user.name || user.email}</span>
+
           <button
             onClick={handleLogout}
             className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
@@ -54,14 +61,9 @@ export default function Header() {
             Log Out
           </button>
         </div>
-      ) : (
-        <Link
-          href="/register"
-          className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
-        >
-          Log In
-        </Link>
       )}
+
+      {/* NOTHING SHOWS IN HEADER WHEN LOGGED OUT */}
     </header>
   );
 }
