@@ -1,45 +1,38 @@
 // models/DyslexiaScreening.ts
-import mongoose, { Schema, Document, models, model } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
-export interface SectionAnswer {
-  sectionId: string;
-  answers: { [questionId: string]: string };
-  completedAt: Date;
-}
-
-export interface DyslexiaScreeningDocument extends Document {
-  screeningId: string;
-  caseId?: string;
-  pupilId?: string;
-  assessorId?: string;
-  sections: SectionAnswer[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const SectionAnswerSchema = new Schema<SectionAnswer>({
-  sectionId: { type: String, required: true },
-  answers: { type: Schema.Types.Mixed, required: false, default: {} },
-  completedAt: { type: Date, required: true },
-});
-
-const DyslexiaScreeningSchema = new Schema<DyslexiaScreeningDocument>(
+const SectionAnswersSchema = new Schema(
   {
-    screeningId: { type: String, required: true, unique: true },
-    caseId: { type: String },              // 👈 THIS is the missing field
-    pupilId: { type: String },
-    assessorId: { type: String },
-    sections: { type: [SectionAnswerSchema], default: [] },
+    sectionId: { type: String, required: true },
+    // answers is a simple key/value object: { [questionId]: string }
+    answers: {
+      type: Map,
+      of: String,
+      default: {},
+    },
+  },
+  { _id: false }
+);
+
+const DyslexiaScreeningSchema = new Schema(
+  {
+    // we now track which teacher did the screening
+    teacherId: {
+      type: String,
+      default: "anonymous",
+    },
+    caseId: { type: String, required: true }, // e.g. "819446"
+    sections: [SectionAnswersSchema],
   },
   { timestamps: true }
 );
 
-const DyslexiaScreeningModel =
-  models.DyslexiaScreening ||
-  model<DyslexiaScreeningDocument>(
-    "DyslexiaScreening",
-    DyslexiaScreeningSchema,
-    "dyslexia_screenings"
-  );
+// One screening per teacher + caseId
+DyslexiaScreeningSchema.index(
+  { teacherId: 1, caseId: 1 },
+  { unique: true }
+);
 
-export const DyslexiaScreening = DyslexiaScreeningModel;
+export const DyslexiaScreening =
+  models.DyslexiaScreening ||
+  model("DyslexiaScreening", DyslexiaScreeningSchema);

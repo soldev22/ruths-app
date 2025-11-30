@@ -1,6 +1,7 @@
+// app/somewhere/ScreeningWizard.tsx (keep the same path you already use)
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Section } from "../../../lib/dyslexiaQuestions";
 
 type Props = {
@@ -12,16 +13,86 @@ type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
 
+// Safe JSON helper
+async function safeJson(res: Response) {
+  const text = await res.text();
+  if (!text) return null;
+
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    console.error("Failed to parse JSON. Raw response was:", text);
+    throw err;
+  }
+}
+
 export default function ScreeningWizard({ sections, caseId }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswersState>({});
-  const [screeningId, setScreeningId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const currentSection = sections[currentIndex];
   const sectionAnswers = answers[currentSection.id] || {};
+
+  // ✅ Load existing screening answers for this caseId on mount
+  useEffect(() => {
+    async function loadScreening() {
+      if (!caseId) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `/api/screening/dyslexia/section?caseId=${encodeURIComponent(
+            caseId
+          )}`
+        );
+
+        if (!res.ok) {
+          const txt = await res.text();
+          console.error(
+            "Failed to load dyslexia screening. Status:",
+            res.status,
+            "Body:",
+            txt
+          );
+          setLoading(false);
+          return;
+        }
+
+        const data = await safeJson(res);
+        if (!data || !data.exists) {
+          setLoading(false);
+          return;
+        }
+
+        const screening = data.screening;
+
+        const loaded: AnswersState = {};
+        (screening.sections || []).forEach((s: any) => {
+          const secId = s.sectionId;
+          const ansMap = s.answers || {};
+          loaded[secId] = {};
+
+          Object.keys(ansMap).forEach((qId) => {
+            loaded[secId][qId] = ansMap[qId];
+          });
+        });
+
+        setAnswers(loaded);
+      } catch (err) {
+        console.error("Failed to load dyslexia screening:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadScreening();
+  }, [caseId]);
 
   // Handle answer selection
   function handleChange(questionId: string, value: string) {
@@ -45,16 +116,20 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
 
   // Save a section to the API
   async function saveCurrentSection(showSavedMessage = false) {
+    if (!caseId) {
+      setError("Missing caseId – cannot save.");
+      return;
+    }
+
     setSaving(true);
     setError(null);
     if (showSavedMessage) setSavedMessage(null);
 
     try {
       const payload = {
-        screeningId,            // null on first save → API creates new doc
         sectionId: currentSection.id,
         answers: sectionAnswers,
-        caseId: caseId ?? null, // ensure we store caseId on creation
+        caseId,
       };
 
       console.log("SAVE PAYLOAD:", payload);
@@ -65,13 +140,24 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any = null;
 
-      if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+      if (text) {
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          console.error(
+            "Failed to parse JSON from save response. Raw body:",
+            text
+          );
+          throw err;
+        }
+      }
 
-      // FIRST SAVE ONLY → assign screeningId returned by API
-      if (!screeningId && data.screeningId) {
-        setScreeningId(data.screeningId);
+      if (!res.ok) {
+        console.error("Save failed. Status:", res.status, "Body:", text);
+        throw new Error(data?.error || `HTTP ${res.status}`);
       }
 
       if (showSavedMessage) setSavedMessage("Section saved.");
@@ -86,7 +172,9 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
   // NEXT section handler, with final redirect
   async function handleNext() {
     if (!isCurrentSectionComplete()) {
-      setError("Please answer all questions in this section before continuing.");
+      setError(
+        "Please answer all questions in this section before continuing."
+      );
       return;
     }
 
@@ -126,6 +214,14 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
     }
   }
 
+  if (loading) {
+    return <p>Loading screening…</p>;
+  }
+
+  if (!caseId) {
+    return <p>No caseId provided – cannot run screening.</p>;
+  }
+
   return (
     <div style={{ marginTop: "2rem" }}>
       <h2>
@@ -148,7 +244,10 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
             <p>{q.text}</p>
 
             {q.options?.map((opt) => (
-              <label key={opt.value} style={{ display: "block", marginBottom: "0.4rem" }}>
+              <label
+                key={opt.value}
+                style={{ display: "block", marginBottom: "0.4rem" }}
+              >
                 <input
                   type="radio"
                   name={q.id}

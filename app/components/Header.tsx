@@ -51,6 +51,11 @@ export default function Header() {
           >
             New case
           </Link>
+            <Link
+            href="/protected/dashboard"
+            className="text-sm underline underline-offset-4"
+          >Dashboard
+          </Link>
 
           <span className="text-sm">Hi, {user.name || user.email}</span>
 
