@@ -46,13 +46,12 @@ export default function NewCasePage() {
       return;
     }
 
-    // Dyslexia ready
+    // FIXED ROUTE — this is the correct dyslexia start URL
     if (selected.includes("dyslexia")) {
-      router.push(`/screening/dyslexia?caseId=${caseId}`);
+      router.push(`/screening/dyslexia/start/${caseId}`);
       return;
     }
 
-    // Dyscalculia placeholder
     if (selected.includes("dyscalculia")) {
       setMessage("Dyscalculia screening is not wired up yet.");
       setError(null);

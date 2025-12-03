@@ -1,8 +1,7 @@
-// app/dashboard/page.tsx
+// app/protected/dashboard/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import { dyslexiaSections } from "@/lib/dyslexiaQuestions";
 
 type Screening = {
   _id: string;
@@ -16,7 +15,9 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const totalSections = dyslexiaSections.length;
+  // We'll temporarily set totalSections to something safe.
+  // Later we will fetch real values from the DB or API.
+  const totalSections = 10; // placeholder until we wire it properly
 
   useEffect(() => {
     async function loadScreenings() {
@@ -94,9 +95,8 @@ export default function DashboardPage() {
                 </p>
               </div>
               <a
-                href={`/screening/dyslexia?caseId=${encodeURIComponent(
-                  s.caseId
-                )}`}
+               href={`/screening/dyslexia/start/${encodeURIComponent(s.caseId)}`}
+
                 className="px-3 py-2 text-sm rounded bg-blue-600 text-white"
               >
                 Resume
@@ -131,9 +131,8 @@ export default function DashboardPage() {
                 </p>
               </div>
               <a
-                href={`/screening/dyslexia?caseId=${encodeURIComponent(
-                  s.caseId
-                )}`}
+              href={`/screening/dyslexia/start/${encodeURIComponent(s.caseId)}`}
+
                 className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
               >
                 Review

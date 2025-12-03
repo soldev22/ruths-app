@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import dbConnect from "@/lib/mongodb";
-import User from "@/models/User";
+import dbConnect from "../../../../lib/mongodb";
+import User from "../../../../models/User";
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 

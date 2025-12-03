@@ -1,122 +1,160 @@
-// app/screening/dyslexia/overview/page.tsx
+"use client";
 
-import { connectToDatabase } from "../../../../lib/db";
-import { DyslexiaScreening } from "../../../../models/DyslexiaScreening";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default async function OverviewPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  // Next.js 16 requires awaiting searchParams
-  const resolved = await searchParams;
-  const raw = resolved?.caseId;
-  const caseId = Array.isArray(raw) ? raw[0] : raw ?? null;
+export default function DyslexiaOverviewPage() {
+  const searchParams = useSearchParams();
+  const caseId = searchParams.get("caseId");
+
+  const [loading, setLoading] = useState(true);
+  const [screening, setScreening] = useState<any>(null);
+  const [questionLookup, setQuestionLookup] = useState<Record<string, string>>(
+    {}
+  );
+  const [scoring, setScoring] = useState<any>(null);
+
+  useEffect(() => {
+    if (!caseId) return;
+
+    async function loadData() {
+      try {
+        const res = await fetch(`/api/screening/dyslexia/list?caseId=${caseId}`);
+        const data = await res.json();
+
+        setScreening(data.screening || null);
+        setQuestionLookup(data.questionLookup || {});
+        setScoring(data.scoring || null);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to load overview:", err);
+        setLoading(false);
+      }
+    }
+
+    loadData();
+  }, [caseId]);
 
   if (!caseId) {
-    return (
-      <main style={{ padding: "2rem" }}>
-        <h1>Dyslexia Screening Overview</h1>
-        <p>No caseId provided.</p>
-      </main>
-    );
+    return <p>No caseId provided.</p>;
   }
 
-  await connectToDatabase();
-
-  const screening = await DyslexiaScreening.findOne({ caseId }).lean();
+  if (loading) {
+    return <p>Loading…</p>;
+  }
 
   if (!screening) {
-    return (
-      <main style={{ padding: "2rem" }}>
-        <h1>Dyslexia Screening Overview</h1>
-        <p>No screening found for case {caseId}.</p>
-      </main>
-    );
+    return <p>No screening found for Case ID: {caseId}</p>;
   }
 
-  // Helper to calculate performance band
-  function band(score: number, total: number) {
-    const pct = score / total;
-    if (pct >= 0.75) return "High";
-    if (pct >= 0.4) return "Average";
-    return "Low";
-  }
-
-  // Helper to pull a section easily
-  function sec(id: string) {
-    return screening.sections.find((s: any) => s.sectionId === id);
-  }
-
-  // Scores
-  const phon = sec("section-1-phonological");
-  const phonScore = phon ? Object.keys(phon.answers).length : 0;
-
-  const ran = sec("section-2-ran");
-  const ranBand = ran?.answers?.["q-ran-band"] || "Unknown";
-
-  const wm = sec("section-3-working-memory");
-  const wmScore = wm ? Object.keys(wm.answers).length : 0;
-
-  const orth = sec("section-4-orthographic");
-  const orthScore = orth ? Object.keys(orth.answers).length : 0;
-
-  const vocab = sec("section-6-vocabulary");
-  const vocabScore = vocab ? Object.keys(vocab.answers).length : 0;
-
-  const visual = sec("section-7-visual");
-  const visualScore = visual ? Object.keys(visual.answers).length : 0;
-
-  const spelling = sec("section-9-spelling");
-  const spellingScore = spelling ? Object.keys(spelling.answers).length : 0;
-
-  // Determine risk level
-  let risk = "Low";
-  if (
-    ranBand === "0-9" ||
-    phonScore < 2 ||
-    orthScore < 2
-  ) {
-    risk = "High";
-  } else if (
-    ranBand === "10-17" ||
-    phonScore < 3 ||
-    orthScore < 3
-  ) {
-    risk = "Moderate";
-  }
+  // Colour style for severity bands
+  const bandColors: any = {
+    green: "#c7f5d9",
+    amber: "#ffe9b3",
+    red: "#ffb3b3",
+  };
 
   return (
-    <main style={{ maxWidth: "900px", margin: "0 auto", padding: "2rem" }}>
-      <h1>Dyslexia Screening Overview</h1>
+    <main style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto" }}>
+      <h1 style={{ fontSize: "2.2rem", fontWeight: "bold" }}>
+        Dyslexia Screening Overview
+      </h1>
 
-      <p><strong>Case ID:</strong> {caseId}</p>
-      <p><strong>Screening ID:</strong> {screening.screeningId}</p>
-
-      <h2 style={{ marginTop: "2rem" }}>Section Summary</h2>
-      <ul>
-        <li>Phonological Awareness: {band(phonScore, 4)}</li>
-        <li>Rapid Naming: {ranBand}</li>
-        <li>Working Memory: {band(wmScore, 3)}</li>
-        <li>Orthographic Processing: {band(orthScore, 4)}</li>
-        <li>Vocabulary: {band(vocabScore, 3)}</li>
-        <li>Visual Processing: {band(visualScore, 2)}</li>
-        <li>Spelling Application: {band(spellingScore, 3)}</li>
-      </ul>
-
-      <h2 style={{ marginTop: "2rem" }}>Risk Level</h2>
-      <p style={{ fontSize: "1.2rem" }}>
-        {risk === "High" && "⚠ High likelihood of dyslexia"}
-        {risk === "Moderate" && "Moderate likelihood of dyslexia"}
-        {risk === "Low" && "Low likelihood of dyslexia"}
+      <p style={{ marginTop: "10px", fontSize: "1.2rem" }}>
+        Case ID: <strong>{caseId}</strong>
       </p>
 
-      <h2 style={{ marginTop: "2rem" }}>Interpretation</h2>
-      <p>
-        This screening shows an overall <strong>{risk}</strong> likelihood.
-        Use this information alongside classroom performance, teacher
-        observations, and written work to support next steps.
-      </p>
+      {/* OVERALL SCORE BLOCK */}
+      {scoring && (
+        <div
+          style={{
+            marginTop: "25px",
+            padding: "20px",
+            borderRadius: "10px",
+            background: "#eef6ff",
+            border: "1px solid #cfe2ff",
+          }}
+        >
+          <h2 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+            Overall Score
+          </h2>
+
+          <p style={{ fontSize: "2.5rem", marginTop: "10px", fontWeight: "900" }}>
+            {scoring.overallPercent}%
+          </p>
+
+          <p style={{ fontSize: "1.2rem", marginTop: "5px" }}>
+            Dyslexia Indicator:{" "}
+            <strong style={{ fontSize: "1.3rem" }}>{scoring.indicator}</strong>
+          </p>
+        </div>
+      )}
+
+      <hr style={{ margin: "30px 0" }} />
+
+      <h2 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Section Results</h2>
+
+      {screening.sections.map((section: any) => {
+        const secScore = scoring?.sectionScores?.[section.sectionId];
+        const color = bandColors[secScore?.band] || "#eee";
+
+        return (
+          <div
+            key={section.sectionId}
+            style={{
+              marginTop: "20px",
+              padding: "15px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              background: color,
+            }}
+          >
+            <h3 style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+              {section.sectionId}
+            </h3>
+
+            {/* Section difficulty */}
+            {secScore && (
+              <p style={{ marginTop: "8px", fontSize: "1rem" }}>
+                Difficulty Score:{" "}
+                <strong>{secScore.difficultyPercent}%</strong> (
+                {secScore.band.toUpperCase()})
+              </p>
+            )}
+
+            {/* Answers */}
+            <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+              {Object.entries(section.answers).map(([questionId, answer]) => {
+                const text =
+                  questionLookup[questionId] || "(Question no longer exists)";
+                return (
+                  <li key={questionId} style={{ marginBottom: "6px" }}>
+                    <strong>{text}:</strong> {answer}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
+      <button
+  onClick={() => {
+    window.location.href = `/screening/dyslexia/report?caseId=${caseId}`;
+  }}
+  style={{
+    marginTop: "25px",
+    padding: "12px 20px",
+    background: "#004c99",
+    color: "white",
+    borderRadius: "6px",
+    fontSize: "1rem",
+    border: "none",
+    cursor: "pointer",
+  }}
+>
+  View Teacher Report
+</button>
+
     </main>
   );
 }

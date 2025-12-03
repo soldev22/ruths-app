@@ -45,17 +45,8 @@ export default function Header() {
       {/* ONLY SHOW THIS AREA IF LOGGED IN */}
       {loaded && user && (
         <div className="flex items-center gap-6">
-          <Link
-            href="/protected/case/new"
-            className="text-sm underline underline-offset-4"
-          >
-            New case
-          </Link>
-            <Link
-            href="/protected/dashboard"
-            className="text-sm underline underline-offset-4"
-          >Dashboard
-          </Link>
+       
+         
 
           <span className="text-sm">Hi, {user.name || user.email}</span>
 

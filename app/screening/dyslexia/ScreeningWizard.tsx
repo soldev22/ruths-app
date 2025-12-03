@@ -1,19 +1,32 @@
-// app/somewhere/ScreeningWizard.tsx (keep the same path you already use)
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Section } from "../../../lib/dyslexiaQuestions";
+
+type Question = {
+  id: string;
+  text: string;
+  options: string[];
+  order?: number;
+  readingYear?: number | null;
+};
+
+type Section = {
+  id: string;
+  title: string;
+  description?: string;
+  questions: Question[];
+};
 
 type Props = {
   sections: Section[];
-  caseId?: string | null;
+  caseId: string;
 };
 
 type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
 
-// Safe JSON helper
+// Helper safely reading JSON from API
 async function safeJson(res: Response) {
   const text = await res.text();
   if (!text) return null;
@@ -21,7 +34,7 @@ async function safeJson(res: Response) {
   try {
     return JSON.parse(text);
   } catch (err) {
-    console.error("Failed to parse JSON. Raw response was:", text);
+    console.error("Failed to parse JSON. Raw:", text);
     throw err;
   }
 }
@@ -37,9 +50,11 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
   const currentSection = sections[currentIndex];
   const sectionAnswers = answers[currentSection.id] || {};
 
-  // ✅ Load existing screening answers for this caseId on mount
+  //
+  // LOAD EXISTING ANSWERS
+  //
   useEffect(() => {
-    async function loadScreening() {
+    async function load() {
       if (!caseId) {
         setLoading(false);
         return;
@@ -47,24 +62,17 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
 
       try {
         const res = await fetch(
-          `/api/screening/dyslexia/section?caseId=${encodeURIComponent(
-            caseId
-          )}`
+          `/api/screening/dyslexia/section?caseId=${encodeURIComponent(caseId)}`
         );
 
         if (!res.ok) {
-          const txt = await res.text();
-          console.error(
-            "Failed to load dyslexia screening. Status:",
-            res.status,
-            "Body:",
-            txt
-          );
+          console.error("Failed to load screening", res.status);
           setLoading(false);
           return;
         }
 
         const data = await safeJson(res);
+
         if (!data || !data.exists) {
           setLoading(false);
           return;
@@ -72,29 +80,31 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
 
         const screening = data.screening;
 
-        const loaded: AnswersState = {};
+        const collected: AnswersState = {};
         (screening.sections || []).forEach((s: any) => {
           const secId = s.sectionId;
           const ansMap = s.answers || {};
-          loaded[secId] = {};
 
+          collected[secId] = {};
           Object.keys(ansMap).forEach((qId) => {
-            loaded[secId][qId] = ansMap[qId];
+            collected[secId][qId] = ansMap[qId];
           });
         });
 
-        setAnswers(loaded);
+        setAnswers(collected);
       } catch (err) {
-        console.error("Failed to load dyslexia screening:", err);
+        console.error("Error loading screening:", err);
       } finally {
         setLoading(false);
       }
     }
 
-    loadScreening();
+    load();
   }, [caseId]);
 
-  // Handle answer selection
+  //
+  // HANDLE ANSWERS
+  //
   function handleChange(questionId: string, value: string) {
     setAnswers((prev) => ({
       ...prev,
@@ -103,36 +113,37 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
         [questionId]: value,
       },
     }));
+
     setError(null);
     setSavedMessage(null);
   }
 
-  // Ensure all questions answered before moving on
+  //
+  // VALIDATION
+  //
   function isCurrentSectionComplete() {
-    if (!currentSection.questions.length) return true;
     const current = answers[currentSection.id] || {};
     return currentSection.questions.every((q) => !!current[q.id]);
   }
 
-  // Save a section to the API
-  async function saveCurrentSection(showSavedMessage = false) {
+  //
+  // SAVE SECTION
+  //
+  async function saveCurrentSection(showMsg = false) {
     if (!caseId) {
-      setError("Missing caseId – cannot save.");
+      setError("Missing caseId — cannot save.");
       return;
     }
 
     setSaving(true);
-    setError(null);
-    if (showSavedMessage) setSavedMessage(null);
+    if (showMsg) setSavedMessage(null);
 
     try {
       const payload = {
-        sectionId: currentSection.id,
-        answers: sectionAnswers,
         caseId,
+        sectionId: currentSection.id,
+        answers: answers[currentSection.id] || {},
       };
-
-      console.log("SAVE PAYLOAD:", payload);
 
       const res = await fetch("/api/screening/dyslexia/section", {
         method: "POST",
@@ -141,53 +152,43 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
       });
 
       const text = await res.text();
-      let data: any = null;
+      let data = null;
 
       if (text) {
         try {
           data = JSON.parse(text);
-        } catch (err) {
-          console.error(
-            "Failed to parse JSON from save response. Raw body:",
-            text
-          );
-          throw err;
+        } catch {
+          console.error("Invalid JSON from API:", text);
         }
       }
 
       if (!res.ok) {
-        console.error("Save failed. Status:", res.status, "Body:", text);
-        throw new Error(data?.error || `HTTP ${res.status}`);
+        throw new Error(data?.error || "Save failed.");
       }
 
-      if (showSavedMessage) setSavedMessage("Section saved.");
-    } catch (e: any) {
-      console.error(e);
-      setError(e?.message || "There was a problem saving this section.");
+      if (showMsg) setSavedMessage("Section saved.");
+    } catch (err: any) {
+      setError(err.message || "Couldn't save section.");
     } finally {
       setSaving(false);
     }
   }
 
-  // NEXT section handler, with final redirect
+  //
+  // NAVIGATION
+  //
   async function handleNext() {
     if (!isCurrentSectionComplete()) {
-      setError(
-        "Please answer all questions in this section before continuing."
-      );
+      setError("Please answer all questions before continuing.");
       return;
     }
 
     await saveCurrentSection(true);
 
-    const isLast = currentIndex === sections.length - 1;
+    const last = currentIndex === sections.length - 1;
 
-    if (isLast) {
-      if (caseId) {
-        window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
-      } else {
-        alert("Saved, but no caseId was provided.");
-      }
+    if (last) {
+      window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
       return;
     }
 
@@ -201,27 +202,21 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
 
   async function handleFinish() {
     if (!isCurrentSectionComplete()) {
-      setError("Please answer all questions in this section before finishing.");
+      setError("Please complete this section before finishing.");
       return;
     }
 
     await saveCurrentSection(true);
 
-    if (caseId) {
-      window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
-    } else {
-      alert("Saved, but missing caseId for redirect.");
-    }
+    window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
   }
 
-  if (loading) {
-    return <p>Loading screening…</p>;
-  }
+  if (loading) return <p>Loading screening…</p>;
+  if (!caseId) return <p>No caseId provided.</p>;
 
-  if (!caseId) {
-    return <p>No caseId provided – cannot run screening.</p>;
-  }
-
+  //
+  // RENDER
+  //
   return (
     <div style={{ marginTop: "2rem" }}>
       <h2>
@@ -243,19 +238,20 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
           >
             <p>{q.text}</p>
 
-            {q.options?.map((opt) => (
+            {/* FIXED: unique key using index */}
+            {q.options?.map((opt, i) => (
               <label
-                key={opt.value}
+                key={`${q.id}_${i}`}
                 style={{ display: "block", marginBottom: "0.4rem" }}
               >
                 <input
                   type="radio"
                   name={q.id}
-                  value={opt.value}
-                  checked={sectionAnswers[q.id] === opt.value}
+                  value={opt}
+                  checked={sectionAnswers[q.id] === opt}
                   onChange={(e) => handleChange(q.id, e.target.value)}
                 />{" "}
-                {opt.label}
+                {opt}
               </label>
             ))}
           </div>
@@ -263,7 +259,7 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
         {savedMessage && <p style={{ color: "green" }}>{savedMessage}</p>}
-        {saving && <p>Saving section…</p>}
+        {saving && <p>Saving…</p>}
 
         <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
           <button
