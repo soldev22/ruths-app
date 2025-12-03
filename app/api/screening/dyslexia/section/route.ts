@@ -1,8 +1,9 @@
 // app/api/screening/dyslexia/section/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "@/lib/mongodb";
-import { DyslexiaScreening } from "@/models/DyslexiaScreening";
-import { getUserFromToken } from "@/lib/getUserFromToken";
+import { connectToDatabase } from "../../../../../lib/db";
+import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
+import { getUserFromToken } from "../../../../../lib/getUserFromToken";
+;
 
 // helper to get teacherId (falls back to "anonymous" in dev / if not logged in)
 function getTeacherId(req: NextRequest): string {
@@ -12,7 +13,7 @@ function getTeacherId(req: NextRequest): string {
 }
 
 export async function POST(req: NextRequest) {
-  await dbConnect();
+  await connectToDatabase();
 
   const { sectionId, answers, caseId } = await req.json();
 

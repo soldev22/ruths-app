@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/db";
-import Question from "@/models/Question";
+import { connectToDatabase } from "../../../../lib/db";
+import Question from "../../../../models/Question";
+
 
 export async function GET(
   request: Request,
