@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  await dbConnect();
+  await connectToDatabase();
 
   const { searchParams } = new URL(req.url);
   const caseId = searchParams.get("caseId");
