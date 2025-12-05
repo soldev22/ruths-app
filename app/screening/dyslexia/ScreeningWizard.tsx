@@ -20,11 +20,20 @@ type Section = {
 type Props = {
   sections: Section[];
   caseId: string;
+  readingYear?: string;   // ← ADD THIS
 };
+
 
 type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
+
+// GET readingYear from URL
+const readingYear =
+  typeof window !== "undefined"
+    ? new URLSearchParams(window.location.search).get("year") || null
+    : null;
+
 
 // Helper safely reading JSON from API
 async function safeJson(res: Response) {
@@ -39,7 +48,7 @@ async function safeJson(res: Response) {
   }
 }
 
-export default function ScreeningWizard({ sections, caseId }: Props) {
+export default function ScreeningWizard({ sections, caseId,readingYear }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswersState>({});
   const [saving, setSaving] = useState(false);
@@ -143,6 +152,7 @@ export default function ScreeningWizard({ sections, caseId }: Props) {
         caseId,
         sectionId: currentSection.id,
         answers: answers[currentSection.id] || {},
+        readingYear  // ← ADD THIS LINE
       };
 
       const res = await fetch("/api/screening/dyslexia/section", {

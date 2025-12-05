@@ -1,17 +1,21 @@
+import type { ReactNode } from "react";
+import Header from "./components/Header";  // your client-side header
+import Sidebar from "./components/Sidebar";
 import "./globals.css";
-import Header from "./components/Header";
 
-export const metadata = {
-  title: "Ruth's Screening Tool",
-  description: "A tool for teachers to screen students",
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-slate-50">
-        <Header />
-        <main className="pt-6 px-4">{children}</main>
+      <body>
+        <Header />   {/* CORRECT header */}
+        
+        <div className="layout" style={{ display: "flex", height: "100vh" }}>
+          <Sidebar />
+
+          <main className="main-content" style={{ flex: 1, padding: "2rem" }}>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

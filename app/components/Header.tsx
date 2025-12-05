@@ -17,14 +17,16 @@ export default function Header() {
   useEffect(() => {
     async function loadUser() {
       try {
-        const res = await fetch("/api/auth/me");
+        const res = await fetch("/api/auth/me", {
+          credentials: "include", // ← **THIS FIXES THE LOGIN STATE**
+        });
+
         if (res.ok) {
           const data = await res.json();
-          setUser(data);
+          setUser(data.user ?? null);
         }
-      } catch {
-        // ignore errors
-      }
+      } catch {}
+
       setLoaded(true);
     }
 
@@ -32,7 +34,11 @@ export default function Header() {
   }, []);
 
   async function handleLogout() {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include", // ← **THIS FIXES LOGOUT**
+    });
+
     window.location.href = "/register";
   }
 
@@ -42,24 +48,27 @@ export default function Header() {
         Ruth’s Screening Tool
       </Link>
 
-      {/* ONLY SHOW THIS AREA IF LOGGED IN */}
-      {loaded && user && (
-        <div className="flex items-center gap-6">
-       
-         
+      <div>
+        {loaded && user ? (
+          <div className="flex items-center gap-6">
+            <span className="text-sm">Hi, {user.name || user.email}</span>
 
-          <span className="text-sm">Hi, {user.name || user.email}</span>
-
-          <button
-            onClick={handleLogout}
+            <button
+              onClick={handleLogout}
+              className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
+            >
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <Link
+            href="/register"
             className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
           >
-            Log Out
-          </button>
-        </div>
-      )}
-
-      {/* NOTHING SHOWS IN HEADER WHEN LOGGED OUT */}
+            Login
+          </Link>
+        )}
+      </div>
     </header>
   );
 }

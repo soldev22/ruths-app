@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 
 type Screening = {
   _id: string;
-  caseId: string;
+  userId: string;
   sections: { sectionId: string; answers: Record<string, string> }[];
   updatedAt: string;
+  caseId?: string;
+  readingYear?: string;
 };
 
 export default function DashboardPage() {
@@ -15,14 +17,31 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // We'll temporarily set totalSections to something safe.
-  // Later we will fetch real values from the DB or API.
-  const totalSections = 10; // placeholder until we wire it properly
+  const totalSections = 10; // placeholder
 
   useEffect(() => {
     async function loadScreenings() {
       try {
-        const res = await fetch("/api/screening/dyslexia/list");
+        // 1️⃣ Get logged in user
+        const meRes = await fetch("/api/auth/me", {
+          credentials: "include",
+        });
+        const meData = await meRes.json();
+console.log("SCREENINGS:", meData.screenings);
+
+        if (!meData.user) {
+          setError("Not authenticated.");
+          setLoading(false);
+          return;
+        }
+
+        const userId = meData.user.userId;
+
+        // 2️⃣ Fetch screenings for THIS USER
+        const res = await fetch(`/api/screening/dyslexia/list?userId=${userId}`, {
+          credentials: "include",
+        });
+
         if (!res.ok) {
           const txt = await res.text();
           console.error("Failed to load screenings:", res.status, txt);
@@ -88,19 +107,22 @@ export default function DashboardPage() {
             >
               <div>
                 <p>
-                  <strong>Case ID:</strong> {s.caseId}
+                  <strong>Screening ID:</strong> {s.caseId}
                 </p>
                 <p className="text-sm text-gray-600">
                   Sections completed: {completedCount} / {totalSections}
                 </p>
               </div>
-              <a
-               href={`/screening/dyslexia/start/${encodeURIComponent(s.caseId)}`}
 
-                className="px-3 py-2 text-sm rounded bg-blue-600 text-white"
-              >
-                Resume
-              </a>
+<a
+  href={`/screening/dyslexia/start/${encodeURIComponent(
+    s.caseId ?? ""
+  )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
+  className="px-3 py-2 text-sm rounded bg-blue-600 text-white"
+>
+  Resume
+</a>
+
             </div>
           );
         })}
@@ -121,7 +143,7 @@ export default function DashboardPage() {
             >
               <div>
                 <p>
-                  <strong>Case ID:</strong> {s.caseId}
+                  <strong>Screening ID:</strong> {s.caseId}
                 </p>
                 <p className="text-sm text-gray-600">
                   Sections completed: {completedCount} / {totalSections}
@@ -130,13 +152,16 @@ export default function DashboardPage() {
                   Last updated: {new Date(s.updatedAt).toLocaleString()}
                 </p>
               </div>
-              <a
-              href={`/screening/dyslexia/start/${encodeURIComponent(s.caseId)}`}
 
-                className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
-              >
-                Review
-              </a>
+<a
+  href={`/screening/dyslexia/start/${encodeURIComponent(
+    s.caseId ?? ""
+  )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
+  className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
+>
+  Review
+</a>
+
             </div>
           );
         })}

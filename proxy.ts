@@ -10,7 +10,6 @@ export function proxy(req: NextRequest) {
   // Public routes
   if (
     pathname === "/register" ||
-    pathname === "/login" ||
     pathname.startsWith("/api/auth")
   ) {
     return NextResponse.next();
@@ -27,12 +26,11 @@ export function proxy(req: NextRequest) {
     jwt.verify(token, JWT_SECRET);
     return NextResponse.next();
   } catch {
-    return NextResponse.redirect(new URL("/register", req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 }
 
 export const config = {
-  // Protect EVERYTHING except public endpoints
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],

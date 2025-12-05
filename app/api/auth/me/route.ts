@@ -40,13 +40,16 @@ export async function GET() {
     }
 
     return NextResponse.json(
-      {
-        userId: user._id.toString(),
-        email: user.email,
-        name: user.name ?? null,
-      },
-      { status: 200 }
-    );
+  {
+    user: {
+      userId: user._id.toString(),
+      email: user.email,
+      name: user.name ?? null,
+    },
+  },
+  { status: 200 }
+);
+
   } catch (err) {
     console.error("Me route error:", err);
     return NextResponse.json(

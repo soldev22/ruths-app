@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
 import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
 import { getUserFromToken } from "../../../../../lib/getUserFromToken";
-;
 
 // helper to get teacherId (falls back to "anonymous" in dev / if not logged in)
 function getTeacherId(req: NextRequest): string {
@@ -15,7 +14,7 @@ function getTeacherId(req: NextRequest): string {
 export async function POST(req: NextRequest) {
   await connectToDatabase();
 
-  const { sectionId, answers, caseId } = await req.json();
+  const { sectionId, answers, caseId, readingYear } = await req.json();
 
   if (!sectionId || !answers || !caseId) {
     return NextResponse.json(
@@ -29,16 +28,28 @@ export async function POST(req: NextRequest) {
   // Find screening for this teacher + case
   let screening = await DyslexiaScreening.findOne({ teacherId, caseId });
 
-  // Create if it doesn't exist
+  // Create if it doesn't exist — PATCHED HERE
   if (!screening) {
     screening = new DyslexiaScreening({
       teacherId,
       caseId,
       sections: [],
+      readingYear: readingYear || null,   // ⬅️ NEW LINE
     });
-  } else if (!screening.teacherId) {
-    // upgrade old records without teacherId
-    screening.teacherId = teacherId;
+  } else {
+    // If resuming & readingYear was never saved before, patch it in
+    if (!screening.readingYear && readingYear) {
+      screening.readingYear = readingYear;
+    }
+
+    if (!screening.teacherId) {
+      screening.teacherId = teacherId;
+    }
+    // Add readingYear if missing
+if (!screening.readingYear && readingYear) {
+  screening.readingYear = readingYear;
+}
+
   }
 
   // Update or insert this section

@@ -1,12 +1,13 @@
-"use client";
-
 import { Suspense } from "react";
-import OverviewInner from "../overview/inner";
+import OverviewInner from "./inner";
 
-export default function OverviewPageWrapper() {
+export default async function OverviewPageWrapper({ searchParams }: any) {
+  const params = await searchParams;
+  const caseId = params.caseId;
+
   return (
     <Suspense fallback={<p>Loading…</p>}>
-      <OverviewInner />
+      <OverviewInner caseId={caseId} />
     </Suspense>
   );
 }

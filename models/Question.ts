@@ -9,7 +9,7 @@ const QuestionSchema = new mongoose.Schema(
     },
 
     readingYear: {
-      type: Number,
+      type: String,
       required: false, // only required for age-dependent sets
     },
 
