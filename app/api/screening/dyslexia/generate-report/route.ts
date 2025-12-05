@@ -58,6 +58,26 @@ STUDENT RESPONSES:
 ${JSON.stringify(structured, null, 2)}
 `;
 
+    // Safe runtime check: log presence (not value) of the OpenAI key and fail early if missing.
+    const hasApiKey = !!process.env.OPENAI_API_KEY;
+    try {
+      console.error(
+        "OPENAI_API_KEY present:",
+        hasApiKey,
+        "length:",
+        process.env.OPENAI_API_KEY?.length ?? 0
+      );
+    } catch (e) {
+      // ignore logging failures
+    }
+
+    if (!hasApiKey) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY is not set in the runtime. Add it to your environment variables and redeploy." },
+        { status: 500 }
+      );
+    }
+
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
     const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
@@ -70,10 +90,11 @@ ${JSON.stringify(structured, null, 2)}
     const report = completion.choices[0].message.content;
 
     return NextResponse.json({ report });
-  } catch (err) {
-    console.error("AI REPORT ERROR:", err);
+  } catch (err: any) {
+    console.error("AI REPORT ERROR:", err?.stack || err);
+    const message = err?.message || JSON.stringify(err);
     return NextResponse.json(
-      { error: "Failed to generate AI report" },
+      { error: `Failed to generate AI report: ${message}` },
       { status: 500 }
     );
   }
