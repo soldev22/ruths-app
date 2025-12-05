@@ -1,13 +1,16 @@
 import { Suspense } from "react";
-import OverviewInner from "./inner";
+import OverviewInner from "./inner"; // assuming file is inner.tsx and component is named OverviewInner
 
-export default async function OverviewPageWrapper({ searchParams }: any) {
-  const params = await searchParams;
-  const caseId = params.caseId;
+export default function OverviewPageWrapper({
+  searchParams,
+}: {
+  searchParams: { caseId?: string };
+}) {
+  const caseId = searchParams?.caseId ?? null;
 
   return (
     <Suspense fallback={<p>Loading…</p>}>
-      <OverviewInner caseId={caseId} />
+      <OverviewInner caseIdx={caseId} />
     </Suspense>
   );
 }

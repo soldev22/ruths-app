@@ -20,7 +20,7 @@ type FlatAnswer = {
   answer: string;
 };
 
-export default function OverviewInner() {
+export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState<any>(null);
   const [openSection, setOpenSection] = useState<string | null>(null);
