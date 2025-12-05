@@ -1,11 +1,19 @@
 // app/screening/dyslexia/report-ai/ReportAI.tsx
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ReportAI() {
-  const searchParams = useSearchParams();
-  const caseId = searchParams.get("caseId");
+  const [caseId, setCaseId] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setCaseId(params.get("caseId"));
+    } catch (e) {
+      setCaseId(null);
+    }
+  }, []);
 
   return (
     <div className="p-6">

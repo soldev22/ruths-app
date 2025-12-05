@@ -1,7 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // REMOVE all punctuation except , and .
 function sanitizeReport(text: string): string {
@@ -9,8 +8,16 @@ function sanitizeReport(text: string): string {
 }
 
 export default function AIReportPage() {
-  const params = useSearchParams();
-  const caseId = params.get("caseId");
+  const [caseId, setCaseId] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setCaseId(params.get("caseId"));
+    } catch (e) {
+      setCaseId(null);
+    }
+  }, []);
 
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<string | null>(null);

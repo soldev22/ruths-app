@@ -60,8 +60,10 @@ ${JSON.stringify(structured, null, 2)}
 
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model,
       messages: [{ role: "user", content: prompt }],
     });
 
