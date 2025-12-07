@@ -44,8 +44,6 @@ export default function Sidebar() {
             <br />
             <Link href="/protected/pricing" style={{ color: "white", textDecoration: "none" }}>View Plans & Pricing</Link>
             <br />
-            <Link href="/protected/case/new" style={{ color: "white", textDecoration: "none" }}>New Case</Link>
-            <br />
             <Link href="/user-guide" style={{ color: "white", textDecoration: "none" }}>User Guide</Link>
             <br />
             <Link href="/about" style={{ color: "white", textDecoration: "none" }}>About</Link>

@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type Screening = {
   _id: string;
@@ -134,94 +135,101 @@ console.log("SCREENINGS:", meData.screenings);
         </div>
 
       {/* Date Filter Section */}
-      <div className="bg-gray-100 p-4 rounded mb-6">
-        <h2 className="text-sm font-semibold mb-3">Filter by Date</h2>
-        <div className="space-y-3">
-          <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={() => {
-                setDateFilter("all");
-                setCustomStartDate("");
-                setCustomEndDate("");
-              }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                dateFilter === "all"
-                  ? "bg-blue-600 text-white"
-                  : "bg-white border border-gray-300"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => {
-                setDateFilter("7days");
-                setCustomStartDate("");
-                setCustomEndDate("");
-              }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                dateFilter === "7days"
-                  ? "bg-blue-600 text-white"
-                  : "bg-white border border-gray-300"
-              }`}
-            >
-              Last 7 Days
-            </button>
-            <button
-              onClick={() => {
-                setDateFilter("30days");
-                setCustomStartDate("");
-                setCustomEndDate("");
-              }}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                dateFilter === "30days"
-                  ? "bg-blue-600 text-white"
-                  : "bg-white border border-gray-300"
-              }`}
-            >
-              Last 30 Days
-            </button>
-          </div>
-
-          {/* Custom Date Range */}
-          <div className="flex gap-2 items-end flex-wrap">
-            <div>
-              <label className="block text-xs font-medium mb-1">Start Date</label>
-              <input
-                type="date"
-                value={customStartDate}
-                onChange={(e) => {
-                  setCustomStartDate(e.target.value);
-                  setDateFilter("all");
-                }}
-                className="px-2 py-1 border border-gray-300 rounded text-sm"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium mb-1">End Date</label>
-              <input
-                type="date"
-                value={customEndDate}
-                onChange={(e) => {
-                  setCustomEndDate(e.target.value);
-                  setDateFilter("all");
-                }}
-                className="px-2 py-1 border border-gray-300 rounded text-sm"
-              />
-            </div>
-            {(customStartDate || customEndDate) && (
+      <div className="flex items-center justify-between mb-6 gap-4">
+        <div className="flex-grow bg-gray-100 p-4 rounded">
+          <h2 className="text-sm font-semibold mb-3">Filter by Date</h2>
+          <div className="space-y-3">
+            <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => {
+                  setDateFilter("all");
                   setCustomStartDate("");
                   setCustomEndDate("");
-                  setDateFilter("all");
                 }}
-                className="px-2 py-1 bg-gray-400 text-white rounded text-sm"
+                className={`px-3 py-1 rounded text-sm font-medium ${
+                  dateFilter === "all"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-300"
+                }`}
               >
-                Clear
+                All
               </button>
-            )}
+              <button
+                onClick={() => {
+                  setDateFilter("7days");
+                  setCustomStartDate("");
+                  setCustomEndDate("");
+                }}
+                className={`px-3 py-1 rounded text-sm font-medium ${
+                  dateFilter === "7days"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-300"
+                }`}
+              >
+                Last 7 Days
+              </button>
+              <button
+                onClick={() => {
+                  setDateFilter("30days");
+                  setCustomStartDate("");
+                  setCustomEndDate("");
+                }}
+                className={`px-3 py-1 rounded text-sm font-medium ${
+                  dateFilter === "30days"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-300"
+                }`}
+              >
+                Last 30 Days
+              </button>
+            </div>
+
+            {/* Custom Date Range */}
+            <div className="flex gap-2 items-end flex-wrap">
+              <div>
+                <label className="block text-xs font-medium mb-1">Start Date</label>
+                <input
+                  type="date"
+                  value={customStartDate}
+                  onChange={(e) => {
+                    setCustomStartDate(e.target.value);
+                    setDateFilter("all");
+                  }}
+                  className="px-2 py-1 border border-gray-300 rounded text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1">End Date</label>
+                <input
+                  type="date"
+                  value={customEndDate}
+                  onChange={(e) => {
+                    setCustomEndDate(e.target.value);
+                    setDateFilter("all");
+                  }}
+                  className="px-2 py-1 border border-gray-300 rounded text-sm"
+                />
+              </div>
+              {(customStartDate || customEndDate) && (
+                <button
+                  onClick={() => {
+                    setCustomStartDate("");
+                    setCustomEndDate("");
+                    setDateFilter("all");
+                  }}
+                  className="px-2 py-1 bg-gray-400 text-white rounded text-sm"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
         </div>
+        <Link href="/protected/case/new">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl w-24 h-24 flex items-center justify-center font-semibold text-center px-2 whitespace-normal transition-colors">
+            New Case
+          </button>
+        </Link>
       </div>
 
       {/* In progress */}
