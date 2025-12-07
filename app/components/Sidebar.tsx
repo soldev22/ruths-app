@@ -11,7 +11,8 @@ export default function Sidebar() {
       style={{
         width: open ? "240px" : "40px",
         transition: "0.2s ease",
-        background: "#f1f1f1",
+        background: "#1e3a8a",
+        color: "white",
         padding: "12px",
         borderRight: "1px solid #ddd",
         minHeight: "100vh",
@@ -27,6 +28,7 @@ export default function Sidebar() {
           border: "none",
           cursor: "pointer",
           fontWeight: "bold",
+          color: "white",
         }}
       >
         {open ? "◀ Hide" : "▶"}
@@ -36,9 +38,25 @@ export default function Sidebar() {
       {open && (
         <>
           <div style={{ marginBottom: "20px" }}>
-            <Link href="/protected/dashboard">Dashboard</Link>
+            <Link href="/protected/dashboard" style={{ color: "white", textDecoration: "none" }}>Dashboard</Link>
             <br />
-            <Link href="/protected/case/new">New Case</Link>
+            <Link href="/protected/account" style={{ color: "white", textDecoration: "none" }}>Account & Billing</Link>
+            <br />
+            <Link href="/protected/pricing" style={{ color: "white", textDecoration: "none" }}>View Plans & Pricing</Link>
+            <br />
+            <Link href="/protected/case/new" style={{ color: "white", textDecoration: "none" }}>New Case</Link>
+            <br />
+            <Link href="/user-guide" style={{ color: "white", textDecoration: "none" }}>User Guide</Link>
+            <br />
+            <Link href="/about" style={{ color: "white", textDecoration: "none" }}>About</Link>
+            <br />
+            <Link href="/faq" style={{ color: "white", textDecoration: "none" }}>FAQ</Link>
+            <br />
+            <Link href="/scoring-guide" style={{ color: "white", textDecoration: "none" }}>Scoring Guide</Link>
+            <br />
+            <Link href="/privacy" style={{ color: "white", textDecoration: "none" }}>Privacy & GDPR</Link>
+            <br />
+            <Link href="/contact" style={{ color: "white", textDecoration: "none" }}>Contact Us</Link>
             <br />
           </div>
 

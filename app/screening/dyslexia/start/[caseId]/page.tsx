@@ -23,7 +23,7 @@ export default async function DyslexiaStartPage({
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Dyslexia Screening — Case {caseId} : Year {(await searchParams).year} </h1>
+      <h1>Dyslexia Review — Case {caseId} : Year {(await searchParams).year} </h1>
 
    <ScreeningWizard 
   caseId={caseId} 

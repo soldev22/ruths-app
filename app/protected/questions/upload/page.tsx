@@ -67,66 +67,50 @@ export default function UploadQuestionsPage() {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: "700px",
-        margin: "0 auto",
-        padding: "2rem",
-      }}
-    >
-      <h1 style={{ marginBottom: "1rem" }}>Upload Question Set (JSON)</h1>
-
-      <p style={{ marginBottom: "1rem" }}>
-        Upload a <strong>.json</strong> file containing your questions. A preview
-        will appear below so you can confirm everything before importing.
-      </p>
-
-      <input
-        type="file"
-        accept=".json"
-        onChange={handleFileUpload}
-        style={{ marginBottom: "1rem" }}
-      />
-
-      {error && (
-        <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>
-      )}
-
-      {success && (
-        <p style={{ color: "green", marginBottom: "1rem" }}>{success}</p>
-      )}
-
-      {jsonPreview && (
-        <div
-          style={{
-            border: "1px solid #444",
-            borderRadius: "8px",
-            padding: "1rem",
-            background: "#fafafa",
-            marginBottom: "1.5rem",
-            maxHeight: "300px",
-            overflowY: "auto",
-          }}
-        >
-          <pre>{JSON.stringify(jsonPreview, null, 2)}</pre>
+    <div className="w-full min-h-screen bg-gray-50">
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-8 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
+          <h1 className="text-4xl font-bold text-gray-900">Upload Question Set (JSON)</h1>
         </div>
-      )}
 
-      {jsonPreview && (
-        <button
-          onClick={handleSubmit}
-          disabled={uploading}
-          style={{
-            padding: "0.8rem 1.4rem",
-            background: "black",
-            color: "white",
-            borderRadius: "6px",
-            width: "100%",
-          }}
-        >
-          {uploading ? "Uploading…" : "Import Questions"}
-        </button>
-      )}
+        <p className="mb-6">
+          Upload a <strong>.json</strong> file containing your questions. A preview
+          will appear below so you can confirm everything before importing.
+        </p>
+
+        <input
+          type="file"
+          accept=".json"
+          onChange={handleFileUpload}
+          className="mb-6 block"
+        />
+
+        {error && (
+          <p className="text-red-600 mb-6">{error}</p>
+        )}
+
+        {success && (
+          <p className="text-green-600 mb-6">{success}</p>
+        )}
+
+        {jsonPreview && (
+          <div
+            className="border border-gray-300 rounded-lg p-4 bg-gray-100 mb-6 max-h-80 overflow-y-auto"
+          >
+            <pre className="text-sm">{JSON.stringify(jsonPreview, null, 2)}</pre>
+          </div>
+        )}
+
+        {jsonPreview && (
+          <button
+            onClick={handleSubmit}
+            disabled={uploading}
+            className="bg-black hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            {uploading ? "Uploading…" : "Import Questions"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

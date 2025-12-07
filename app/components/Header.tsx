@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 
 interface MeResponse {
   name?: string | null;
@@ -43,19 +44,48 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full bg-blue-600 text-white py-3 px-6 flex justify-between items-center shadow">
-      <Link href="/" className="text-xl font-bold">
-        Ruth’s Screening Tool
+    <header style={{ 
+      width: "100%", 
+      background: "#1e3a8a", 
+      color: "white", 
+      padding: "0.75rem 1.5rem", 
+      display: "flex", 
+      justifyContent: "space-between", 
+      alignItems: "center", 
+      boxShadow: "0 2px 4px rgba(0,0,0,0.1)" 
+    }}>
+      <Link href="/" style={{ fontSize: "1.25rem", fontWeight: "bold", color: "white", textDecoration: "none", display: "flex", alignItems: "center" }}>
+        <Logo />
+        SkillScan
       </Link>
+
+      {loaded && user && (
+        <span style={{ 
+          fontSize: "1.5rem", 
+          fontWeight: "bold", 
+          position: "absolute", 
+          left: "50%", 
+          transform: "translateX(-50%)" 
+        }}>
+          Logged In: {user.name || user.email}
+        </span>
+      )}
 
       <div>
         {loaded && user ? (
-          <div className="flex items-center gap-6">
-            <span className="text-sm">Hi, {user.name || user.email}</span>
-
+          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
             <button
               onClick={handleLogout}
-              className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
+              style={{
+                background: "white",
+                color: "#1e3a8a",
+                padding: "0.25rem 0.75rem",
+                borderRadius: "0.375rem",
+                fontSize: "0.875rem",
+                fontWeight: "600",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               Log Out
             </button>
@@ -63,7 +93,16 @@ export default function Header() {
         ) : (
           <Link
             href="/register"
-            className="bg-white text-blue-600 px-3 py-1 rounded-md text-sm font-semibold hover:bg-slate-100"
+            style={{
+              background: "white",
+              color: "#1e3a8a",
+              padding: "0.25rem 0.75rem",
+              borderRadius: "0.375rem",
+              fontSize: "0.875rem",
+              fontWeight: "600",
+              textDecoration: "none",
+              display: "inline-block",
+            }}
           >
             Login
           </Link>

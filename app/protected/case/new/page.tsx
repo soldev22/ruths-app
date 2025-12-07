@@ -66,19 +66,20 @@ export default function NewCasePage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-2xl bg-white shadow-md rounded-2xl p-8 space-y-6">
+    <div className="w-full min-h-screen bg-gray-50">
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-8 max-w-4xl mx-auto">
 
         {/* HEADER */}
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold">New Screening Case</h1>
+        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
+          <h1 className="text-4xl font-bold text-gray-900">New SkillScan Case</h1>
+        </div>
 
-          <p className="text-lg font-mono font-semibold text-blue-700">
-            Case ID: {caseId || "------"}
-          </p>
-
-          <p className="text-sm text-gray-600 max-w-md mx-auto">
-            Please record this Case ID in your own records. It does not store the pupil’s name.
+        {/* CASE ID SLUG */}
+        <div className="bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4 mb-8">
+          <p className="text-sm text-gray-600">Case ID:</p>
+          <p className="text-2xl font-mono font-bold text-blue-700">{caseId || "------"}</p>
+          <p className="text-xs text-gray-600 mt-2">
+            Please record this Case ID in your own records. It does not store the pupil's name.
           </p>
         </div>
 
@@ -171,6 +172,6 @@ export default function NewCasePage() {
           {message && <p className="text-sm text-green-600 text-center">{message}</p>}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

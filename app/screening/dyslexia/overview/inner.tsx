@@ -18,6 +18,7 @@ type FlatAnswer = {
   questionId: string;
   questionText: string;
   answer: string;
+  correctAnswer?: string | string[];
 };
 
 export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
@@ -84,11 +85,43 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Dyslexia Screening — Overview</h1>
+      <h1 className="text-3xl font-bold mb-4">Dyslexia Review — Overview</h1>
 
       <p className="text-lg mb-1">
         <strong>Case ID:</strong> {caseId}
       </p>
+
+      {/* SECTION NAVIGATION BOX */}
+      <div
+        style={{
+          background: "#f5f5f5",
+          border: "1px solid #ddd",
+          borderRadius: "6px",
+          padding: "1rem",
+          marginBottom: "2rem",
+        }}
+      >
+        <p style={{ fontWeight: "bold", marginBottom: "0.8rem" }}>Jump to Section:</p>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          {sectionScores.map((section: SectionScore, idx: number) => (
+            <button
+              key={section.sectionId}
+              onClick={() => setOpenSection(section.sectionId)}
+              style={{
+                padding: "0.5rem 1rem",
+                background: openSection === section.sectionId ? "black" : "#ddd",
+                color: openSection === section.sectionId ? "white" : "black",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: openSection === section.sectionId ? "bold" : "normal",
+              }}
+            >
+              {idx + 1}. {section.sectionId}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Risk overview panel */}
       <div
@@ -223,8 +256,13 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
                       <div key={a.questionId} className="mb-3">
                         <p className="font-medium">{a.questionText}</p>
                         <p className="text-gray-700">
-                          <strong>Answer:</strong> {a.answer}
+                          <strong>Student answered:</strong> {a.answer}
                         </p>
+                        {a.correctAnswer && (
+                          <p className="text-gray-600 text-sm">
+                            <strong>Correct answer:</strong> {Array.isArray(a.correctAnswer) ? a.correctAnswer.join(" / ") : a.correctAnswer}
+                          </p>
+                        )}
                       </div>
                     ))}
                 </div>

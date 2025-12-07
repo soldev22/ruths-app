@@ -9,8 +9,17 @@ export function proxy(req: NextRequest) {
 
   // Public routes
   if (
+    pathname === "/" ||
     pathname === "/register" ||
-    pathname.startsWith("/api/auth")
+    pathname === "/landing" ||
+    pathname.startsWith("/api/auth") ||
+    pathname.startsWith("/api/subscription") ||
+    pathname === "/about" ||
+    pathname === "/faq" ||
+    pathname === "/privacy" ||
+    pathname === "/contact" ||
+    pathname === "/user-guide" ||
+    pathname === "/scoring-guide"
   ) {
     return NextResponse.next();
   }

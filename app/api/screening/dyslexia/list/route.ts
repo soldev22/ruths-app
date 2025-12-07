@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
         teacherId: 1,
         caseId: 1,
         sections: 1,
+        createdAt: 1,
         updatedAt: 1,
         readingYear: 1,   // ✅ ADDED
       }

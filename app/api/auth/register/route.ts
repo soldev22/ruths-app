@@ -27,14 +27,33 @@ export async function POST(req: Request) {
 
     const hashed = await bcrypt.hash(password, 10);
 
+    // Calculate trial dates
+    const trialStartDate = new Date();
+    const trialEndDate = new Date();
+    trialEndDate.setDate(trialEndDate.getDate() + 30); // 30 days from now
+
     const user = await User.create({
       name: name || "",
       email,
       password: hashed,
+      accountType: 'individual',
+      subscriptionTier: 'trial',
+      subscriptionStatus: 'trial',
+      trialStartDate,
+      trialEndDate,
+      screeningsUsed: 0,
+      maxScreenings: 20, // 20 free screenings during trial
     });
 
     return NextResponse.json(
-      { message: "User registered", userId: user._id.toString() },
+      { 
+        message: "User registered", 
+        userId: user._id.toString(),
+        trialInfo: {
+          trialEndDate,
+          maxScreenings: 20
+        }
+      },
       { status: 201 }
     );
   } catch (err) {

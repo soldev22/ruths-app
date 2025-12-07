@@ -1,27 +1,6 @@
-"use client";
+import Link from "next/link";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await fetch("/api/auth/me");
-        if (res.ok) {
-          // Redirect to dashboard if logged in
-          router.push("/protected/dashboard");
-        }
-      } catch (err) {
-        // Do nothing if not logged in
-      }
-    }
-    checkAuth();
-  }, [router]);
-
-  // Show landing page - inline to avoid import issues
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
@@ -37,19 +16,20 @@ export default function Home() {
           Identify learning difficulties early and provide targeted support.
         </p>
 
+        {/* CTA Buttons */}
         <div className="flex gap-4 justify-center mb-16">
-          <a
+          <Link
             href="/register"
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg transition"
           >
             Start Free Trial
-          </a>
-          <a
+          </Link>
+          <Link
             href="/register"
             className="bg-white hover:bg-gray-50 text-blue-600 font-bold py-4 px-8 rounded-lg text-xl shadow-lg border-2 border-blue-600 transition"
           >
             Login
-          </a>
+          </Link>
         </div>
 
         {/* Trial Info - More Prominent */}
@@ -81,18 +61,83 @@ export default function Home() {
                 ✓ AI-powered reports included
               </p>
             </div>
-            <a
+            <Link
               href="/register"
               className="inline-block bg-white text-green-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
             >
               Get Started - It's Free! →
-            </a>
+            </Link>
             <p className="text-sm text-green-100 mt-4">
               Already have an account?{" "}
-              <a href="/register" className="underline font-semibold hover:text-white">
+              <Link href="/register" className="underline font-semibold hover:text-white">
                 Login here
-              </a>
+              </Link>
             </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Features Section */}
+      <div className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Teachers Choose SkillScan</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-semibold mb-3">Fast & Easy</h3>
+              <p className="text-gray-600">
+                Complete screenings in 20-30 minutes. Results available immediately with AI-powered reports.
+              </p>
+            </div>
+            <div className="text-center p-6">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-semibold mb-3">Evidence-Based</h3>
+              <p className="text-gray-600">
+                Grounded in peer-reviewed research and validated by specialist teachers with dyslexia expertise.
+              </p>
+            </div>
+            <div className="text-center p-6">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-semibold mb-3">GDPR Compliant</h3>
+              <p className="text-gray-600">
+                No student names stored. Complete privacy protection designed for UK schools.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works */}
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+        <div className="grid md:grid-cols-4 gap-6">
+          <div className="bg-blue-50 rounded-lg p-6 text-center">
+            <div className="bg-blue-600 text-white font-bold text-2xl rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
+              1
+            </div>
+            <h3 className="font-semibold mb-2">Register Free</h3>
+            <p className="text-sm text-gray-600">Create your teacher account in 2 minutes</p>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-6 text-center">
+            <div className="bg-blue-600 text-white font-bold text-2xl rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
+              2
+            </div>
+            <h3 className="font-semibold mb-2">Create Cases</h3>
+            <p className="text-sm text-gray-600">Start screenings for your students</p>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-6 text-center">
+            <div className="bg-blue-600 text-white font-bold text-2xl rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
+              3
+            </div>
+            <h3 className="font-semibold mb-2">Run Screenings</h3>
+            <p className="text-sm text-gray-600">Complete assessments with students</p>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-6 text-center">
+            <div className="bg-blue-600 text-white font-bold text-2xl rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
+              4
+            </div>
+            <h3 className="font-semibold mb-2">Get Results</h3>
+            <p className="text-sm text-gray-600">Download reports and plan interventions</p>
           </div>
         </div>
       </div>
@@ -100,7 +145,7 @@ export default function Home() {
       {/* Pricing Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4">School Subscription Plans</h2>
+          <h2 className="text-4xl font-bold mb-4">Subscription Plans</h2>
           <p className="text-xl mb-3">Unlimited screenings for your staff</p>
           <p className="text-lg text-blue-100 mb-12">✓ Shared login - All teachers access one account</p>
           
@@ -113,7 +158,7 @@ export default function Home() {
               <div className="text-gray-600 mb-6">per month</div>
               <div className="bg-blue-50 rounded-lg p-4 mb-6">
                 <div className="text-3xl font-bold text-blue-600">5</div>
-                <div className="text-sm">teachers</div>
+                <div className="text-sm text-gray-700">teachers</div>
               </div>
               <ul className="text-left space-y-3 mb-8 text-sm">
                 <li>✓ Unlimited screenings</li>
@@ -182,17 +227,45 @@ export default function Home() {
             <p className="text-sm mb-4">
               Contact us for district-wide pricing and custom solutions
             </p>
-            <a
+            <Link
               href="/contact"
               className="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100 transition"
             >
               Request Quote
-            </a>
+            </Link>
           </div>
           
           <div className="mt-8 text-sm text-blue-100">
             <p>💰 <strong>Save vs. Competition:</strong> Other tools charge £7.50 per assessment - You save hundreds!</p>
           </div>
+        </div>
+      </div>
+
+      {/* Resources Section */}
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">Learn More</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Link
+            href="/about"
+            className="bg-white border-2 border-gray-200 hover:border-blue-600 rounded-lg p-6 text-center transition shadow-sm hover:shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-2">About SkillScan</h3>
+            <p className="text-gray-600 text-sm">Learn about the science behind online screeners</p>
+          </Link>
+          <Link
+            href="/user-guide"
+            className="bg-white border-2 border-gray-200 hover:border-blue-600 rounded-lg p-6 text-center transition shadow-sm hover:shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-2">User Guide</h3>
+            <p className="text-gray-600 text-sm">Step-by-step instructions for getting started</p>
+          </Link>
+          <Link
+            href="/faq"
+            className="bg-white border-2 border-gray-200 hover:border-blue-600 rounded-lg p-6 text-center transition shadow-sm hover:shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-2">FAQ</h3>
+            <p className="text-gray-600 text-sm">Common questions about using SkillScan</p>
+          </Link>
         </div>
       </div>
 
@@ -203,17 +276,17 @@ export default function Home() {
           <p className="text-xl text-gray-700 mb-8">
             Join teachers across the UK using SkillScan to identify learning difficulties early
           </p>
-          <a
+          <Link
             href="/register"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition"
           >
             Start Your Free Trial Now
-          </a>
+          </Link>
           <p className="text-sm text-gray-600 mt-4">
             Already have an account?{" "}
-            <a href="/register" className="text-blue-600 hover:underline font-semibold">
+            <Link href="/register" className="text-blue-600 hover:underline font-semibold">
               Login here
-            </a>
+            </Link>
           </p>
         </div>
       </div>
