@@ -9,6 +9,7 @@ export default function AuthPage() {
     name: "",
     email: "",
     password: "",
+    accountType: "individual" as "individual" | "school",
   });
 
   const [loading, setLoading] = useState(false);
@@ -100,12 +101,44 @@ export default function AuthPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name only for register */}
           {mode === "register" && (
-            <input
-              className="w-full border rounded-lg px-3 py-2 text-sm"
-              placeholder="Name (optional)"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
+            <>
+              <input
+                className="w-full border rounded-lg px-3 py-2 text-sm"
+                placeholder="Name (optional)"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Account Type</label>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setForm({ ...form, accountType: "individual" })}
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 text-sm font-medium transition ${
+                      form.accountType === "individual"
+                        ? "bg-blue-50 border-blue-600 text-blue-700"
+                        : "bg-white border-gray-300 text-gray-700 hover:border-gray-400"
+                    }`}
+                  >
+                    <div className="font-semibold">Individual Teacher</div>
+                    <div className="text-xs mt-1">£5 per assessment</div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setForm({ ...form, accountType: "school" })}
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 text-sm font-medium transition ${
+                      form.accountType === "school"
+                        ? "bg-blue-50 border-blue-600 text-blue-700"
+                        : "bg-white border-gray-300 text-gray-700 hover:border-gray-400"
+                    }`}
+                  >
+                    <div className="font-semibold">School/Institution</div>
+                    <div className="text-xs mt-1">Monthly subscription</div>
+                  </button>
+                </div>
+              </div>
+            </>
           )}
 
           <input

@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "migrate:activity-logs": "tsx scripts/migrate-activity-logs.ts"
+  }
+}

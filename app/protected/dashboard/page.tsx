@@ -304,9 +304,9 @@ console.log("SCREENINGS:", meData.screenings);
               </div>
 
 <a
-  href={`/screening/dyslexia/start/${encodeURIComponent(
+  href={`/screening/dyslexia/overview?caseId=${encodeURIComponent(
     s.caseId ?? ""
-  )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
+  )}`}
   className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
 >
   Review

@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     },
     subscriptionTier: { 
       type: String, 
-      enum: ['trial', 'starter', 'professional', 'school'],
+      enum: ['trial', 'starter', 'professional', 'school', 'payperuse'],
       default: 'trial'
     },
     subscriptionStatus: { 
@@ -29,11 +29,17 @@ const UserSchema = new Schema(
     
     // Usage tracking
     screeningsUsed: { type: Number, default: 0 },
-    maxScreenings: { type: Number, default: 20 }, // 20 for trial, unlimited (-1) for paid
+    maxScreenings: { type: Number, default: 0 }, // 0 for pay-per-use (no free trial)
+    
+    // Pay-per-use tracking (for individuals)
+    prepaidCredits: { type: Number, default: 0 }, // Number of prepaid assessments
     
     // Payment tracking
     stripeCustomerId: { type: String },
     stripeSubscriptionId: { type: String },
+    
+    // Admin access
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

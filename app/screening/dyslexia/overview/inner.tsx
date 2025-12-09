@@ -27,7 +27,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
   const [openSection, setOpenSection] = useState<string | null>(null);
   const [studentName, setStudentName] = useState("");
   const [teacherNotes, setTeacherNotes] = useState("");
- const [generating, setGenerating] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [aiReport, setAiReport] = useState<string | null>(null);
   const caseId =
     typeof window !== "undefined"
@@ -159,30 +159,27 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
         </span>
       </div>
 
-      {/* Student name + notes (not saved) */}
-      <div className="mb-6 border p-4 rounded">
-        <label className="block mb-2 font-semibold">Student Name (not saved):</label>
+      {/* Student name and notes input */}
+      <div className="mb-6 border p-4 rounded bg-blue-50">
+        <label className="block mb-2 font-semibold">Student Name (optional):</label>
         <input
           type="text"
-          className="w-full border rounded px-3 py-2 mb-1"
+          className="w-full border rounded px-3 py-2 mb-4"
           value={studentName}
           onChange={(e) => setStudentName(e.target.value)}
           placeholder="Enter student name..."
         />
-        <p className="text-sm text-gray-500 mb-4">
-          This name is NOT stored anywhere. It only appears in the Word report.
-        </p>
-
-        <label className="block mb-2 font-semibold">Teacher Notes (added to Word report):</label>
+        
+        <label className="block mb-2 font-semibold">Additional Notes (optional):</label>
         <textarea
           className="w-full border rounded px-3 py-2"
-          rows={5}
+          rows={4}
           value={teacherNotes}
           onChange={(e) => setTeacherNotes(e.target.value)}
-          placeholder="Observations, concerns, strengths, patterns…"
+          placeholder="Add observations, context, or recommendations..."
         />
         <p className="text-sm text-gray-500 mt-1">
-          Notes are NOT saved to the system. They only appear in the exported report.
+          These details are only used in the exported Word report. They are not stored in the system.
         </p>
       </div>
 
@@ -272,81 +269,130 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
         );
       })}
 
-      <div className="mt-8">
-       <form
-  method="POST"
-  action="/api/screening/dyslexia/export-word"
-  encType="multipart/form-data"
->
-  <input type="hidden" name="caseId" value={caseId ?? ""} />
-  <input type="hidden" name="studentName" value={studentName} />
-  <input type="hidden" name="teacherNotes" value={teacherNotes} />
+      {/* Report Section */}
+      <div className="mt-8 border-t pt-6">
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold mb-2">Generate Report</h2>
+          <p className="text-gray-600 mb-4">
+            Get a professional summary of this screening that you can export to Word.
+          </p>
+          
+          <button
+            onClick={async () => {
+              setGenerating(true);
+              setAiReport(null);
+              try {
+                const res = await fetch("/api/screening/dyslexia/generate-report", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    caseId,
+                  }),
+                });
 
-  <button
-    type="submit"
-    className="px-4 py-2 bg-blue-600 text-white rounded"
-  >
-    Download Word Report
-  </button>
-</form>
+                if (!res.ok) {
+                  const errorText = await res.text();
+                  throw new Error(`Failed to generate report: ${errorText}`);
+                }
 
-<div className="mt-4">
-        {/* AI Report Generator */}
-      <div className="mt-6">
-        <button
-          onClick={async () => {
-            setGenerating(true);
-            setAiReport(null);
-            try {
-              const res = await fetch("/api/screening/dyslexia/generate-report", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  caseId,
-                  studentName,
-                  teacherNotes,
-                }),
-              });
-
-              if (!res.ok) {
-                const errorText = await res.text();
-                throw new Error(`Failed to generate report: ${errorText}`);
+                const data = await res.json();
+                setAiReport(data.report);
+              } catch (err: any) {
+                console.error("AI Report Error:", err);
+                alert("Could not generate AI report. See console for details.");
+              } finally {
+                setGenerating(false);
               }
-
-              const data = await res.json();
-              setAiReport(data.report);
-            } catch (err: any) {
-              console.error("AI Report Error:", err);
-              alert("Could not generate AI report. See console for details.");
-            } finally {
-              setGenerating(false);
-            }
-          }}
-          disabled={generating}
-          className={`px-4 py-2 rounded text-white ${
-            generating ? "bg-gray-500" : "bg-purple-700 hover:bg-purple-800"
-          }`}
-        >
-          {generating ? "Generating AI Report..." : "Generate AI Summary"}
-        </button>
-      </div>
-
-      {aiReport && (
-        <div className="mt-6 border border-purple-300 bg-purple-50 p-4 rounded">
-          <h2 className="text-xl font-semibold mb-2 text-purple-800">
-            AI Teacher-Facing Summary
-          </h2>
-          <pre className="whitespace-pre-wrap text-sm text-gray-800">{aiReport}</pre>
+            }}
+            disabled={generating}
+            className={`px-6 py-3 rounded-lg text-white font-semibold text-lg ${
+              generating ? "bg-gray-500 cursor-not-allowed" : "bg-purple-700 hover:bg-purple-800"
+            }`}
+          >
+            {generating ? "Generating Report..." : "Generate Report"}
+          </button>
         </div>
-      )}
 
-</div>
+        {/* Loading/Success Modal */}
+        {generating && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-purple-700 mx-auto mb-4"></div>
+              <h3 className="text-xl font-bold mb-2">Generating Report</h3>
+              <p className="text-gray-600">
+                Please wait while we analyze the screening results and generate your professional report.
+              </p>
+              <p className="text-sm text-gray-500 mt-4">
+                This may take 10-30 seconds...
+              </p>
+            </div>
+          </div>
+        )}
 
+        {aiReport && !generating && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+              <div className="text-green-600 text-6xl mb-4">✓</div>
+              <h3 className="text-2xl font-bold mb-4">Report Ready!</h3>
+              <p className="text-gray-600 mb-6">
+                Your screening report has been generated and is ready to download.
+              </p>
+              
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch("/api/screening/dyslexia/export-ai-report", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        caseId,
+                        studentName,
+                        teacherNotes,
+                        aiReport,
+                        sectionScores,
+                        flatAnswers,
+                      }),
+                    });
 
+                    if (!res.ok) {
+                      throw new Error("Failed to export report");
+                    }
 
-
+                    const blob = await res.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `screening-report-${caseId}.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    // Close modal after download
+                    setAiReport(null);
+                  } catch (err: any) {
+                    console.error("Export Error:", err);
+                    alert("Could not export report to Word. See console for details.");
+                  }
+                }}
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-lg mb-3 w-full"
+              >
+                Download Word Report
+              </button>
+              
+              <button
+                onClick={() => setAiReport(null)}
+                className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -58,18 +58,17 @@ export default function Sidebar() {
             <br />
           </div>
 
-          {/* ADMIN 
-          <div style={{ fontSize: "14px", color: "#666", marginTop: "25px" }}>
+          {/* ADMIN */}
+          <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "25px", marginBottom: "10px" }}>
             ADMIN
-          </div>*/}
+          </div>
 
-          {/*<div>
-            <Link href="/admin/questions">Manage Questions</Link>
+          <div>
+            <Link href="/admin/activity-logs" style={{ color: "white", textDecoration: "none" }}>Activity Logs</Link>
             <br />
-            <Link href="/admin/questions/new">Add Question</Link>
+            <Link href="/admin/vouchers" style={{ color: "white", textDecoration: "none" }}>Vouchers</Link>
             <br />
-            <Link href="/protected/questions/upload">Upload Questions</Link>
-          </div>*/}
+          </div>
         </>
       )}
     </div>

@@ -26,27 +26,45 @@ export async function GET(req: NextRequest) {
     if (typeof dbUser.maxScreenings !== "number") dbUser.maxScreenings = 20;
     if (!dbUser.subscriptionStatus) dbUser.subscriptionStatus = "trial";
     if (!dbUser.subscriptionTier) dbUser.subscriptionTier = "trial";
+    if (!dbUser.accountType) dbUser.accountType = "individual";
+    if (typeof dbUser.prepaidCredits !== "number") dbUser.prepaidCredits = 0;
     await dbUser.save();
 
     const now = new Date();
     const trialActive = dbUser.trialEndDate && new Date(dbUser.trialEndDate) > now;
     const subscriptionActive = dbUser.subscriptionStatus === 'active';
     
-    // Check if user can still screen
-    const canScreen = subscriptionActive || 
-                      (trialActive && dbUser.screeningsUsed < dbUser.maxScreenings);
+    // Check if user can still screen based on account type
+    let canScreen = false;
+    let screeningsRemaining: string | number = 0;
+    
+    if (dbUser.accountType === 'individual') {
+      // Individual: check prepaid credits or trial
+      canScreen = dbUser.prepaidCredits > 0 || (trialActive && dbUser.screeningsUsed < dbUser.maxScreenings);
+      screeningsRemaining = trialActive 
+        ? Math.max(dbUser.prepaidCredits, Math.max(0, dbUser.maxScreenings - dbUser.screeningsUsed))
+        : dbUser.prepaidCredits;
+    } else {
+      // School: check subscription status or trial
+      canScreen = subscriptionActive || (trialActive && dbUser.screeningsUsed < dbUser.maxScreenings);
+      screeningsRemaining = subscriptionActive ? 'unlimited' : 
+                            Math.max(0, dbUser.maxScreenings - dbUser.screeningsUsed);
+    }
     
     const response = {
       canScreen,
+      accountType: dbUser.accountType,
       subscriptionStatus: dbUser.subscriptionStatus,
       subscriptionTier: dbUser.subscriptionTier,
       screeningsUsed: dbUser.screeningsUsed,
       maxScreenings: dbUser.maxScreenings,
+      prepaidCredits: dbUser.prepaidCredits,
       trialActive,
       trialEndDate: dbUser.trialEndDate,
-      screeningsRemaining: subscriptionActive ? 'unlimited' : 
-                           Math.max(0, dbUser.maxScreenings - dbUser.screeningsUsed),
-      message: !canScreen ? 'Trial limit reached. Please upgrade to continue.' : null
+      screeningsRemaining,
+      message: !canScreen ? (dbUser.accountType === 'individual' ? 
+        'No credits remaining. Please purchase more assessments.' : 
+        'Trial limit reached. Please upgrade to continue.') : null
     };
 
     return NextResponse.json(response);

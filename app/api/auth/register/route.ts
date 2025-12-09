@@ -2,12 +2,13 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import {connectToDatabase} from "../../../../lib/db";
 import User from "../../../../models/User";
+import ActivityLog from "../../../../models/ActivityLog";
 
 export async function POST(req: Request) {
   try {
     await connectToDatabase();
 
-    const { name, email, password } = await req.json();
+    const { name, email, password, accountType } = await req.json();
 
     if (!email || !password) {
       return NextResponse.json(
@@ -36,14 +37,32 @@ export async function POST(req: Request) {
       name: name || "",
       email,
       password: hashed,
-      accountType: 'individual',
+      accountType: accountType || 'individual',
       subscriptionTier: 'trial',
       subscriptionStatus: 'trial',
       trialStartDate,
       trialEndDate,
       screeningsUsed: 0,
-      maxScreenings: 20, // 20 free screenings during trial
+      maxScreenings: 0, // No free trial - must purchase credits
+      prepaidCredits: 0,
     });
+
+    // Log the registration
+    try {
+      await ActivityLog.create({
+        userId: user._id,
+        userEmail: user.email,
+        activityType: 'registration',
+        metadata: {
+          accountType: user.accountType,
+          userAgent: req.headers.get('user-agent'),
+          timestamp: new Date()
+        }
+      });
+      console.log(`[REGISTRATION] New user registered: ${user.email} (ID: ${user._id}, Type: ${user.accountType})`);
+    } catch (logError) {
+      console.error('Failed to log registration activity:', logError);
+    }
 
     return NextResponse.json(
       { 
@@ -51,7 +70,7 @@ export async function POST(req: Request) {
         userId: user._id.toString(),
         trialInfo: {
           trialEndDate,
-          maxScreenings: 20
+          maxScreenings: 0
         }
       },
       { status: 201 }

@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     }));
 
     const prompt = `
-You are an educational specialist writing a **dyslexia screening support report** for teachers.
+You are an educational specialist writing a dyslexia screening support report for teachers.
 
 Guidance:
 - Do mention likely dyslexia indicators based on student responses. 
@@ -52,7 +52,37 @@ Guidance:
 - Offer supportive language that helps teachers understand and act.
 - Make recommendations for further assessment if needed.
 - Use professional tone — this will be shared with educators.
-- Use educational terms to make it look pedagogiclaly sound.
+- Use educational terms to make it look pedagogically sound.
+
+IMPORTANT FORMATTING RULES:
+- DO NOT use markdown formatting (no asterisks, hashes, or other symbols)
+- DO NOT use bold, italic, or heading markers
+- Write in plain text only
+- Use clear paragraph breaks for readability
+- Do not use dashes, bullets, or list markers
+- Use simple numbered points if needed (e.g., "1. Point here")
+- Do not use ## or ### or ** or __ or any markdown syntax
+- Do not use - or * or + for lists
+
+REQUIRED STRUCTURE - Include these section headings:
+
+OVERVIEW
+[Provide a brief summary of the screening results]
+
+KEY FINDINGS
+[Detail the main observations and patterns identified]
+
+AREAS OF CONCERN
+[Highlight specific difficulties or indicators]
+
+STRENGTHS IDENTIFIED
+[Note positive aspects and capabilities]
+
+RECOMMENDATIONS
+[Provide actionable next steps and strategies]
+
+FURTHER ASSESSMENT
+[Suggest if additional evaluation is needed]
 
 STUDENT RESPONSES:
 ${JSON.stringify(structured, null, 2)}

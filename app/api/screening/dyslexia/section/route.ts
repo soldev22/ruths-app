@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
 import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
 import { getUserFromToken } from "../../../../../lib/getUserFromToken";
+import ActivityLog from "../../../../../models/ActivityLog";
+import User from "../../../../../models/User";
 
 // helper to get teacherId (falls back to "anonymous" in dev / if not logged in)
 function getTeacherId(req: NextRequest): string {
@@ -64,6 +66,29 @@ if (!screening.readingYear && readingYear) {
   }
 
   await screening.save();
+
+  // Log section completion
+  try {
+    const user = await User.findById(teacherId);
+    if (user) {
+      await ActivityLog.create({
+        userId: teacherId,
+        userEmail: user.email,
+        activityType: 'screening_section_completed',
+        screeningId: screening._id,
+        caseId: caseId,
+        sectionId: sectionId,
+        metadata: {
+          sectionsCompleted: screening.sections.length,
+          readingYear: screening.readingYear,
+          timestamp: new Date()
+        }
+      });
+      console.log(`[SECTION_COMPLETED] User: ${user.email}, Case: ${caseId}, Section: ${sectionId}`);
+    }
+  } catch (logError) {
+    console.error('Failed to log section completion:', logError);
+  }
 
   return NextResponse.json(
     {

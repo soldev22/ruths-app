@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
 import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
 import User from "../../../../../models/User";
+import ActivityLog from "../../../../../models/ActivityLog";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
@@ -58,6 +59,7 @@ export async function POST(req: Request) {
 
     // check if screening already exists
     let screening = await DyslexiaScreening.findOne({ caseId });
+    const isNewScreening = !screening;
 
     if (!screening) {
       screening = await DyslexiaScreening.create({
@@ -74,6 +76,29 @@ export async function POST(req: Request) {
       userId,
       screeningsUsed: user.screeningsUsed,
     });
+
+    // Log the screening start
+    try {
+      await ActivityLog.create({
+        userId: user._id,
+        userEmail: user.email,
+        activityType: 'screening_started',
+        screeningId: screening._id,
+        caseId: caseId,
+        metadata: {
+          isNewScreening,
+          screeningsUsed: user.screeningsUsed,
+          creditsUsed: 1,
+          remainingCredits: user.prepaidCredits || 0,
+          accountType: user.accountType,
+          userAgent: req.headers.get('user-agent'),
+          timestamp: new Date()
+        }
+      });
+      console.log(`[SCREENING_STARTED] User: ${user.email}, Case ID: ${caseId}, Screening ID: ${screening._id}, Credits Used: 1`);
+    } catch (logError) {
+      console.error('Failed to log screening start:', logError);
+    }
 
     const screeningsRemaining = subscriptionActive ? 'unlimited' : 
                                 Math.max(0, user.maxScreenings - user.screeningsUsed);

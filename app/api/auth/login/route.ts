@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { connectToDatabase } from "../../../../lib/db";
 import User from "../../../../models/User";
+import ActivityLog from "../../../../models/ActivityLog";
 
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
@@ -41,6 +42,23 @@ export async function POST(req: Request) {
     const token = jwt.sign({ userId: user._id.toString() }, JWT_SECRET, {
       expiresIn: "7d",
     });
+
+    // Log the login activity
+    try {
+      await ActivityLog.create({
+        userId: user._id,
+        userEmail: user.email,
+        activityType: 'login',
+        metadata: {
+          userAgent: req.headers.get('user-agent'),
+          timestamp: new Date()
+        }
+      });
+      console.log(`[LOGIN] User logged in: ${user.email} (ID: ${user._id})`);
+    } catch (logError) {
+      console.error('Failed to log login activity:', logError);
+      // Don't fail the login if logging fails
+    }
 
     const res = NextResponse.json(
       {

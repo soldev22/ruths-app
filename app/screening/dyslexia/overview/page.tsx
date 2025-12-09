@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import OverviewInner from "./inner"; // assuming file is inner.tsx and component is named OverviewInner
 
-export default function OverviewPageWrapper({
+export default async function OverviewPageWrapper({
   searchParams,
 }: {
-  searchParams: { caseId?: string };
+  searchParams: Promise<{ caseId?: string }>;
 }) {
-  const caseId = searchParams?.caseId ?? null;
+  const params = await searchParams;
+  const caseId = params?.caseId ?? null;
 
   return (
     <Suspense fallback={<p>Loading…</p>}>

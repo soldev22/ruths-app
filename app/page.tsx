@@ -30,11 +30,11 @@ export default function Home() {
           Welcome to SkillScan
         </h1>
         <p className="text-2xl text-gray-700 mb-8">
-          Evidence-Based Dyslexia Screening for Teachers
+          Professionally Designed Dyslexia Screening
         </p>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-          Professional online screening tools designed and verified by qualified teaching professionals. 
-          Identify learning difficulties early and provide targeted support.
+          Professional online screening tools designed and verified by qualified education professionals. 
+          Identify learning difficulties early and provide guidance.
         </p>
 
         <div className="flex gap-4 justify-center mb-16">
@@ -42,7 +42,7 @@ export default function Home() {
             href="/register"
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg transition"
           >
-            Start Free Trial
+            Get Started
           </a>
           <a
             href="/register"
@@ -52,30 +52,30 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Trial Info - More Prominent */}
-        <div className="bg-gradient-to-r from-green-400 to-green-500 text-white rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
+        {/* Pay Per Use Info */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
           <div className="text-center">
-            <div className="text-6xl mb-4">🎉</div>
+            <div className="text-6xl mb-4">💳</div>
             <h2 className="text-3xl font-bold mb-4">
-              Start Your Free 30-Day Trial Today
+              Simple Pay-As-You-Go Pricing
             </h2>
             <div className="bg-white text-gray-900 rounded-lg p-6 mb-6">
               <div className="flex items-center justify-center gap-8 mb-4">
                 <div>
-                  <div className="text-4xl font-bold text-green-600">30</div>
-                  <div className="text-sm">Days Free</div>
+                  <div className="text-4xl font-bold text-blue-600">£5</div>
+                  <div className="text-sm">per assessment</div>
                 </div>
-                <div className="text-3xl text-gray-300">+</div>
+                <div className="text-3xl text-gray-300">or</div>
                 <div>
-                  <div className="text-4xl font-bold text-green-600">20</div>
-                  <div className="text-sm">Free Screenings</div>
+                  <div className="text-4xl font-bold text-blue-600">£40</div>
+                  <div className="text-sm">bundle of 10</div>
                 </div>
               </div>
               <p className="text-lg text-gray-700 font-semibold">
-                ✓ No credit card required
+                ✓ No subscription required
               </p>
               <p className="text-md text-gray-600">
-                ✓ Full access to all features
+                ✓ Purchase credits as needed
               </p>
               <p className="text-md text-gray-600">
                 ✓ AI-powered reports included
@@ -83,11 +83,11 @@ export default function Home() {
             </div>
             <a
               href="/register"
-              className="inline-block bg-white text-green-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
+              className="inline-block bg-white text-blue-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
             >
-              Get Started - It's Free! →
+              Create Account →
             </a>
-            <p className="text-sm text-green-100 mt-4">
+            <p className="text-sm text-blue-100 mt-4">
               Already have an account?{" "}
               <a href="/register" className="underline font-semibold hover:text-white">
                 Login here
@@ -97,101 +97,37 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Pricing Section */}
+      {/* Schools Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4">School Subscription Plans</h2>
-          <p className="text-xl mb-3">Unlimited screenings for your staff</p>
-          <p className="text-lg text-blue-100 mb-12">✓ Shared login - All teachers access one account</p>
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="text-6xl mb-6">🏫</div>
+          <h2 className="text-4xl font-bold mb-4">Schools & Organizations</h2>
+          <p className="text-xl mb-8">Looking for a solution for your whole school?</p>
           
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Starter Plan */}
-            <div className="bg-white text-gray-900 rounded-lg p-8 shadow-xl">
-              <h3 className="text-2xl font-bold mb-2">Starter</h3>
-              <p className="text-sm text-gray-600 mb-4">Perfect for small schools</p>
-              <div className="text-5xl font-bold mb-2">£9.99</div>
-              <div className="text-gray-600 mb-6">per month</div>
-              <div className="bg-blue-50 rounded-lg p-4 mb-6">
-                <div className="text-3xl font-bold text-blue-600">5</div>
-                <div className="text-sm">teachers</div>
-              </div>
-              <ul className="text-left space-y-3 mb-8 text-sm">
-                <li>✓ Unlimited screenings</li>
-                <li>✓ AI-generated reports</li>
-                <li>✓ Word export</li>
-                <li>✓ GDPR compliant</li>
-                <li>✓ Email support</li>
-              </ul>
-              <div className="text-sm text-gray-600 pt-4 border-t">
-                Annual: <strong>£99.90/year</strong> (save 2 months)
-              </div>
-            </div>
-
-            {/* Professional Plan */}
-            <div className="bg-green-500 text-white rounded-lg p-8 shadow-xl relative transform scale-105">
-              <div className="absolute -top-4 right-4 bg-yellow-400 text-gray-900 font-bold px-4 py-1 rounded-full text-sm">
-                POPULAR
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Professional</h3>
-              <p className="text-sm text-green-100 mb-4">Most schools choose this</p>
-              <div className="text-5xl font-bold mb-2">£35.99</div>
-              <div className="text-green-100 mb-6">per month</div>
-              <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-6">
-                <div className="text-3xl font-bold">25</div>
-                <div className="text-sm">teachers</div>
-              </div>
-              <ul className="text-left space-y-3 mb-8 text-sm">
-                <li>✓ Everything in Starter</li>
-                <li>✓ Priority support</li>
-                <li>✓ Training webinars</li>
-                <li>✓ Dedicated account manager</li>
-                <li>✓ Custom reports</li>
-              </ul>
-              <div className="text-sm text-green-100 pt-4 border-t border-green-400">
-                Annual: <strong>£359.90/year</strong> (save 2 months)
-              </div>
-            </div>
-
-            {/* School Plan */}
-            <div className="bg-white text-gray-900 rounded-lg p-8 shadow-xl">
-              <h3 className="text-2xl font-bold mb-2">School</h3>
-              <p className="text-sm text-gray-600 mb-4">For larger schools</p>
-              <div className="text-5xl font-bold mb-2">£73.99</div>
-              <div className="text-gray-600 mb-6">per month</div>
-              <div className="bg-blue-50 rounded-lg p-4 mb-6">
-                <div className="text-3xl font-bold text-blue-600">50</div>
-                <div className="text-sm text-gray-700">teachers</div>
-              </div>
-              <ul className="text-left space-y-3 mb-8 text-sm">
-                <li>✓ Everything in Professional</li>
-                <li>✓ Phone support</li>
-                <li>✓ On-site training available</li>
-                <li>✓ Data export & analytics</li>
-                <li>✓ Integration support</li>
-              </ul>
-              <div className="text-sm text-gray-600 pt-4 border-t">
-                Annual: <strong>£739.90/year</strong> (save 2 months)
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-white bg-opacity-20 rounded-lg p-6 max-w-2xl mx-auto">
-            <p className="text-lg mb-3">
-              <strong>Need more than 50 teachers?</strong>
+          <div className="bg-white text-gray-900 rounded-lg p-8 shadow-xl max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4">Custom Solutions Available</h3>
+            <ul className="text-left space-y-3 mb-8 text-lg">
+              <li>✓ Unlimited screenings for your team</li>
+              <li>✓ Shared access for multiple users</li>
+              <li>✓ Bulk voucher codes for your school</li>
+              <li>✓ Custom training and support</li>
+              <li>✓ Flexible pricing based on your needs</li>
+            </ul>
+            
+            <p className="text-gray-700 mb-6">
+              We'll work with you to create a package that fits your school's requirements and budget.
             </p>
-            <p className="text-sm mb-4">
-              Contact us for district-wide pricing and custom solutions
-            </p>
+            
             <a
-              href="/contact"
-              className="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100 transition"
+              href="mailto:contact@solutionsdeveloped.co.uk?subject=School Enquiry - SkillScan&body=Hi, I'm interested in learning more about SkillScan for our organization.%0D%0A%0D%0AOrganization Name:%0D%0AContact Name:%0D%0ANumber of Users:%0D%0APhone Number:%0D%0A%0D%0APlease tell us a bit about your requirements:"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg transition"
             >
-              Request Quote
+              📧 Contact Us for School Pricing
             </a>
-          </div>
-          
-          <div className="mt-8 text-sm text-blue-100">
-            <p>💰 <strong>Save vs. Competition:</strong> Other tools charge £7.50 per assessment - You save hundreds!</p>
+            
+            <p className="text-sm text-gray-600 mt-4">
+              Email: <a href="mailto:contact@solutionsdeveloped.co.uk" className="text-blue-600 hover:underline font-semibold">contact@solutionsdeveloped.co.uk</a>
+            </p>
           </div>
         </div>
       </div>
@@ -201,13 +137,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
           <p className="text-xl text-gray-700 mb-8">
-            Join teachers across the UK using SkillScan to identify learning difficulties early
+            Join education professionals across the UK using SkillScan to identify learning difficulties early
           </p>
           <a
             href="/register"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition"
           >
-            Start Your Free Trial Now
+            Create Your Account
           </a>
           <p className="text-sm text-gray-600 mt-4">
             Already have an account?{" "}
