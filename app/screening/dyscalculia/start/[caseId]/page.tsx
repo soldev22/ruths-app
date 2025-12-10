@@ -1,18 +1,15 @@
-// app/screening/dyslexia/start/[caseId]/page.tsx
-import { fetchDyslexiaQuestions } from "../../../../../lib/dyslexiaQuestions";
-import ScreeningWizard from "../../../dyslexia/ScreeningWizard";
+// app/screening/dyscalculia/start/[caseId]/page.tsx
+import { fetchDyscalculiaQuestions } from "../../../../../lib/dyscalculiaQuestions";
+import ScreeningWizard from "./ScreeningWizard";
 
-
-export default async function DyslexiaStartPage({ 
+export default async function DyscalculiaStartPage({ 
   params,
   searchParams,
 }: {
   params: Promise<{ caseId: string }>;
   searchParams: Promise<{ year?: string }>;
-
 }) {
   try {
-    // 🔥 MUST unwrap the params Promise
     const { caseId } = await params;
     const search = await searchParams;
     const year = search?.year;
@@ -54,22 +51,20 @@ export default async function DyslexiaStartPage({
     );
   }
 
-    const sections = await fetchDyslexiaQuestions(year);
+    const sections = await fetchDyscalculiaQuestions(year);
 
     return (
       <div style={{ padding: "20px" }}>
-        <h1>Dyslexia Review — Case {caseId} : Year {year}</h1>
-
-     <ScreeningWizard 
-    caseId={caseId} 
-    sections={sections} 
-    readingYear={year}
-  />
-
+        <h1>Dyscalculia Assessment — Case {caseId} : Year {year}</h1>
+        <ScreeningWizard 
+          caseId={caseId} 
+          sections={sections} 
+          readingYear={year}
+        />
       </div>
     );
   } catch (error) {
-    console.error("Error loading dyslexia start page:", error);
+    console.error("Error loading dyscalculia start page:", error);
     return (
       <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
         <div style={{ 

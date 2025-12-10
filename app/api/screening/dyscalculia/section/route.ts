@@ -1,7 +1,7 @@
-// app/api/screening/dyslexia/section/route.ts
+// app/api/screening/dyscalculia/section/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
-import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
+import { DyscalculiaScreening } from "../../../../../models/DyscalculiaScreening";
 import { getUserFromToken } from "../../../../../lib/getUserFromToken";
 import ActivityLog from "../../../../../models/ActivityLog";
 import User from "../../../../../models/User";
@@ -28,15 +28,15 @@ export async function POST(req: NextRequest) {
   const teacherId = getTeacherId(req);
 
   // Find screening for this teacher + case
-  let screening = await DyslexiaScreening.findOne({ teacherId, caseId });
+  let screening = await DyscalculiaScreening.findOne({ teacherId, caseId });
 
-  // Create if it doesn't exist — PATCHED HERE
+  // Create if it doesn't exist
   if (!screening) {
-    screening = new DyslexiaScreening({
+    screening = new DyscalculiaScreening({
       teacherId,
       caseId,
       sections: [],
-      readingYear: readingYear || null,   // ⬅️ NEW LINE
+      readingYear: readingYear || null,
     });
   } else {
     // If resuming & readingYear was never saved before, patch it in
@@ -47,11 +47,11 @@ export async function POST(req: NextRequest) {
     if (!screening.teacherId) {
       screening.teacherId = teacherId;
     }
+    
     // Add readingYear if missing
-if (!screening.readingYear && readingYear) {
-  screening.readingYear = readingYear;
-}
-
+    if (!screening.readingYear && readingYear) {
+      screening.readingYear = readingYear;
+    }
   }
 
   // Check if this is the first section being saved (screening becomes visible in dashboard)
@@ -108,15 +108,16 @@ if (!screening.readingYear && readingYear) {
         caseId: caseId,
         sectionId: sectionId,
         metadata: {
+          screeningType: 'dyscalculia',
           sectionsCompleted: screening.sections.length,
           readingYear: screening.readingYear,
           timestamp: new Date()
         }
       });
-      console.log(`[SECTION_COMPLETED] User: ${user.email}, Case: ${caseId}, Section: ${sectionId}`);
+      console.log(`[DYSCALCULIA_SECTION_COMPLETED] User: ${user.email}, Case: ${caseId}, Section: ${sectionId}`);
     }
   } catch (logError) {
-    console.error('Failed to log section completion:', logError);
+    console.error('Failed to log dyscalculia section completion:', logError);
   }
 
   return NextResponse.json(
@@ -143,7 +144,7 @@ export async function GET(req: NextRequest) {
 
   const teacherId = getTeacherId(req);
 
-  const screening = await DyslexiaScreening.findOne({ teacherId, caseId });
+  const screening = await DyscalculiaScreening.findOne({ teacherId, caseId });
 
   if (!screening) {
     return NextResponse.json({ exists: false }, { status: 200 });

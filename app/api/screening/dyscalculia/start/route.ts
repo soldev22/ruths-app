@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
-import { DyslexiaScreening } from "../../../../../models/DyslexiaScreening";
+import { DyscalculiaScreening } from "../../../../../models/DyscalculiaScreening";
 import User from "../../../../../models/User";
 import ActivityLog from "../../../../../models/ActivityLog";
 import jwt from "jsonwebtoken";
@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 
 export async function POST(req: Request) {
   try {
-    console.log("[start] incoming request");
+    console.log("[dyscalculia/start] incoming request");
     await connectToDatabase();
 
     const body = await req.json();
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       ?.replace("auth_token=", "");
 
     if (!token) {
-      console.log("[start] missing auth_token cookie");
+      console.log("[dyscalculia/start] missing auth_token cookie");
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
@@ -54,11 +54,11 @@ export async function POST(req: Request) {
     }
 
     // check if screening already exists
-    let screening = await DyslexiaScreening.findOne({ caseId });
+    let screening = await DyscalculiaScreening.findOne({ caseId });
     const isNewScreening = !screening;
 
     if (!screening) {
-      screening = await DyslexiaScreening.create({
+      screening = await DyscalculiaScreening.create({
         userId,
         caseId,
         sections: [],
@@ -77,6 +77,7 @@ export async function POST(req: Request) {
         screeningId: screening._id,
         caseId: caseId,
         metadata: {
+          screeningType: 'dyscalculia',
           isNewScreening,
           screeningsUsed: user.screeningsUsed,
           creditsPending: isNewScreening ? 1 : 0, // Will be deducted on first section save
@@ -86,14 +87,14 @@ export async function POST(req: Request) {
           timestamp: new Date()
         }
       });
-      console.log(`[SCREENING_STARTED] User: ${user.email}, Case ID: ${caseId}, Screening ID: ${screening._id}, Credits Pending: ${isNewScreening ? 1 : 0}`);
+      console.log(`[DYSCALCULIA_SCREENING_STARTED] User: ${user.email}, Case ID: ${caseId}, Screening ID: ${screening._id}, Credits Pending: ${isNewScreening ? 1 : 0}`);
     } catch (logError) {
       console.error('Failed to log screening start:', logError);
     }
 
     const screeningsRemaining = user.prepaidCredits || 0;
 
-    console.log("[start] success - credit will be deducted on first section save", { userId, prepaidCredits: user.prepaidCredits, screeningsUsed: user.screeningsUsed });
+    console.log("[dyscalculia/start] success - credit will be deducted on first section save", { userId, prepaidCredits: user.prepaidCredits, screeningsUsed: user.screeningsUsed });
 
     return NextResponse.json({ 
       screening,
@@ -101,7 +102,7 @@ export async function POST(req: Request) {
       prepaidCredits: user.prepaidCredits
     });
   } catch (err) {
-    console.error("Start error:", err);
+    console.error("Dyscalculia start error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

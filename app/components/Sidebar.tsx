@@ -1,10 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    async function checkAdmin() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          setIsAdmin(data.user?.isAdmin || false);
+        }
+      } catch (err) {
+        console.error("Error checking admin status:", err);
+      }
+    }
+    checkAdmin();
+  }, []);
 
   return (
     <div
@@ -38,6 +54,24 @@ export default function Sidebar() {
       {open && (
         <>
           <div style={{ marginBottom: "20px" }}>
+            <Link 
+              href="/protected/case/new" 
+              style={{ 
+                color: "white", 
+                textDecoration: "none",
+                display: "inline-block",
+                background: "#3b82f6",
+                padding: "8px 12px",
+                borderRadius: "6px",
+                fontWeight: "600",
+                marginBottom: "12px",
+                width: "100%",
+                textAlign: "center"
+              }}
+            >
+              ➕ New Assessment
+            </Link>
+            <br />
             <Link href="/protected/dashboard" style={{ color: "white", textDecoration: "none" }}>Dashboard</Link>
             <br />
             <Link href="/protected/account" style={{ color: "white", textDecoration: "none" }}>Account & Billing</Link>
@@ -58,17 +92,21 @@ export default function Sidebar() {
             <br />
           </div>
 
-          {/* ADMIN */}
-          <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "25px", marginBottom: "10px" }}>
-            ADMIN
-          </div>
+          {/* ADMIN - Only visible to admin users */}
+          {isAdmin && (
+            <>
+              <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "25px", marginBottom: "10px" }}>
+                ADMIN
+              </div>
 
-          <div>
-            <Link href="/admin/activity-logs" style={{ color: "white", textDecoration: "none" }}>Activity Logs</Link>
-            <br />
-            <Link href="/admin/vouchers" style={{ color: "white", textDecoration: "none" }}>Vouchers</Link>
-            <br />
-          </div>
+              <div>
+                <Link href="/admin/activity-logs" style={{ color: "white", textDecoration: "none" }}>Activity Logs</Link>
+                <br />
+                <Link href="/admin/vouchers" style={{ color: "white", textDecoration: "none" }}>Vouchers</Link>
+                <br />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

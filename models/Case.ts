@@ -12,6 +12,17 @@ const CaseSchema = new mongoose.Schema(
       type: String,
     },
 
+    // For teachers: student identifier (first name or code)
+    studentIdentifier: {
+      type: String,
+    },
+
+    // For individuals: who is being assessed
+    assessing: {
+      type: String,
+      enum: ['child', 'self', 'other'],
+    },
+
     teacherName: {
       type: String,
     },

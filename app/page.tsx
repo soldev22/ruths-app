@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
+  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
     async function checkAuth() {
@@ -13,13 +14,29 @@ export default function Home() {
         if (res.ok) {
           // Redirect to dashboard if logged in
           router.push("/protected/dashboard");
+        } else {
+          // Not logged in, show landing page
+          setIsChecking(false);
         }
       } catch (err) {
-        // Do nothing if not logged in
+        // Error or not logged in - show landing page
+        setIsChecking(false);
       }
     }
     checkAuth();
   }, [router]);
+
+  // Don't render landing page until we've checked auth
+  if (isChecking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Show landing page - inline to avoid import issues
   return (
@@ -30,76 +47,82 @@ export default function Home() {
           Welcome to SkillScan
         </h1>
         <p className="text-2xl text-gray-700 mb-8">
-          Professionally Designed Dyslexia Screening
+          Professional Dyslexia & Dyscalculia Screening
         </p>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
           Professional online screening tools designed and verified by qualified education professionals. 
           Identify learning difficulties early and provide guidance.
         </p>
 
-        <div className="flex gap-4 justify-center mb-16">
+        {/* Login Link - Positioned High */}
+        <div className="mb-12">
           <a
             href="/register"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg transition"
+            className="inline-block text-blue-600 hover:text-blue-700 font-semibold text-lg underline mb-2"
           >
-            Get Started
-          </a>
-          <a
-            href="/register"
-            className="bg-white hover:bg-gray-50 text-blue-600 font-bold py-4 px-8 rounded-lg text-xl shadow-lg border-2 border-blue-600 transition"
-          >
-            Login
+            I already have an account →
           </a>
         </div>
 
-        {/* Pay Per Use Info */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
-          <div className="text-center">
-            <div className="text-6xl mb-4">💳</div>
-            <h2 className="text-3xl font-bold mb-4">
-              Simple Pay-As-You-Go Pricing
-            </h2>
-            <div className="bg-white text-gray-900 rounded-lg p-6 mb-6">
-              <div className="flex items-center justify-center gap-8 mb-4">
-                <div>
-                  <div className="text-4xl font-bold text-blue-600">£5</div>
-                  <div className="text-sm">per assessment</div>
-                </div>
-                <div className="text-3xl text-gray-300">or</div>
-                <div>
-                  <div className="text-4xl font-bold text-blue-600">£40</div>
-                  <div className="text-sm">bundle of 10</div>
-                </div>
-              </div>
-              <p className="text-lg text-gray-700 font-semibold">
-                ✓ No subscription required
-              </p>
-              <p className="text-md text-gray-600">
-                ✓ Purchase credits as needed
-              </p>
-              <p className="text-md text-gray-600">
-                ✓ AI-powered reports included
-              </p>
-            </div>
+        {/* User Type Selection */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">I am a...</h2>
+          <div className="flex gap-6 justify-center max-w-4xl mx-auto">
             <a
               href="/register"
-              className="inline-block bg-white text-blue-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
+              className="flex-1 bg-white hover:bg-green-50 border-2 border-green-600 rounded-xl p-8 shadow-lg transition transform hover:scale-105 group"
             >
-              Create Account →
+              <div className="text-6xl mb-4">👩‍🏫</div>
+              <h3 className="text-2xl font-bold text-green-700 mb-3">Teacher</h3>
+              <p className="text-gray-600 mb-4">
+                Screen multiple students efficiently. Professional reports for parents and SENCO.
+              </p>
+              <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4 mb-4">
+                <div className="text-2xl font-bold text-green-700 mb-1">Bundled Pricing</div>
+                <p className="text-sm text-gray-600">Contact us for bulk packages tailored to your needs</p>
+              </div>
+              <ul className="text-sm text-left space-y-2 text-gray-700 mb-4">
+                <li>✓ Manage class screenings</li>
+                <li>✓ Track student progress</li>
+                <li>✓ Generate professional reports</li>
+                <li>✓ Bulk operations</li>
+                <li>✓ No subscription required</li>
+              </ul>
+              <span className="inline-block bg-green-600 text-white font-bold py-3 px-6 rounded-lg group-hover:bg-green-700 transition">
+                Get Started as Teacher →
+              </span>
             </a>
-            <p className="text-sm text-blue-100 mt-4">
-              Already have an account?{" "}
-              <a href="/register" className="underline font-semibold hover:text-white">
-                Login here
-              </a>
-            </p>
+            
+            <a
+              href="/register"
+              className="flex-1 bg-white hover:bg-blue-50 border-2 border-blue-600 rounded-xl p-8 shadow-lg transition transform hover:scale-105 group"
+            >
+              <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
+              <h3 className="text-2xl font-bold text-blue-700 mb-3">Parent / Individual</h3>
+              <p className="text-gray-600 mb-4">
+                Quick, affordable screening for your child or yourself. Clear results and guidance.
+              </p>
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-4">
+                <div className="text-3xl font-bold text-blue-700 mb-1">£5</div>
+                <p className="text-sm text-gray-600">per assessment</p>
+              </div>
+              <ul className="text-sm text-left space-y-2 text-gray-700 mb-4">
+                <li>✓ Complete at home</li>
+                <li>✓ Professional reports</li>
+                <li>✓ Actionable recommendations</li>
+                <li>✓ No subscription required</li>
+              </ul>
+              <span className="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg group-hover:bg-blue-700 transition">
+                Get Started as Parent →
+              </span>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Schools Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* Schools Section - Full Width */}
+      <div className="bg-gradient-to-r from-green-600 to-blue-800 text-white py-20 w-full">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="text-6xl mb-6">🏫</div>
           <h2 className="text-4xl font-bold mb-4">Schools & Organizations</h2>
           <p className="text-xl mb-8">Looking for a solution for your whole school?</p>

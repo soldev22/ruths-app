@@ -45,6 +45,11 @@ export async function GET() {
       userId: user._id.toString(),
       email: user.email,
       name: user.name ?? null,
+      isAdmin: user.isAdmin ?? false,
+      userType: user.userType ?? "individual",
+      prepaidCredits: user.prepaidCredits ?? 0,
+      screeningsUsed: user.screeningsUsed ?? 0,
+      accountType: user.accountType ?? "individual",
     },
   },
   { status: 200 }

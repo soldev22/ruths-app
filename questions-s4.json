@@ -1,0 +1,502 @@
+[
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Phonological Awareness",
+    "text": "How many syllables are in 'incomprehensible'?",
+    "options": ["4", "5", "6", "7"],
+    "correctAnswer": "6",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Phonological Awareness",
+    "text": "Which word has the same vowel sound as 'heir'?",
+    "options": ["their", "hair", "here", "her"],
+    "correctAnswer": "hair",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Phonological Awareness",
+    "text": "What sound does 'ch' make in 'archive'?",
+    "options": ["ch as in chair", "k as in kite", "sh as in ship", "s as in sit"],
+    "correctAnswer": "k as in kite",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Phonological Awareness",
+    "text": "Remove both prefix and suffix from 'unbelievable'. What remains?",
+    "options": ["believe", "belief", "believ", "lieve"],
+    "correctAnswer": "believe",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Phonological Awareness",
+    "text": "Which word has the most silent letters?",
+    "options": ["knight", "pneumonia", "Wednesday", "psalm"],
+    "correctAnswer": "pneumonia",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Letter-Sound Knowledge",
+    "text": "What sound does 'ough' make in 'thorough'?",
+    "options": ["ow as in cow", "oo as in food", "off as in cough", "uh as in duh"],
+    "correctAnswer": "uh as in duh",
+    "order": 6,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which suffix changes 'analyse' to a noun meaning 'the process of analysing'?",
+    "options": ["-tion", "-sis", "-ment", "-ity"],
+    "correctAnswer": "-sis",
+    "order": 7,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Letter-Sound Knowledge",
+    "text": "What is the correct spelling?",
+    "options": ["liason", "liaison", "liasion", "liasson"],
+    "correctAnswer": "liaison",
+    "order": 8,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Letter-Sound Knowledge",
+    "text": "How is 'prestigious' pronounced at the 'ti' part?",
+    "options": ["ti as in tip", "shi as in ship", "si as in sip", "chi as in chip"],
+    "correctAnswer": "shi as in ship",
+    "order": 9,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which prefix means 'self'?",
+    "options": ["auto-", "aero-", "anthro-", "astro-"],
+    "correctAnswer": "auto-",
+    "order": 10,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Word Reading Fluency",
+    "text": "Read: 'The phenomenon was unprecedented in modern history.' Which word means never done before?",
+    "options": ["phenomenon", "unprecedented", "modern", "history"],
+    "correctAnswer": "unprecedented",
+    "order": 11,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Word Reading Fluency",
+    "text": "What does 'juxtaposition' mean?",
+    "options": ["Placing things side by side for contrast", "Combining things together", "Separating things completely", "Arranging in order"],
+    "correctAnswer": "Placing things side by side for contrast",
+    "order": 12,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Word Reading Fluency",
+    "text": "Which word is a synonym for 'ubiquitous'?",
+    "options": ["Rare", "Everywhere", "Beautiful", "Ancient"],
+    "correctAnswer": "Everywhere",
+    "order": 13,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Word Reading Fluency",
+    "text": "What is the superlative form of 'bad'?",
+    "options": ["badder", "more bad", "worse", "worst"],
+    "correctAnswer": "worst",
+    "order": 14,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Word Reading Fluency",
+    "text": "Which word means 'using very few words'?",
+    "options": ["verbose", "laconic", "eloquent", "articulate"],
+    "correctAnswer": "laconic",
+    "order": 15,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Reading Comprehension",
+    "text": "'The author's prose was deliberately ambiguous.' What does this mean?",
+    "options": ["Clear and precise", "Open to multiple interpretations", "Well-written", "Boring"],
+    "correctAnswer": "Open to multiple interpretations",
+    "order": 16,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Reading Comprehension",
+    "text": "'The catalyst for change was the economic crisis.' What role does 'catalyst' play?",
+    "options": ["It prevented change", "It triggered or accelerated change", "It slowed change", "It had no effect"],
+    "correctAnswer": "It triggered or accelerated change",
+    "order": 17,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Reading Comprehension",
+    "text": "What is the purpose of foreshadowing in literature?",
+    "options": ["To summarize the ending", "To hint at future events", "To describe the setting", "To introduce characters"],
+    "correctAnswer": "To hint at future events",
+    "order": 18,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Reading Comprehension",
+    "text": "'His argument was specious.' This means it was:",
+    "options": ["Strong and valid", "Seemingly good but actually wrong", "Complex", "Brief"],
+    "correctAnswer": "Seemingly good but actually wrong",
+    "order": 19,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Reading Comprehension",
+    "text": "If someone is 'pragmatic', they are:",
+    "options": ["Idealistic", "Practical and realistic", "Artistic", "Religious"],
+    "correctAnswer": "Practical and realistic",
+    "order": 20,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Spelling and Writing",
+    "text": "Which is spelled correctly?",
+    "options": ["embarass", "embarrass", "embarras", "embaress"],
+    "correctAnswer": "embarrass",
+    "order": 21,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Spelling and Writing",
+    "text": "Which sentence uses a semicolon correctly?",
+    "options": ["I like coffee; but not tea", "I like coffee; tea is good too", "I like coffee; however, I prefer tea", "I like; coffee and tea"],
+    "correctAnswer": "I like coffee; however, I prefer tea",
+    "order": 22,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Spelling and Writing",
+    "text": "What is the correct spelling?",
+    "options": ["occassion", "occasion", "ocassion", "occation"],
+    "correctAnswer": "occasion",
+    "order": 23,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Spelling and Writing",
+    "text": "Which word is spelled correctly?",
+    "options": ["perseverance", "perserverance", "perseverence", "perserverence"],
+    "correctAnswer": "perseverance",
+    "order": 24,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Spelling and Writing",
+    "text": "Choose the correct form: 'The data shows/show significant variation.'",
+    "options": ["shows", "show", "both work", "neither works"],
+    "correctAnswer": "show",
+    "order": 25,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Visual Processing",
+    "text": "Which word is different? 'diary - dairy - diary - diary'",
+    "options": ["1st word", "2nd word", "3rd word", "4th word"],
+    "correctAnswer": "2nd word",
+    "order": 26,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Visual Processing",
+    "text": "How many times does 'i' appear in 'indivisibility'?",
+    "options": ["4", "5", "6", "7"],
+    "correctAnswer": "5",
+    "order": 27,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Visual Processing",
+    "text": "Which words are anagrams? 'listen - silent - enlist'",
+    "options": ["listen and silent only", "silent and enlist only", "All three", "None"],
+    "correctAnswer": "All three",
+    "order": 28,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Visual Processing",
+    "text": "Identify the palindrome: 'RACECAR - MADAM - RADAR - NOON'",
+    "options": ["Only RACECAR", "RACECAR and MADAM", "All four", "None"],
+    "correctAnswer": "All four",
+    "order": 29,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Visual Processing",
+    "text": "How many capital letters in: 'The UNESCO report on STEM Education'?",
+    "options": ["6", "7", "8", "9"],
+    "correctAnswer": "9",
+    "order": 30,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Memory and Sequencing",
+    "text": "Continue the sequence: 1, 1, 2, 3, 5, 8, 13, __",
+    "options": ["18", "19", "20", "21"],
+    "correctAnswer": "21",
+    "order": 31,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Memory and Sequencing",
+    "text": "Which word comes second alphabetically? 'quintessential, quarantine, qualitative, quantum'",
+    "options": ["quintessential", "quarantine", "qualitative", "quantum"],
+    "correctAnswer": "qualitative",
+    "order": 32,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Memory and Sequencing",
+    "text": "Remember: 'photosynthesis, respiration, transpiration, germination'. What comes between respiration and germination?",
+    "options": ["photosynthesis", "transpiration", "pollination", "nothing"],
+    "correctAnswer": "transpiration",
+    "order": 33,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Memory and Sequencing",
+    "text": "What is the next number? 3, 9, 27, 81, __",
+    "options": ["162", "216", "243", "324"],
+    "correctAnswer": "243",
+    "order": 34,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Memory and Sequencing",
+    "text": "Arrange chronologically: 'conclusion, hypothesis, experiment, analysis'",
+    "options": ["hypothesis, experiment, analysis, conclusion", "hypothesis, experiment, conclusion, analysis", "experiment, hypothesis, analysis, conclusion", "hypothesis, analysis, experiment, conclusion"],
+    "correctAnswer": "hypothesis, experiment, analysis, conclusion",
+    "order": 35,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Rapid Naming",
+    "text": "What pattern: 2, 5, 11, 23, 47?",
+    "options": ["Add 3, 6, 12, 24", "Multiply by 2 then add 1", "Square then subtract", "Prime numbers"],
+    "correctAnswer": "Multiply by 2 then add 1",
+    "order": 36,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Rapid Naming",
+    "text": "How many four-letter words in 'EXTRAORDINARY'?",
+    "options": ["8-12", "13-17", "18-22", "23-27"],
+    "correctAnswer": "18-22",
+    "order": 37,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Rapid Naming",
+    "text": "Quickly identify the category: 'sonnet, haiku, limerick, ballad'",
+    "options": ["Authors", "Poems types", "Story genres", "Writing tools"],
+    "correctAnswer": "Poems types",
+    "order": 38,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Rapid Naming",
+    "text": "Count vowels in: 'EDUCATION'",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "5",
+    "order": 39,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Rapid Naming",
+    "text": "Starting at 256, halve it 4 times. Final number?",
+    "options": ["8", "12", "16", "32"],
+    "correctAnswer": "16",
+    "order": 40,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Working Memory",
+    "text": "Calculate: (24 × 4) - (36 ÷ 3) = ?",
+    "options": ["72", "84", "92", "96"],
+    "correctAnswer": "84",
+    "order": 41,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Working Memory",
+    "text": "Remember: P-15-R-8-T-21. Sum the numbers.",
+    "options": ["42", "43", "44", "45"],
+    "correctAnswer": "44",
+    "order": 42,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Working Memory",
+    "text": "If A=1, B=2... what is the sum of the letters in 'CAT'?",
+    "options": ["21", "22", "23", "24"],
+    "correctAnswer": "24",
+    "order": 43,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Working Memory",
+    "text": "A book has 360 pages. If you read 25% on Monday and 40% on Tuesday, how many pages remain?",
+    "options": ["108", "120", "126", "144"],
+    "correctAnswer": "126",
+    "order": 44,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Working Memory",
+    "text": "Count the letters in: PHOTOSYNTHESIS",
+    "options": ["12", "13", "14", "15"],
+    "correctAnswer": "14",
+    "order": 45,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Language Processing",
+    "text": "What does 'barking up the wrong tree' mean?",
+    "options": ["Making noise outdoors", "Pursuing a mistaken course", "Climbing trees", "Working with dogs"],
+    "correctAnswer": "Pursuing a mistaken course",
+    "order": 46,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Language Processing",
+    "text": "In 'The committee reached a unanimous decision', what is the verb?",
+    "options": ["committee", "reached", "unanimous", "decision"],
+    "correctAnswer": "reached",
+    "order": 47,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Language Processing",
+    "text": "What type of clause is: 'Although it was raining'?",
+    "options": ["Independent clause", "Subordinate/dependent clause", "Relative clause", "Main clause"],
+    "correctAnswer": "Subordinate/dependent clause",
+    "order": 48,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Language Processing",
+    "text": "Which sentence uses personification?",
+    "options": ["The wind whispered secrets", "He ran like a cheetah", "Time is precious", "She has a heart of gold"],
+    "correctAnswer": "The wind whispered secrets",
+    "order": 49,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S4",
+    "section": "Language Processing",
+    "text": "What is the subjunctive mood in: 'If I were rich, I would travel'?",
+    "options": ["I were", "If I", "would travel", "I would"],
+    "correctAnswer": "I were",
+    "order": 50,
+    "active": true
+  }
+]

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-
-
 type SectionScore = {
   sectionId: string;
   correct: number;
@@ -11,7 +9,6 @@ type SectionScore = {
   percent: number;
   rag: "green" | "amber" | "red";
 };
-
 
 type FlatAnswer = {
   sectionId: string;
@@ -36,7 +33,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
 
   useEffect(() => {
     async function load() {
-      const res = await fetch(`/api/screening/dyslexia/details?caseId=${caseId}`);
+      const res = await fetch(`/api/screening/dyscalculia/details?caseId=${caseId}`);
       const data = await res.json();
       console.log("API RESPONSE:", data);
       setDetails(data);
@@ -53,24 +50,6 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
   const { scoring, sectionScores, flatAnswers } = details;
   console.log("Section Scores:", sectionScores);
 
-  const handleGenerateAiReport = async () => {
-    setGenerating(true);
-    try {
-      const response = await fetch("/api/screening/dyslexia/generate-ai-report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseId, scoring, sectionScores, flatAnswers }),
-      });
-      const data = await response.json();
-      setAiReport(data.report);
-    } catch (error) {
-      console.error("Error generating AI report:", error);
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-
   const ragColours: any = {
     green: "#c6f6d5",
     amber: "#fefcbf",
@@ -85,11 +64,43 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
 
   return (
     <div className="w-full p-6">
-      <h1 className="text-3xl font-bold mb-4">Dyslexia Review — Overview</h1>
+      <h1 className="text-3xl font-bold mb-4">Dyscalculia Review — Overview</h1>
 
       <p className="text-lg mb-1">
         <strong>Case ID:</strong> {caseId}
       </p>
+
+      {/* SECTION NAVIGATION BOX */}
+      <div
+        style={{
+          background: "#f5f5f5",
+          border: "1px solid #ddd",
+          borderRadius: "6px",
+          padding: "1rem",
+          marginBottom: "2rem",
+        }}
+      >
+        <p style={{ fontWeight: "bold", marginBottom: "0.8rem" }}>Jump to Section:</p>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          {sectionScores.map((section: SectionScore, idx: number) => (
+            <button
+              key={section.sectionId}
+              onClick={() => setOpenSection(section.sectionId)}
+              style={{
+                padding: "0.5rem 1rem",
+                background: openSection === section.sectionId ? "black" : "#ddd",
+                color: openSection === section.sectionId ? "white" : "black",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: openSection === section.sectionId ? "bold" : "normal",
+              }}
+            >
+              {idx + 1}. {section.sectionId}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Risk overview panel */}
       <div
@@ -133,7 +144,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
               setGenerating(true);
               setAiReport(null);
               try {
-                const res = await fetch("/api/screening/dyslexia/generate-report", {
+                const res = await fetch("/api/screening/dyscalculia/generate-report", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -224,10 +235,9 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
                 <div className="text-left">
                   <h2 className="text-xl font-semibold">{sec.sectionId}</h2>
                   <p className="text-sm text-gray-700">
-                    Difficulty: {sec.percent}%
+                    Score: {sec.percent}%
                   </p>
                 </div>
-
 
                 {/* Badge and arrow */}
                 <div className="flex items-center gap-2">
@@ -278,60 +288,14 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
         );
       })}
 
-      {/* Report Section */}
-      <div className="mt-8 border-t pt-6">
-        <div className="mb-4">
-          <h2 className="text-2xl font-bold mb-2">Generate Report</h2>
-          <p className="text-gray-600 mb-4">
-            Get a professional summary of this screening that you can export to Word.
-          </p>
-          
-          <button
-            onClick={async () => {
-              setGenerating(true);
-              setAiReport(null);
-              try {
-                const res = await fetch("/api/screening/dyslexia/generate-report", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    caseId,
-                  }),
-                });
-
-                if (!res.ok) {
-                  const errorText = await res.text();
-                  throw new Error(`Failed to generate report: ${errorText}`);
-                }
-
-                const data = await res.json();
-                setAiReport(data.report);
-              } catch (err: any) {
-                console.error("AI Report Error:", err);
-                alert("Could not generate AI report. See console for details.");
-              } finally {
-                setGenerating(false);
-              }
-            }}
-            disabled={generating}
-            className={`px-6 py-3 rounded-lg text-white font-semibold text-lg ${
-              generating ? "bg-gray-500 cursor-not-allowed" : "bg-purple-700 hover:bg-purple-800"
-            }`}
-          >
-            {generating ? "Generating Report..." : "Generate Report"}
-          </button>
-        </div>
-
-        {/* Loading/Success Modal */}
-        {generating && (
+      {/* Loading/Success Modal */}
+      {generating && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
               <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-purple-700 mx-auto mb-4"></div>
               <h3 className="text-xl font-bold mb-2">Generating Report</h3>
               <p className="text-gray-600">
-                Please wait while we analyze the screening results and generate your professional report.
+                Please wait while we analyze the assessment results and generate your professional report.
               </p>
               <p className="text-sm text-gray-500 mt-4">
                 This may take 10-30 seconds...
@@ -346,13 +310,13 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
               <div className="text-green-600 text-6xl mb-4">✓</div>
               <h3 className="text-2xl font-bold mb-4">Report Ready!</h3>
               <p className="text-gray-600 mb-6">
-                Your screening report has been generated and is ready to download.
+                Your assessment report has been generated and is ready to download.
               </p>
               
               <button
                 onClick={async () => {
                   try {
-                    const res = await fetch("/api/screening/dyslexia/export-ai-report", {
+                    const res = await fetch("/api/screening/dyscalculia/export-ai-report", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
@@ -375,7 +339,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement("a");
                     a.href = url;
-                    a.download = `screening-report-${caseId}.docx`;
+                    a.download = `dyscalculia-report-${caseId}.docx`;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
@@ -402,7 +366,6 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 }

@@ -20,20 +20,12 @@ type Section = {
 type Props = {
   sections: Section[];
   caseId: string;
-  readingYear?: string;   // ← ADD THIS
+  readingYear?: string;
 };
-
 
 type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
-
-// GET readingYear from URL
-const readingYear =
-  typeof window !== "undefined"
-    ? new URLSearchParams(window.location.search).get("year") || null
-    : null;
-
 
 // Helper safely reading JSON from API
 async function safeJson(res: Response) {
@@ -48,7 +40,7 @@ async function safeJson(res: Response) {
   }
 }
 
-export default function ScreeningWizard({ sections, caseId,readingYear }: Props) {
+export default function ScreeningWizard({ sections, caseId, readingYear }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswersState>({});
   const [saving, setSaving] = useState(false);
@@ -60,9 +52,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
   const currentSection = sections[currentIndex];
   const sectionAnswers = answers[currentSection.id] || {};
 
-  //
   // LOAD EXISTING ANSWERS
-  //
   useEffect(() => {
     let cancelled = false;
 
@@ -79,7 +69,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
 
         // Ensure screening start is recorded (increments usage)
         if (!startedFlag) {
-          const startRes = await fetch("/api/screening/dyslexia/start", {
+          const startRes = await fetch("/api/screening/dyscalculia/start", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -111,7 +101,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
 
       try {
         const res = await fetch(
-          `/api/screening/dyslexia/section?caseId=${encodeURIComponent(caseId)}`
+          `/api/screening/dyscalculia/section?caseId=${encodeURIComponent(caseId)}`
         );
 
         if (!res.ok) {
@@ -155,9 +145,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
     };
   }, [caseId]);
 
-  //
   // HANDLE ANSWERS
-  //
   function handleChange(questionId: string, value: string) {
     setAnswers((prev) => ({
       ...prev,
@@ -171,17 +159,13 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
     setSavedMessage(null);
   }
 
-  //
   // VALIDATION
-  //
   function isCurrentSectionComplete() {
     const current = answers[currentSection.id] || {};
     return currentSection.questions.every((q) => !!current[q.id]);
   }
 
-  //
   // SAVE SECTION
-  //
   async function saveCurrentSection(showMsg = false) {
     if (!caseId) {
       setError("Missing caseId — cannot save.");
@@ -196,10 +180,10 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
         caseId,
         sectionId: currentSection.id,
         answers: answers[currentSection.id] || {},
-        readingYear  // ← ADD THIS LINE
+        readingYear
       };
 
-      const res = await fetch("/api/screening/dyslexia/section", {
+      const res = await fetch("/api/screening/dyscalculia/section", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -228,9 +212,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
     }
   }
 
-  //
   // NAVIGATION
-  //
   async function handleNext() {
     if (!isCurrentSectionComplete()) {
       setError("Please answer all questions before continuing.");
@@ -242,7 +224,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
     const last = currentIndex === sections.length - 1;
 
     if (last) {
-      window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
+      window.location.href = `/screening/dyscalculia/overview?caseId=${caseId}`;
       return;
     }
 
@@ -280,16 +262,14 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
 
     await saveCurrentSection(true);
 
-    window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
+    window.location.href = `/screening/dyscalculia/overview?caseId=${caseId}`;
   }
 
   if (loading) return <p>Loading screening…</p>;
   if (startError) return <p style={{ color: "red" }}>{startError}</p>;
   if (!caseId) return <p>No caseId provided.</p>;
 
-  //
   // RENDER
-  //
   return (
     <div style={{ marginTop: "2rem" }}>
       {/* SECTION NAVIGATION BOX */}
@@ -308,7 +288,6 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
             const sectionAnswers = answers[section.id] || {};
             const isSectionComplete = section.questions.every((q) => !!sectionAnswers[q.id]);
             
-            // Can only access: current section, section 1, or any section if all previous are complete
             const prevSectionsComplete = sections.slice(0, idx).every((sec) => {
               const secAnswers = answers[sec.id] || {};
               return sec.questions.every((q) => !!secAnswers[q.id]);
@@ -381,7 +360,6 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
                 {isPassageConfirmation && "⚠️ "}{q.text}
               </p>
 
-              {/* FIXED: unique key using index */}
               {q.options?.map((opt, i) => (
                 <label
                   key={`${q.id}_${i}`}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel } from "docx";
+import { Document, Packer, Paragraph, TextRun, AlignmentType } from "docx";
 
 export async function POST(req: NextRequest) {
   try {
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "Dyslexia Screening Report",
+                  text: "Dyscalculia Assessment Report",
                   bold: true,
                   size: 48,
                   font: "Arial",
@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "Dyslexia Screening Report",
+                  text: "Dyscalculia Assessment Report",
                   bold: true,
                   size: 40,
                   font: "Arial",
@@ -290,7 +290,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Contact an educational psychologist for a comprehensive dyslexia assessment. Typical cost: £300-800.",
+                        text: "Contact an educational psychologist for a comprehensive dyscalculia assessment. Typical cost: £300-800.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -311,7 +311,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Share these results with teachers. Request support like extra time, colored overlays, or literacy interventions.",
+                        text: "Share these results with teachers. Request support like extra time, use of calculator, or math interventions.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -332,7 +332,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "• Read together daily (10-15 mins)\n• Use audiobooks to maintain interest in stories\n• Practice phonics and word recognition\n• Break tasks into smaller steps\n• Encourage and celebrate effort",
+                        text: "• Practice number bonds and times tables daily (5-10 mins)\n• Use visual aids: counters, number lines, blocks\n• Try math games and apps (make it fun!)\n• Break problems into smaller steps\n• Praise effort and perseverance",
                         size: 22,
                         font: "Arial",
                       }),
@@ -356,7 +356,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Keep track of reading and writing challenges. Re-screen in 6 months to check progress.",
+                        text: "Keep track of math challenges. Re-screen in 6 months to check progress.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -377,7 +377,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Focus on areas showing weakness (check section scores below). Use phonics apps, reading games, and visual aids.",
+                        text: "Focus on areas showing weakness (check section scores below). Use math games, flashcards, and visual tools.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -398,7 +398,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Inform teachers of specific challenges. Small accommodations (extra time, larger fonts) can help.",
+                        text: "Inform teachers of specific challenges. Small accommodations (extra time, formula sheets) can help.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -422,7 +422,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Maintain good reading habits. Encourage diverse reading materials and continued practice.",
+                        text: "Maintain good math habits. Practice mental math, explore number puzzles.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -443,7 +443,7 @@ export async function POST(req: NextRequest) {
                   new Paragraph({
                     children: [
                       new TextRun({
-                        text: "Consider other factors: attention difficulties (ADHD), vision problems, processing speed, or working memory challenges.",
+                        text: "Consider other factors: attention difficulties (ADHD), anxiety, processing speed, or working memory challenges.",
                         size: 22,
                         font: "Arial",
                       }),
@@ -666,7 +666,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "Detailed Screening Responses",
+                  text: "Detailed Assessment Responses",
                   bold: true,
                   size: 32,
                   font: "Arial",
@@ -789,7 +789,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "This screening report provides an assessment to help identify areas where additional support may be beneficial. The results can guide conversations between teachers and parents about next steps and appropriate interventions.",
+                  text: "This assessment report provides an evaluation to help identify areas where additional mathematical support may be beneficial. The results can guide conversations between teachers and parents about next steps and appropriate interventions.",
                   size: 22,
                   font: "Arial",
                 }),
@@ -813,7 +813,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "Use this report to plan targeted interventions and monitor progress. Consider the recommendations provided and adapt teaching strategies to support the student's individual learning needs.",
+                  text: "Use this report to plan targeted mathematical interventions and monitor progress. Consider the recommendations provided and adapt teaching strategies to support the student's individual learning needs in numeracy.",
                   size: 22,
                   font: "Arial",
                 }),
@@ -837,7 +837,7 @@ export async function POST(req: NextRequest) {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "This report helps you understand your child's strengths and areas where they may need extra support. Discuss the findings with your child's teacher to develop a collaborative approach to supporting their learning journey.",
+                  text: "This report helps you understand your child's mathematical strengths and areas where they may need extra support. Discuss the findings with your child's teacher to develop a collaborative approach to supporting their mathematical learning journey.",
                   size: 22,
                   font: "Arial",
                 }),
@@ -953,7 +953,7 @@ export async function POST(req: NextRequest) {
       headers: {
         "Content-Type":
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "Content-Disposition": `attachment; filename=ai-screening-report-${caseId}.docx`,
+        "Content-Disposition": `attachment; filename=ai-dyscalculia-report-${caseId}.docx`,
       },
     });
   } catch (err) {

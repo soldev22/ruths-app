@@ -1,0 +1,502 @@
+[
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Phonological Awareness",
+    "text": "How many morphemes are in 'uncharacteristically'?",
+    "options": ["4", "5", "6", "7"],
+    "correctAnswer": "5",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Phonological Awareness",
+    "text": "Which word pair demonstrates vowel gradation (ablaut)?",
+    "options": ["sing - sang - sung", "walk - walked", "run - running", "eat - eats"],
+    "correctAnswer": "sing - sang - sung",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Phonological Awareness",
+    "text": "What sound does 'ch' make in 'machinations'?",
+    "options": ["ch as in chair", "k as in kite", "sh as in ship", "s as in sit"],
+    "correctAnswer": "k as in kite",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Phonological Awareness",
+    "text": "Identify the word with a schwa sound in every unstressed syllable:",
+    "options": ["elephant", "banana", "comfortable", "magnificent"],
+    "correctAnswer": "banana",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Phonological Awareness",
+    "text": "Which word has the most complex consonant cluster?",
+    "options": ["strengths", "twelfths", "sixths", "prompts"],
+    "correctAnswer": "strengths",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Letter-Sound Knowledge",
+    "text": "What is the etymology of the prefix 'pseudo-'?",
+    "options": ["Latin for 'false'", "Greek for 'false'", "Latin for 'hidden'", "Greek for 'similar'"],
+    "correctAnswer": "Greek for 'false'",
+    "order": 6,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which suffix forms an abstract noun from 'obfuscate'?",
+    "options": ["-tion", "-ation", "-ition", "-sion"],
+    "correctAnswer": "-ation",
+    "order": 7,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Letter-Sound Knowledge",
+    "text": "What is the correct spelling of the word meaning 'occurring simultaneously'?",
+    "options": ["synchronous", "synchromous", "synchronus", "sinkronous"],
+    "correctAnswer": "synchronous",
+    "order": 8,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Letter-Sound Knowledge",
+    "text": "In 'hierarchical', how many distinct vowel sounds are there?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "5",
+    "order": 9,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which Greek root means 'time'?",
+    "options": ["chronos", "cosmos", "bios", "logos"],
+    "correctAnswer": "chronos",
+    "order": 10,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Word Reading Fluency",
+    "text": "Read: 'The philosopher's epistemological approach was fundamentally empirical.' Which word relates to knowledge theory?",
+    "options": ["philosopher's", "epistemological", "fundamentally", "empirical"],
+    "correctAnswer": "epistemological",
+    "order": 11,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Word Reading Fluency",
+    "text": "What does 'paradigm' mean in academic context?",
+    "options": ["A simple example", "A fundamental model or framework", "A contradiction", "An exception"],
+    "correctAnswer": "A fundamental model or framework",
+    "order": 12,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Word Reading Fluency",
+    "text": "Which word means 'the deliberate use of ambiguous language'?",
+    "options": ["euphemism", "equivocation", "hyperbole", "litotes"],
+    "correctAnswer": "equivocation",
+    "order": 13,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Word Reading Fluency",
+    "text": "What is an antonym for 'ephemeral'?",
+    "options": ["Temporary", "Permanent", "Beautiful", "Ancient"],
+    "correctAnswer": "Permanent",
+    "order": 14,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Word Reading Fluency",
+    "text": "Which word describes language that is pompous and pretentious?",
+    "options": ["eloquent", "bombastic", "articulate", "lucid"],
+    "correctAnswer": "bombastic",
+    "order": 15,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Reading Comprehension",
+    "text": "'The text's hermeneutical complexity demands careful exegesis.' What does 'exegesis' mean?",
+    "options": ["Criticism", "Critical explanation or interpretation", "Summary", "Translation"],
+    "correctAnswer": "Critical explanation or interpretation",
+    "order": 16,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Reading Comprehension",
+    "text": "'The author employs a dialectical methodology.' What does this involve?",
+    "options": ["Simple description", "Examining contradictions and synthesis", "Chronological narrative", "Personal anecdotes"],
+    "correctAnswer": "Examining contradictions and synthesis",
+    "order": 17,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Reading Comprehension",
+    "text": "What is a 'non sequitur' in logical argument?",
+    "options": ["A strong conclusion", "A conclusion that doesn't follow from premises", "Supporting evidence", "A rhetorical question"],
+    "correctAnswer": "A conclusion that doesn't follow from premises",
+    "order": 18,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Reading Comprehension",
+    "text": "'The writer's use of apophasis was deliberately ironic.' Apophasis is:",
+    "options": ["Direct statement", "Mentioning something by denying it will be mentioned", "Using metaphor", "Repetition for emphasis"],
+    "correctAnswer": "Mentioning something by denying it will be mentioned",
+    "order": 19,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Reading Comprehension",
+    "text": "If an argument is 'tautological', it is:",
+    "options": ["Extremely complex", "Circular, needlessly repetitive", "Well-reasoned", "Contradictory"],
+    "correctAnswer": "Circular, needlessly repetitive",
+    "order": 20,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Spelling and Writing",
+    "text": "Which is spelled correctly?",
+    "options": ["burocracy", "bureaucracy", "beurocracy", "buraucracy"],
+    "correctAnswer": "bureaucracy",
+    "order": 21,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Spelling and Writing",
+    "text": "Which sentence uses a dash correctly for emphasis?",
+    "options": ["The result was clear-victory", "The result was clear - victory", "The result - was clear - victory", "The result was - clear victory"],
+    "correctAnswer": "The result was clear - victory",
+    "order": 22,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Spelling and Writing",
+    "text": "What is the correct spelling?",
+    "options": ["conscientous", "conscientious", "consientious", "concientious"],
+    "correctAnswer": "conscientious",
+    "order": 23,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Spelling and Writing",
+    "text": "Which word is spelled correctly?",
+    "options": ["millenium", "millennium", "milenium", "milennium"],
+    "correctAnswer": "millennium",
+    "order": 24,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Spelling and Writing",
+    "text": "Choose the correct form: 'The phenomena is/are diverse.'",
+    "options": ["is", "are", "both work", "neither works"],
+    "correctAnswer": "are",
+    "order": 25,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Visual Processing",
+    "text": "Which word is different? 'empirical - imperial - empirical - empirical'",
+    "options": ["1st word", "2nd word", "3rd word", "4th word"],
+    "correctAnswer": "2nd word",
+    "order": 26,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Visual Processing",
+    "text": "How many double letters in 'accommodation, committee, millennium'?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "7",
+    "order": 27,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Visual Processing",
+    "text": "Which words are perfect anagrams? 'conversation - conservation'",
+    "options": ["Yes, they are anagrams", "No, different letters", "Almost, but not quite", "Same number of letters only"],
+    "correctAnswer": "Yes, they are anagrams",
+    "order": 28,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Visual Processing",
+    "text": "Identify the longest palindromic substring in 'rotator':",
+    "options": ["tat", "oto", "rotor", "rotator"],
+    "correctAnswer": "rotator",
+    "order": 29,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Visual Processing",
+    "text": "How many unique letters in 'SUPERCALIFRAGILISTICEXPIALIDOCIOUS'?",
+    "options": ["13", "14", "15", "16"],
+    "correctAnswer": "15",
+    "order": 30,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Memory and Sequencing",
+    "text": "Continue: 1, 4, 9, 16, 25, 36, __",
+    "options": ["42", "45", "48", "49"],
+    "correctAnswer": "49",
+    "order": 31,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Memory and Sequencing",
+    "text": "Alphabetically order: 'zeitgeist, xenophobia, yacht, zephyr'",
+    "options": ["xenophobia, yacht, zeitgeist, zephyr", "xenophobia, yacht, zephyr, zeitgeist", "yacht, xenophobia, zeitgeist, zephyr", "xenophobia, zephyr, yacht, zeitgeist"],
+    "correctAnswer": "xenophobia, yacht, zeitgeist, zephyr",
+    "order": 32,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Memory and Sequencing",
+    "text": "Remember: 'epistemology, ontology, axiology, teleology'. What comes after ontology?",
+    "options": ["epistemology", "axiology", "teleology", "methodology"],
+    "correctAnswer": "axiology",
+    "order": 33,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Memory and Sequencing",
+    "text": "What is the next prime number after 97?",
+    "options": ["99", "101", "103", "107"],
+    "correctAnswer": "101",
+    "order": 34,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Memory and Sequencing",
+    "text": "Order the stages of the scientific method correctly:",
+    "options": ["Question, Hypothesis, Experiment, Analysis, Conclusion", "Hypothesis, Question, Experiment, Conclusion, Analysis", "Question, Experiment, Hypothesis, Analysis, Conclusion", "Experiment, Question, Hypothesis, Analysis, Conclusion"],
+    "correctAnswer": "Question, Hypothesis, Experiment, Analysis, Conclusion",
+    "order": 35,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Rapid Naming",
+    "text": "Pattern in: 1, 3, 7, 15, 31, 63?",
+    "options": ["Add increasing numbers", "Multiply by 2 and add 1", "Double each time", "Add powers of 2"],
+    "correctAnswer": "Multiply by 2 and add 1",
+    "order": 36,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Rapid Naming",
+    "text": "How many five-letter words can be made from 'PHILOSOPHY'?",
+    "options": ["20-30", "31-40", "41-50", "51-60"],
+    "correctAnswer": "41-50",
+    "order": 37,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Rapid Naming",
+    "text": "Category for: 'syllogism, enthymeme, sorites, polysyllogism'",
+    "options": ["Literary devices", "Logical argument forms", "Rhetorical techniques", "Grammatical terms"],
+    "correctAnswer": "Logical argument forms",
+    "order": 38,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Rapid Naming",
+    "text": "Count consonants in 'PHILOSOPHICAL'",
+    "options": ["6", "7", "8", "9"],
+    "correctAnswer": "7",
+    "order": 39,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Rapid Naming",
+    "text": "Starting at 1024, halve it 5 times. Final number?",
+    "options": ["16", "24", "32", "64"],
+    "correctAnswer": "32",
+    "order": 40,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Working Memory",
+    "text": "Calculate: (144 ÷ 12) × 8 - 15 = ?",
+    "options": ["81", "91", "96", "101"],
+    "correctAnswer": "81",
+    "order": 41,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Working Memory",
+    "text": "Remember: X-23-Y-17-Z-31. Sum all numbers.",
+    "options": ["68", "69", "70", "71"],
+    "correctAnswer": "71",
+    "order": 42,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Working Memory",
+    "text": "If A=1, B=2... what is the sum of 'LOGIC'?",
+    "options": ["52", "54", "56", "58"],
+    "correctAnswer": "54",
+    "order": 43,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Working Memory",
+    "text": "A research paper is 15,000 words. If the introduction is 8%, literature review is 22%, and conclusion is 10%, how many words for methodology and results?",
+    "options": ["7500", "8000", "9000", "9500"],
+    "correctAnswer": "9000",
+    "order": 44,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Working Memory",
+    "text": "Reverse and count: EPISTEMOLOGICAL has how many letters?",
+    "options": ["13", "14", "15", "16"],
+    "correctAnswer": "15",
+    "order": 45,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Language Processing",
+    "text": "What does 'Occam's razor' refer to in argumentation?",
+    "options": ["The sharpest criticism", "The simplest explanation is usually correct", "Cutting through confusion", "A double-edged argument"],
+    "correctAnswer": "The simplest explanation is usually correct",
+    "order": 46,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Language Processing",
+    "text": "In 'The implications of this phenomenon remain ambiguous', identify the abstract noun:",
+    "options": ["implications", "phenomenon", "Both implications and phenomenon", "ambiguous"],
+    "correctAnswer": "Both implications and phenomenon",
+    "order": 47,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Language Processing",
+    "text": "What is a 'zeugma' in rhetoric?",
+    "options": ["Repetition of sounds", "One word governs multiple parts of a sentence differently", "Exaggeration", "Understatement"],
+    "correctAnswer": "One word governs multiple parts of a sentence differently",
+    "order": 48,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Language Processing",
+    "text": "Which sentence demonstrates chiasmus?",
+    "options": ["Ask not what your country can do for you - ask what you can do for your country", "To be or not to be", "It was the best of times, it was the worst of times", "Never, never, never give up"],
+    "correctAnswer": "Ask not what your country can do for you - ask what you can do for your country",
+    "order": 49,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S5",
+    "section": "Language Processing",
+    "text": "What is the function of a 'modal auxiliary' verb?",
+    "options": ["Express action", "Express possibility, necessity, or permission", "Link subject to predicate", "Show tense only"],
+    "correctAnswer": "Express possibility, necessity, or permission",
+    "order": 50,
+    "active": true
+  }
+]

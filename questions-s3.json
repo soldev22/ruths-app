@@ -1,0 +1,502 @@
+[
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Phonological Awareness",
+    "text": "How many syllables are in the word 'uncomfortable'?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "5",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Phonological Awareness",
+    "text": "Which pair of words rhyme?",
+    "options": ["thorough - through", "cough - though", "bough - rough", "dough - though"],
+    "correctAnswer": "dough - though",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Phonological Awareness",
+    "text": "What sound does 'ch' make in the word 'character'?",
+    "options": ["ch as in chair", "k as in kite", "sh as in ship", "s as in sit"],
+    "correctAnswer": "k as in kite",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Phonological Awareness",
+    "text": "Remove the prefix from 'independent'. What word remains?",
+    "options": ["dependent", "pendent", "endent", "ndependent"],
+    "correctAnswer": "dependent",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Phonological Awareness",
+    "text": "Which word has a silent letter?",
+    "options": ["psychology", "biology", "geology", "mythology"],
+    "correctAnswer": "psychology",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Letter-Sound Knowledge",
+    "text": "What sound does 'ough' make in 'drought'?",
+    "options": ["ow as in cow", "oo as in food", "off as in cough", "oo as in foot"],
+    "correctAnswer": "ow as in cow",
+    "order": 6,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which letter combination makes the 'shun' sound in 'confusion'?",
+    "options": ["sion", "tion", "shun", "cion"],
+    "correctAnswer": "sion",
+    "order": 7,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Letter-Sound Knowledge",
+    "text": "What is the correct spelling of the word meaning 'required'?",
+    "options": ["neccesary", "necessary", "neccessary", "neccassary"],
+    "correctAnswer": "necessary",
+    "order": 8,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Letter-Sound Knowledge",
+    "text": "How is the 'c' pronounced in 'bicycle'?",
+    "options": ["Both as 's'", "Both as 'k'", "First as 's', second as 'k'", "First as 'k', second as 's'"],
+    "correctAnswer": "First as 's', second as 'k'",
+    "order": 9,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which prefix means 'against'?",
+    "options": ["anti-", "ante-", "auto-", "ambi-"],
+    "correctAnswer": "anti-",
+    "order": 10,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Word Reading Fluency",
+    "text": "Read: 'The archaeologist discovered ancient manuscripts.' Which word means very old?",
+    "options": ["archaeologist", "discovered", "ancient", "manuscripts"],
+    "correctAnswer": "ancient",
+    "order": 11,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Word Reading Fluency",
+    "text": "What does 'conscientious' mean?",
+    "options": ["Lazy", "Careful and thorough", "Quick", "Forgetful"],
+    "correctAnswer": "Careful and thorough",
+    "order": 12,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Word Reading Fluency",
+    "text": "Which word is a synonym for 'meticulous'?",
+    "options": ["Careless", "Detailed", "Quick", "Loud"],
+    "correctAnswer": "Detailed",
+    "order": 13,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Word Reading Fluency",
+    "text": "What is the comparative form of 'good'?",
+    "options": ["gooder", "more good", "better", "best"],
+    "correctAnswer": "better",
+    "order": 14,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Word Reading Fluency",
+    "text": "Which word means 'not able to be believed'?",
+    "options": ["incredible", "credible", "incredulous", "credited"],
+    "correctAnswer": "incredible",
+    "order": 15,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Reading Comprehension",
+    "text": "'Despite the torrential rain, the concert proceeded as planned.' What does 'torrential' suggest?",
+    "options": ["Light rain", "Very heavy rain", "No rain", "Occasional rain"],
+    "correctAnswer": "Very heavy rain",
+    "order": 16,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Reading Comprehension",
+    "text": "'The protagonist's decision was pivotal to the story's outcome.' What does 'pivotal' mean?",
+    "options": ["Unimportant", "Crucial", "Confusing", "Quick"],
+    "correctAnswer": "Crucial",
+    "order": 17,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Reading Comprehension",
+    "text": "What is the main purpose of a persuasive text?",
+    "options": ["To entertain", "To inform", "To convince", "To describe"],
+    "correctAnswer": "To convince",
+    "order": 18,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Reading Comprehension",
+    "text": "'The atmosphere was tense as the deadline approached.' What literary device is used?",
+    "options": ["Simile", "Metaphor", "Personification", "Setting description"],
+    "correctAnswer": "Setting description",
+    "order": 19,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Reading Comprehension",
+    "text": "If someone is 'ambivalent', they feel:",
+    "options": ["Very certain", "Mixed feelings", "Happy", "Angry"],
+    "correctAnswer": "Mixed feelings",
+    "order": 20,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Spelling and Writing",
+    "text": "Which is spelled correctly?",
+    "options": ["accomodate", "accommodate", "acomodate", "acommodate"],
+    "correctAnswer": "accommodate",
+    "order": 21,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Spelling and Writing",
+    "text": "Which sentence uses punctuation correctly?",
+    "options": ["The teacher said, 'homework is due tomorrow'.", "The teacher said, 'Homework is due tomorrow.'", "The teacher said 'Homework is due tomorrow.'", "The teacher said: Homework is due tomorrow."],
+    "correctAnswer": "The teacher said, 'Homework is due tomorrow.'",
+    "order": 22,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Spelling and Writing",
+    "text": "What is the correct spelling of the word meaning 'to affect beforehand'?",
+    "options": ["prejudice", "predjudice", "prejudise", "prejidice"],
+    "correctAnswer": "prejudice",
+    "order": 23,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Spelling and Writing",
+    "text": "Which word is spelled correctly?",
+    "options": ["seperate", "separate", "seperete", "separete"],
+    "correctAnswer": "separate",
+    "order": 24,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Spelling and Writing",
+    "text": "Choose the correct form: 'The effect/affect of climate change is significant.'",
+    "options": ["effect", "affect", "both work", "neither works"],
+    "correctAnswer": "effect",
+    "order": 25,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Visual Processing",
+    "text": "Which word is different? 'form - from - form - form'",
+    "options": ["1st word", "2nd word", "3rd word", "4th word"],
+    "correctAnswer": "2nd word",
+    "order": 26,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Visual Processing",
+    "text": "How many times does the letter 'e' appear in 'Nevertheless'?",
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": "3",
+    "order": 27,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Visual Processing",
+    "text": "Which word has letters in reverse order? 'was - saw - sea - ear'",
+    "options": ["was and saw", "sea and ear", "was and ear", "saw and sea"],
+    "correctAnswer": "was and saw",
+    "order": 28,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Visual Processing",
+    "text": "Spot the word spelled backwards: 'LEVEL - REFER - CIVIC - ROTOR'",
+    "options": ["Only LEVEL", "LEVEL and REFER", "All of them", "None of them"],
+    "correctAnswer": "All of them",
+    "order": 29,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Visual Processing",
+    "text": "Which pair contains a reversal? 'stop-pots, word-drow, time-emit'",
+    "options": ["stop-pots only", "word-drow only", "All three pairs", "None"],
+    "correctAnswer": "All three pairs",
+    "order": 30,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Memory and Sequencing",
+    "text": "Repeat this sequence: 7, 14, 21, 28, __, __",
+    "options": ["32, 36", "35, 42", "34, 40", "36, 44"],
+    "correctAnswer": "35, 42",
+    "order": 31,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Memory and Sequencing",
+    "text": "Which word comes third alphabetically? 'xenophobia, yacht, zealous, whisper'",
+    "options": ["xenophobia", "yacht", "zealous", "whisper"],
+    "correctAnswer": "yacht",
+    "order": 32,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Memory and Sequencing",
+    "text": "Remember these words in order: 'hypothesis, experiment, conclusion, analysis'. What comes after 'experiment'?",
+    "options": ["hypothesis", "conclusion", "analysis", "results"],
+    "correctAnswer": "conclusion",
+    "order": 33,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Memory and Sequencing",
+    "text": "What is the next number in the sequence? 2, 6, 12, 20, 30, __",
+    "options": ["38", "40", "42", "44"],
+    "correctAnswer": "42",
+    "order": 34,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Memory and Sequencing",
+    "text": "Rearrange these to form a sentence: 'carefully / scientist / the / observed / phenomenon / the'",
+    "options": ["The scientist carefully observed the phenomenon", "The scientist observed the phenomenon carefully", "Both are correct", "Neither is correct"],
+    "correctAnswer": "Both are correct",
+    "order": 35,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Rapid Naming",
+    "text": "Name these quickly: 7, 15, 23, 31. What pattern do you see?",
+    "options": ["Adding 7", "Adding 8", "Doubling", "Random"],
+    "correctAnswer": "Adding 8",
+    "order": 36,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Rapid Naming",
+    "text": "How many three-letter words can you identify in: 'UNDERSTANDING'?",
+    "options": ["4-6", "7-9", "10-12", "13-15"],
+    "correctAnswer": "10-12",
+    "order": 37,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Rapid Naming",
+    "text": "Quickly identify the odd one out: 'circle, square, triangle, pyramid'",
+    "options": ["circle", "square", "triangle", "pyramid"],
+    "correctAnswer": "pyramid",
+    "order": 38,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Rapid Naming",
+    "text": "Name these colours fast: R-E-D, B-L-U-E, G-R-E-E-N. How many letters total?",
+    "options": ["11", "12", "13", "14"],
+    "correctAnswer": "12",
+    "order": 39,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Rapid Naming",
+    "text": "Count backwards from 100 in 7s. What's the 5th number?",
+    "options": ["72", "70", "65", "58"],
+    "correctAnswer": "72",
+    "order": 40,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Working Memory",
+    "text": "Calculate: (15 × 3) + (20 ÷ 4) = ?",
+    "options": ["45", "50", "55", "60"],
+    "correctAnswer": "50",
+    "order": 41,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Working Memory",
+    "text": "Remember: J-7-Q-3-M-9. Now reverse it.",
+    "options": ["9-M-3-Q-7-J", "M-9-Q-3-J-7", "9-3-M-Q-J-7", "J-7-M-3-Q-9"],
+    "correctAnswer": "9-M-3-Q-7-J",
+    "order": 42,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Working Memory",
+    "text": "If A=1, B=2, C=3... what number is 'CAB'?",
+    "options": ["312", "321", "132", "213"],
+    "correctAnswer": "312",
+    "order": 43,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Working Memory",
+    "text": "Read then answer: 'The library contains 450 books. 120 are fiction, 180 are non-fiction.' How many are other categories?",
+    "options": ["100", "120", "150", "180"],
+    "correctAnswer": "150",
+    "order": 44,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Working Memory",
+    "text": "Spell this word backwards: ACCOMMODATION",
+    "options": ["NOITADOMMOCCA", "NOITADOMOCCA", "NOITADOMMOCA", "NOITADOMOCA"],
+    "correctAnswer": "NOITADOMMOCCA",
+    "order": 45,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Language Processing",
+    "text": "What does 'under the weather' mean?",
+    "options": ["Outside in rain", "Feeling unwell", "Below clouds", "Underground"],
+    "correctAnswer": "Feeling unwell",
+    "order": 46,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Language Processing",
+    "text": "In 'The government implemented new policies', what is the subject?",
+    "options": ["The", "government", "implemented", "policies"],
+    "correctAnswer": "government",
+    "order": 47,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Language Processing",
+    "text": "What type of word is 'significantly' in 'The results improved significantly'?",
+    "options": ["Noun", "Verb", "Adjective", "Adverb"],
+    "correctAnswer": "Adverb",
+    "order": 48,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Language Processing",
+    "text": "Which sentence uses a metaphor?",
+    "options": ["Time is money", "He ran like the wind", "The car was as fast as lightning", "She sings beautifully"],
+    "correctAnswer": "Time is money",
+    "order": 49,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S3",
+    "section": "Language Processing",
+    "text": "What is the passive voice of 'The teacher explained the theory'?",
+    "options": ["The theory explained the teacher", "The theory was explained by the teacher", "The teacher was explaining the theory", "The theory is explaining"],
+    "correctAnswer": "The theory was explained by the teacher",
+    "order": 50,
+    "active": true
+  }
+]

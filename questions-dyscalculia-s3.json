@@ -1,0 +1,502 @@
+[
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Number Recognition",
+    "text": "What is the value of -3²?",
+    "options": ["-9", "9", "-6", "6"],
+    "correctAnswer": "-9",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Number Recognition",
+    "text": "Which number is between -7 and -4?",
+    "options": ["-8", "-5", "-3", "-10"],
+    "correctAnswer": "-5",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Number Recognition",
+    "text": "Express 64 as a power of 2.",
+    "options": ["2⁴", "2⁵", "2⁶", "2⁷"],
+    "correctAnswer": "2⁶",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Number Recognition",
+    "text": "What is the highest common factor (HCF) of 24 and 36?",
+    "options": ["6", "12", "18", "24"],
+    "correctAnswer": "12",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Number Recognition",
+    "text": "What is the lowest common multiple (LCM) of 4 and 6?",
+    "options": ["10", "12", "18", "24"],
+    "correctAnswer": "12",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Basic Arithmetic",
+    "text": "What is -5 × -8?",
+    "options": ["-40", "40", "-13", "13"],
+    "correctAnswer": "40",
+    "order": 6,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Basic Arithmetic",
+    "text": "What is -36 ÷ -4?",
+    "options": ["-9", "9", "-32", "32"],
+    "correctAnswer": "9",
+    "order": 7,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Basic Arithmetic",
+    "text": "What is 3 + 4 × 2?",
+    "options": ["11", "14", "10", "16"],
+    "correctAnswer": "11",
+    "order": 8,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Basic Arithmetic",
+    "text": "What is (8 - 3) × (2 + 4)?",
+    "options": ["20", "24", "30", "36"],
+    "correctAnswer": "30",
+    "order": 9,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Basic Arithmetic",
+    "text": "What is 2³ × 5?",
+    "options": ["30", "40", "50", "60"],
+    "correctAnswer": "40",
+    "order": 10,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Fractions and Decimals",
+    "text": "What is 2/3 × 3/4?",
+    "options": ["1/2", "5/7", "6/12", "2/3"],
+    "correctAnswer": "1/2",
+    "order": 11,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Fractions and Decimals",
+    "text": "What is 5/6 ÷ 1/3?",
+    "options": ["5/18", "5/2", "5/9", "15/6"],
+    "correctAnswer": "5/2",
+    "order": 12,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Fractions and Decimals",
+    "text": "What is 0.125 as a fraction in simplest form?",
+    "options": ["1/8", "1/4", "1/5", "125/1000"],
+    "correctAnswer": "1/8",
+    "order": 13,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Fractions and Decimals",
+    "text": "What is 2.5 × 0.4?",
+    "options": ["0.1", "1", "10", "2.9"],
+    "correctAnswer": "1",
+    "order": 14,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Fractions and Decimals",
+    "text": "Convert 7/8 to a decimal.",
+    "options": ["0.78", "0.875", "0.88", "0.7"],
+    "correctAnswer": "0.875",
+    "order": 15,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Word Problems",
+    "text": "A phone costs £240 after a 25% discount. What was the original price?",
+    "options": ["£300", "£320", "£360", "£280"],
+    "correctAnswer": "£320",
+    "order": 16,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Word Problems",
+    "text": "If 3x + 5 = 20, what is x?",
+    "options": ["3", "5", "7", "15"],
+    "correctAnswer": "5",
+    "order": 17,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Word Problems",
+    "text": "A car travels at 60 mph for 2.5 hours. How far does it travel?",
+    "options": ["120 miles", "150 miles", "180 miles", "200 miles"],
+    "correctAnswer": "150 miles",
+    "order": 18,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Word Problems",
+    "text": "The ratio of boys to girls is 3:5. If there are 24 boys, how many girls are there?",
+    "options": ["30", "35", "40", "45"],
+    "correctAnswer": "40",
+    "order": 19,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Word Problems",
+    "text": "A rectangle has an area of 72 cm² and length of 9 cm. What is its width?",
+    "options": ["6 cm", "7 cm", "8 cm", "9 cm"],
+    "correctAnswer": "8 cm",
+    "order": 20,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Time and Measurement",
+    "text": "How many seconds are in 1.5 hours?",
+    "options": ["5,400", "5,500", "5,600", "5,000"],
+    "correctAnswer": "5,400",
+    "order": 21,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Time and Measurement",
+    "text": "Convert 3.5 metres to millimetres.",
+    "options": ["350 mm", "3,500 mm", "35,000 mm", "35 mm"],
+    "correctAnswer": "3,500 mm",
+    "order": 22,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Time and Measurement",
+    "text": "If it's 14:35 now, what time was it 3 hours and 50 minutes ago?",
+    "options": ["10:45", "10:35", "11:45", "10:55"],
+    "correctAnswer": "10:45",
+    "order": 23,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Time and Measurement",
+    "text": "A box weighs 2.75 kg. What is this in grams?",
+    "options": ["275 g", "2,750 g", "27,500 g", "27.5 g"],
+    "correctAnswer": "2,750 g",
+    "order": 24,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Time and Measurement",
+    "text": "A journey takes 2 hours 45 minutes. If you start at 09:30, when do you finish?",
+    "options": ["11:15", "12:00", "12:15", "11:45"],
+    "correctAnswer": "12:15",
+    "order": 25,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Percentages",
+    "text": "Increase £80 by 35%.",
+    "options": ["£100", "£108", "£115", "£120"],
+    "correctAnswer": "£108",
+    "order": 26,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Percentages",
+    "text": "Decrease 250 by 12%.",
+    "options": ["210", "220", "230", "238"],
+    "correctAnswer": "220",
+    "order": 27,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Percentages",
+    "text": "What percentage is 27 out of 60?",
+    "options": ["40%", "45%", "50%", "55%"],
+    "correctAnswer": "45%",
+    "order": 28,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Percentages",
+    "text": "A value increases from 50 to 65. What is the percentage increase?",
+    "options": ["15%", "20%", "25%", "30%"],
+    "correctAnswer": "30%",
+    "order": 29,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Percentages",
+    "text": "If 15% of a number is 30, what is the number?",
+    "options": ["150", "180", "200", "220"],
+    "correctAnswer": "200",
+    "order": 30,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Patterns and Sequences",
+    "text": "What is the nth term of the sequence: 5, 8, 11, 14, ...?",
+    "options": ["3n + 2", "3n + 5", "n + 4", "2n + 3"],
+    "correctAnswer": "3n + 2",
+    "order": 31,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Patterns and Sequences",
+    "text": "What is the next term in: 1, 1, 2, 3, 5, 8, __?",
+    "options": ["11", "13", "15", "16"],
+    "correctAnswer": "13",
+    "order": 32,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Patterns and Sequences",
+    "text": "What is the 10th term if the nth term is 2n² - 1?",
+    "options": ["199", "200", "199", "201"],
+    "correctAnswer": "199",
+    "order": 33,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Patterns and Sequences",
+    "text": "In the sequence 100, 50, 25, 12.5, what is the next term?",
+    "options": ["6", "6.25", "7", "5"],
+    "correctAnswer": "6.25",
+    "order": 34,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Patterns and Sequences",
+    "text": "What is the common difference in: -8, -3, 2, 7, 12?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "5",
+    "order": 35,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Geometry and Shapes",
+    "text": "What is the area of a circle with radius 5 cm? (Use π ≈ 3.14)",
+    "options": ["15.7 cm²", "31.4 cm²", "78.5 cm²", "157 cm²"],
+    "correctAnswer": "78.5 cm²",
+    "order": 36,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Geometry and Shapes",
+    "text": "What is the circumference of a circle with diameter 8 cm? (Use π ≈ 3.14)",
+    "options": ["25.12 cm", "50.24 cm", "12.56 cm", "100.48 cm"],
+    "correctAnswer": "25.12 cm",
+    "order": 37,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Geometry and Shapes",
+    "text": "In a right-angled triangle, if one angle is 35°, what is the third angle?",
+    "options": ["45°", "55°", "65°", "75°"],
+    "correctAnswer": "55°",
+    "order": 38,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Geometry and Shapes",
+    "text": "What is the volume of a cube with side length 4 cm?",
+    "options": ["16 cm³", "48 cm³", "64 cm³", "80 cm³"],
+    "correctAnswer": "64 cm³",
+    "order": 39,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Geometry and Shapes",
+    "text": "What is the name of a polygon with 8 sides?",
+    "options": ["Hexagon", "Heptagon", "Octagon", "Nonagon"],
+    "correctAnswer": "Octagon",
+    "order": 40,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Data and Statistics",
+    "text": "What is the mean of: 12, 15, 18, 20, 25?",
+    "options": ["17", "18", "19", "20"],
+    "correctAnswer": "18",
+    "order": 41,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Data and Statistics",
+    "text": "What is the median of: 4, 7, 9, 12, 15, 18?",
+    "options": ["9", "10", "10.5", "11"],
+    "correctAnswer": "10.5",
+    "order": 42,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Data and Statistics",
+    "text": "What is the range of: 22, 18, 30, 25, 19, 28?",
+    "options": ["8", "10", "12", "14"],
+    "correctAnswer": "12",
+    "order": 43,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Data and Statistics",
+    "text": "If you flip two coins, what is the probability of getting two heads?",
+    "options": ["1/4", "1/3", "1/2", "2/3"],
+    "correctAnswer": "1/4",
+    "order": 44,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Data and Statistics",
+    "text": "What is the mode of: 5, 8, 5, 12, 8, 5, 9?",
+    "options": ["5", "8", "9", "12"],
+    "correctAnswer": "5",
+    "order": 45,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Mental Math",
+    "text": "What is 19 × 11?",
+    "options": ["199", "209", "219", "229"],
+    "correctAnswer": "209",
+    "order": 46,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Mental Math",
+    "text": "What is 15² (15 squared)?",
+    "options": ["200", "215", "225", "235"],
+    "correctAnswer": "225",
+    "order": 47,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Mental Math",
+    "text": "What is 480 ÷ 12?",
+    "options": ["35", "38", "40", "42"],
+    "correctAnswer": "40",
+    "order": 48,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Mental Math",
+    "text": "What is 25% of 360?",
+    "options": ["80", "85", "90", "95"],
+    "correctAnswer": "90",
+    "order": 49,
+    "active": true
+  },
+  {
+    "screeningType": "dyscalculia",
+    "readingYear": "S3",
+    "section": "Mental Math",
+    "text": "What is √144?",
+    "options": ["10", "11", "12", "13"],
+    "correctAnswer": "12",
+    "order": 50,
+    "active": true
+  }
+]

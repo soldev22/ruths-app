@@ -6,6 +6,13 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     
+    // User type for journey customization
+    userType: {
+      type: String,
+      enum: ['teacher', 'individual'],
+      default: 'individual'
+    },
+    
     // Subscription fields
     accountType: { 
       type: String, 

@@ -12,6 +12,7 @@ type Screening = {
   updatedAt: string;
   caseId?: string;
   readingYear?: string;
+  screeningType?: "dyslexia" | "dyscalculia";
 };
 
 export default function DashboardPage() {
@@ -21,6 +22,9 @@ export default function DashboardPage() {
   const [dateFilter, setDateFilter] = useState<"all" | "7days" | "30days">("all");
   const [customStartDate, setCustomStartDate] = useState("");
   const [customEndDate, setCustomEndDate] = useState("");
+  const [prepaidCredits, setPrepaidCredits] = useState<number>(0);
+  const [screeningsUsed, setScreeningsUsed] = useState<number>(0);
+  const [accountType, setAccountType] = useState<string>("");
 
   const totalSections = 10; // placeholder
 
@@ -41,22 +45,39 @@ console.log("SCREENINGS:", meData.screenings);
         }
 
         const userId = meData.user.userId;
+        
+        // Store credit information
+        setPrepaidCredits(meData.user.prepaidCredits || 0);
+        setScreeningsUsed(meData.user.screeningsUsed || 0);
+        setAccountType(meData.user.accountType || "individual");
 
-        // 2️⃣ Fetch screenings for THIS USER
-        const res = await fetch(`/api/screening/dyslexia/list?userId=${userId}`, {
-          credentials: "include",
-        });
+        // 2️⃣ Fetch both dyslexia and dyscalculia screenings
+        const [dyslexiaRes, dyscalculiaRes] = await Promise.all([
+          fetch(`/api/screening/dyslexia/list?userId=${userId}`, {
+            credentials: "include",
+          }),
+          fetch(`/api/screening/dyscalculia/list?userId=${userId}`, {
+            credentials: "include",
+          }),
+        ]);
 
-        if (!res.ok) {
-          const txt = await res.text();
-          console.error("Failed to load screenings:", res.status, txt);
+        if (!dyslexiaRes.ok && !dyscalculiaRes.ok) {
+          console.error("Failed to load screenings");
           setError("Could not load screenings.");
           setLoading(false);
           return;
         }
 
-        const data = await res.json();
-        setScreenings(data.screenings || []);
+        const dyslexiaData = dyslexiaRes.ok ? await dyslexiaRes.json() : { screenings: [] };
+        const dyscalculiaData = dyscalculiaRes.ok ? await dyscalculiaRes.json() : { screenings: [] };
+
+        // Combine and mark each screening with its type
+        const allScreenings = [
+          ...(dyslexiaData.screenings || []).map((s: Screening) => ({ ...s, screeningType: "dyslexia" as const })),
+          ...(dyscalculiaData.screenings || []).map((s: Screening) => ({ ...s, screeningType: "dyscalculia" as const })),
+        ];
+
+        setScreenings(allScreenings);
       } catch (err) {
         console.error(err);
         setError("There was a problem loading the dashboard.");
@@ -105,6 +126,19 @@ console.log("SCREENINGS:", meData.screenings);
   const filteredCompleted = getFilteredScreenings(completed);
   const filteredInProgress = getFilteredScreenings(inProgress);
 
+  // Helper function to format reading year for display
+  const formatReadingYear = (year: string | undefined) => {
+    if (!year || year === "NotSet") return "Not Set";
+    const yearMap: { [key: string]: string } = {
+      "S1": "S1 (Ages 12-13)",
+      "S2": "S2 (Ages 13-14)",
+      "S3": "S3 (Ages 14-15)",
+      "S4": "S4 (Ages 15-16)",
+      "S5": "S5 (Ages 16-17)",
+    };
+    return yearMap[year] || year;
+  };
+
   if (loading) {
     return (
       <div className="w-full min-h-screen bg-gray-50">
@@ -130,9 +164,57 @@ console.log("SCREENINGS:", meData.screenings);
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8 overflow-y-auto">
+        {/* Header - Simple Title Only */}
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">SkillScan Dyslexia Reviews</h1>
+          <h1 className="text-4xl font-bold text-gray-900">SkillScan Reviews</h1>
         </div>
+
+        {/* Combined Welcome & Credit Panel - Always visible for prepaid users */}
+        {accountType === "individual" && (
+          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl p-8 mb-8 shadow-lg">
+            <div className="flex flex-col lg:flex-row items-start justify-between gap-6 mb-6">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-2">Welcome to SkillScan!</h2>
+                <p className="text-blue-100 text-sm">
+                  Professional screening tools to identify learning differences quickly and accurately.
+                </p>
+              </div>
+              <div className="bg-blue-900 bg-opacity-60 rounded-lg px-8 py-4 min-w-[180px] border-2 border-white border-opacity-30">
+                <div className="text-center">
+                  <div className="text-5xl font-bold mb-1 text-white">{prepaidCredits}</div>
+                  <div className="text-sm text-white font-semibold">credits remaining</div>
+                  <div className="text-xs text-white mt-2 opacity-90">
+                    {screeningsUsed} completed
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 items-center">
+              <Link 
+                href="/protected/case/new"
+                className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition-colors"
+              >
+                Create Your Assessment
+              </Link>
+              
+              {prepaidCredits <= 2 && (
+                <Link 
+                  href="/protected/account"
+                  className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg shadow transition-colors"
+                >
+                  {prepaidCredits === 0 ? '⚠️ Purchase Credits' : '💡 Buy More Credits'}
+                </Link>
+              )}
+            </div>
+
+            {prepaidCredits === 0 && (
+              <p className="text-amber-200 text-sm mt-4 font-medium">
+                ⚠️ You have no credits remaining. Purchase credits to continue assessments.
+              </p>
+            )}
+          </div>
+        )}
 
       {/* Date Filter Section */}
       <div className="flex items-center justify-between mb-6 gap-4">
@@ -225,11 +307,6 @@ console.log("SCREENINGS:", meData.screenings);
             </div>
           </div>
         </div>
-        <Link href="/protected/case/new">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl w-24 h-24 flex items-center justify-center font-semibold text-center px-2 whitespace-normal transition-colors">
-            New Case
-          </button>
-        </Link>
       </div>
 
       {/* In progress */}
@@ -237,10 +314,15 @@ console.log("SCREENINGS:", meData.screenings);
         <h2 className="text-xl font-semibold mb-3">
           In progress ({filteredInProgress.length})
         </h2>
-        {filteredInProgress.length === 0 && <p>No in-progress reviews.</p>}
+        {filteredInProgress.length === 0 && (
+          <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
+            <p className="text-gray-600">No assessments in progress.</p>
+          </div>
+        )}
 
         {filteredInProgress.map((s) => {
           const completedCount = s.sections?.length || 0;
+          const screeningLabel = s.screeningType === "dyscalculia" ? "Dyscalculia" : "Dyslexia";
 
           return (
             <div
@@ -250,6 +332,9 @@ console.log("SCREENINGS:", meData.screenings);
               <div>
                 <p>
                   <strong>Review ID:</strong> {s.caseId}
+                  <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                    {screeningLabel} — {formatReadingYear(s.readingYear)}
+                  </span>
                 </p>
                 <p className="text-xs text-gray-500">
                   Started: {s.createdAt ? new Date(s.createdAt).toLocaleString() : "—"}
@@ -260,7 +345,7 @@ console.log("SCREENINGS:", meData.screenings);
               </div>
 
 <a
-  href={`/screening/dyslexia/start/${encodeURIComponent(
+  href={`/screening/${s.screeningType || "dyslexia"}/start/${encodeURIComponent(
     s.caseId ?? ""
   )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
   className="px-3 py-2 text-sm rounded bg-blue-600 text-white"
@@ -278,10 +363,15 @@ console.log("SCREENINGS:", meData.screenings);
         <h2 className="text-xl font-semibold mb-3">
           Completed ({filteredCompleted.length})
         </h2>
-        {filteredCompleted.length === 0 && <p>No completed reviews yet.</p>}
+        {filteredCompleted.length === 0 && (
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+            <p className="text-gray-600">No completed assessments yet.</p>
+          </div>
+        )}
 
         {filteredCompleted.map((s) => {
           const completedCount = s.sections?.length || 0;
+          const screeningLabel = s.screeningType === "dyscalculia" ? "Dyscalculia" : "Dyslexia";
 
           return (
             <div
@@ -291,6 +381,9 @@ console.log("SCREENINGS:", meData.screenings);
               <div>
                 <p>
                   <strong>Review ID:</strong> {s.caseId}
+                  <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                    {screeningLabel} — {formatReadingYear(s.readingYear)}
+                  </span>
                 </p>
                 <p className="text-xs text-gray-500">
                   Started: {s.createdAt ? new Date(s.createdAt).toLocaleString() : "—"}
@@ -304,7 +397,7 @@ console.log("SCREENINGS:", meData.screenings);
               </div>
 
 <a
-  href={`/screening/dyslexia/overview?caseId=${encodeURIComponent(
+  href={`/screening/${s.screeningType || "dyslexia"}/overview?caseId=${encodeURIComponent(
     s.caseId ?? ""
   )}`}
   className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
