@@ -70,38 +70,6 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
         <strong>Case ID:</strong> {caseId}
       </p>
 
-      {/* SECTION NAVIGATION BOX */}
-      <div
-        style={{
-          background: "#f5f5f5",
-          border: "1px solid #ddd",
-          borderRadius: "6px",
-          padding: "1rem",
-          marginBottom: "2rem",
-        }}
-      >
-        <p style={{ fontWeight: "bold", marginBottom: "0.8rem" }}>Jump to Section:</p>
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-          {sectionScores.map((section: SectionScore, idx: number) => (
-            <button
-              key={section.sectionId}
-              onClick={() => setOpenSection(section.sectionId)}
-              style={{
-                padding: "0.5rem 1rem",
-                background: openSection === section.sectionId ? "black" : "#ddd",
-                color: openSection === section.sectionId ? "white" : "black",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
-                fontWeight: openSection === section.sectionId ? "bold" : "normal",
-              }}
-            >
-              {idx + 1}. {section.sectionId}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Risk overview panel */}
       <div
         className="mb-6 p-4 rounded border"
