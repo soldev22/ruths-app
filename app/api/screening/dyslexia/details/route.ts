@@ -103,7 +103,14 @@ export async function GET(req: NextRequest) {
 
     await connectToDatabase();
 
-    const screening = await DyslexiaScreening.findOne({ caseId }).lean();
+    // Find the most recent screening with this caseId that has sections
+    // (in case there are duplicate caseIds, get the completed one)
+    const screening = await DyslexiaScreening.findOne({ 
+      caseId,
+      sections: { $exists: true, $ne: [] }  // Must have sections
+    })
+      .sort({ createdAt: -1 })
+      .lean();
     if (!screening) {
       return NextResponse.json({
         screening: null,

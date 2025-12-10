@@ -28,6 +28,11 @@ const QuestionSchema = new mongoose.Schema(
       default: [],
     },
 
+    correctAnswer: {
+      type: String,
+      required: false,
+    },
+
     order: {
       type: Number,
       default: 0,

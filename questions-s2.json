@@ -1,0 +1,502 @@
+[
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Phonological Awareness",
+    "text": "Which pair of words rhyme?",
+    "options": ["knight - night", "cough - rough", "break - brake", "through - though"],
+    "correctAnswer": "knight - night",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Phonological Awareness",
+    "text": "How many syllables are in the word 'photography'?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "4",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Phonological Awareness",
+    "text": "What sound does 'ch' make in the word 'chemistry'?",
+    "options": ["ch as in chair", "k as in cat", "sh as in ship", "s as in sit"],
+    "correctAnswer": "k as in cat",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Phonological Awareness",
+    "text": "Which word has the same vowel sound as 'caught'?",
+    "options": ["taught", "coat", "cut", "chat"],
+    "correctAnswer": "taught",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Phonological Awareness",
+    "text": "How many meaningful parts (morphemes) are in 'unbelievable'?",
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": "3",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which letters make the 'f' sound in 'enough'?",
+    "options": ["ou", "gh", "ough", "en"],
+    "correctAnswer": "gh",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Letter-Sound Knowledge",
+    "text": "In the word 'psychology', which letter is silent?",
+    "options": ["p", "s", "y", "h"],
+    "correctAnswer": "p",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Letter-Sound Knowledge",
+    "text": "What sound does 'tion' make in 'information'?",
+    "options": ["shun", "tee-on", "ton", "chin"],
+    "correctAnswer": "shun",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Letter-Sound Knowledge",
+    "text": "Which vowel pattern appears in 'receive'?",
+    "options": ["ei", "ie", "ee", "ea"],
+    "correctAnswer": "ei",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Letter-Sound Knowledge",
+    "text": "The letter 'c' makes a soft sound (like 's') in which word?",
+    "options": ["castle", "circle", "cucumber", "clock"],
+    "correctAnswer": "circle",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Word Reading Fluency",
+    "text": "Which word is spelled correctly?",
+    "options": ["accommodate", "acommodate", "accomodate", "acomodate"],
+    "correctAnswer": "accommodate",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Word Reading Fluency",
+    "text": "Which word means 'to make something better'?",
+    "options": ["improve", "approve", "prove", "remove"],
+    "correctAnswer": "improve",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Word Reading Fluency",
+    "text": "Which word means 'happening at the same time'?",
+    "options": ["consecutive", "simultaneous", "previous", "continuous"],
+    "correctAnswer": "simultaneous",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Word Reading Fluency",
+    "text": "What is the root word in 'extraordinary'?",
+    "options": ["extra", "ordinary", "order", "traord"],
+    "correctAnswer": "ordinary",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Word Reading Fluency",
+    "text": "Which prefix means 'against'?",
+    "options": ["anti-", "ante-", "auto-", "ambi-"],
+    "correctAnswer": "anti-",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Reading Comprehension",
+    "text": "In the sentence 'The evidence was compelling', what does 'compelling' mean?",
+    "options": ["confusing", "convincing", "complicated", "concerning"],
+    "correctAnswer": "convincing",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Reading Comprehension",
+    "text": "What is the main purpose of a conclusion paragraph?",
+    "options": ["Introduce new ideas", "Summarize main points", "Ask questions", "Give examples"],
+    "correctAnswer": "Summarize main points",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Reading Comprehension",
+    "text": "Which word best describes this tone: 'I suppose it might work, maybe'?",
+    "options": ["confident", "uncertain", "angry", "excited"],
+    "correctAnswer": "uncertain",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Reading Comprehension",
+    "text": "What does the prefix 'mis-' mean in 'misunderstand'?",
+    "options": ["not", "wrongly", "again", "before"],
+    "correctAnswer": "wrongly",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Reading Comprehension",
+    "text": "For an article about climate change, which subtitle fits a section about solutions?",
+    "options": ["The Problem Worsens", "Taking Action", "Historical Data", "Scientific Method"],
+    "correctAnswer": "Taking Action",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Spelling and Writing",
+    "text": "Which word is spelled correctly?",
+    "options": ["separate", "seperate", "separete", "seprate"],
+    "correctAnswer": "separate",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Spelling and Writing",
+    "text": "Complete the word: 'The scientist conducted an exper____'",
+    "options": ["iment", "ement", "imint", "ament"],
+    "correctAnswer": "iment",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Spelling and Writing",
+    "text": "Which sentence uses commas correctly?",
+    "options": ["I need: bread, milk and eggs.", "I need bread, milk, and eggs.", "I need bread milk and eggs.", "I need, bread milk and eggs."],
+    "correctAnswer": "I need bread, milk, and eggs.",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Spelling and Writing",
+    "text": "What is the past tense of 'begin'?",
+    "options": ["beginned", "began", "begun", "begined"],
+    "correctAnswer": "began",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Spelling and Writing",
+    "text": "Which word correctly completes: 'Their performance _____ expectations'?",
+    "options": ["exceeded", "exceaded", "exseeded", "exceded"],
+    "correctAnswer": "exceeded",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Visual Processing",
+    "text": "Which letters are often confused because they look similar?",
+    "options": ["b and d", "a and e", "t and f", "k and h"],
+    "correctAnswer": "b and d",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Visual Processing",
+    "text": "How many separate words: 'thereisnospacinghere'?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": "5",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Visual Processing",
+    "text": "Which word pair has the same letters rearranged?",
+    "options": ["silent - listen", "bread - beard", "heart - hate", "read - dear"],
+    "correctAnswer": "silent - listen",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Visual Processing",
+    "text": "What helps you track from one line to the next when reading?",
+    "options": ["Memory", "Eye movement", "Spelling", "Vocabulary"],
+    "correctAnswer": "Eye movement",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Visual Processing",
+    "text": "Which format is harder to read?",
+    "options": ["Large clear text", "Small crowded text", "Well-spaced text", "Bold text"],
+    "correctAnswer": "Small crowded text",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Memory and Sequencing",
+    "text": "What comes next: A1, B2, C3, D4, ___?",
+    "options": ["E5", "F5", "E6", "D5"],
+    "correctAnswer": "E5",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Memory and Sequencing",
+    "text": "Put these in alphabetical order: telescope, technology, telephone, television",
+    "options": ["technology, telescope, telephone, television", "technology, telephone, telescope, television", "telescope, technology, telephone, television", "technology, telescope, telephone, television"],
+    "correctAnswer": "technology, telephone, telescope, television",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Memory and Sequencing",
+    "text": "Which memory trick helps spell 'necessary'?",
+    "options": ["One collar, two sleeves", "I before E", "Drop the E", "Double the last letter"],
+    "correctAnswer": "One collar, two sleeves",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Memory and Sequencing",
+    "text": "What is the correct order for writing an essay?",
+    "options": ["Plan, draft, edit, final", "Draft, plan, edit, final", "Edit, plan, draft, final", "Final, edit, draft, plan"],
+    "correctAnswer": "Plan, draft, edit, final",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Memory and Sequencing",
+    "text": "How many months have 31 days?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "7",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Rapid Naming",
+    "text": "What category: Shakespeare, Dickens, Austen, Orwell?",
+    "options": ["Scientists", "Authors", "Politicians", "Artists"],
+    "correctAnswer": "Authors",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Rapid Naming",
+    "text": "Which doesn't fit: triangle, square, circle, pyramid?",
+    "options": ["triangle", "square", "circle", "pyramid"],
+    "correctAnswer": "pyramid",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Rapid Naming",
+    "text": "What is the capital of France?",
+    "options": ["London", "Paris", "Berlin", "Rome"],
+    "correctAnswer": "Paris",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Rapid Naming",
+    "text": "What do we call a word that sounds the same but has different meaning?",
+    "options": ["Synonym", "Antonym", "Homophone", "Metaphor"],
+    "correctAnswer": "Homophone",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Rapid Naming",
+    "text": "Which is the odd one out: noun, verb, adjective, sentence?",
+    "options": ["noun", "verb", "adjective", "sentence"],
+    "correctAnswer": "sentence",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Working Memory",
+    "text": "Remember these backwards: 7, 3, 9, 2. What is the sequence?",
+    "options": ["2, 9, 3, 7", "7, 3, 9, 2", "9, 7, 3, 2", "2, 3, 7, 9"],
+    "correctAnswer": "2, 9, 3, 7",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Working Memory",
+    "text": "Read: 'The cat sat on the mat.' What was sitting?",
+    "options": ["The dog", "The cat", "The mat", "The hat"],
+    "correctAnswer": "The cat",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Working Memory",
+    "text": "After reading an instruction, what helps you remember it?",
+    "options": ["Forget it quickly", "Write it down", "Do something else", "Ignore it"],
+    "correctAnswer": "Write it down",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Working Memory",
+    "text": "Which strategy helps you remember what you read?",
+    "options": ["Read faster", "Take notes", "Skip paragraphs", "Read once only"],
+    "correctAnswer": "Take notes",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Working Memory",
+    "text": "If you need to remember 5 facts, what helps most?",
+    "options": ["Say them once", "Create a mnemonic", "Hope for the best", "Skip some facts"],
+    "correctAnswer": "Create a mnemonic",
+    "order": 5,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Language Processing",
+    "text": "What does 'break the ice' mean?",
+    "options": ["Smash frozen water", "Start a conversation", "Feel cold", "Make a mistake"],
+    "correctAnswer": "Start a conversation",
+    "order": 1,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Language Processing",
+    "text": "In 'She ran to the store', what is the verb?",
+    "options": ["She", "ran", "store", "the"],
+    "correctAnswer": "ran",
+    "order": 2,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Language Processing",
+    "text": "What type of word is 'quickly' in 'He ran quickly'?",
+    "options": ["Noun", "Verb", "Adjective", "Adverb"],
+    "correctAnswer": "Adverb",
+    "order": 3,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Language Processing",
+    "text": "Which sentence is in passive voice?",
+    "options": ["The dog chased the cat", "The cat was chased by the dog", "The dog is chasing", "Chase the cat"],
+    "correctAnswer": "The cat was chased by the dog",
+    "order": 4,
+    "active": true
+  },
+  {
+    "screeningType": "dyslexia",
+    "readingYear": "S2",
+    "section": "Language Processing",
+    "text": "What does a semicolon do?",
+    "options": ["End a sentence", "Join related clauses", "Ask a question", "Show excitement"],
+    "correctAnswer": "Join related clauses",
+    "order": 5,
+    "active": true
+  }
+]

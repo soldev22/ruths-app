@@ -35,25 +35,21 @@ export async function POST(req: Request) {
     const decoded = jwt.verify(token, JWT_SECRET) as any;
     const userId = decoded.userId;
 
-    // Check subscription limits
+    // Check prepaid credits
     const user = await User.findById(userId);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const now = new Date();
-    const trialActive = user.trialEndDate && new Date(user.trialEndDate) > now;
-    const subscriptionActive = user.subscriptionStatus === 'active';
-    const canScreen = subscriptionActive || 
-              (trialActive && user.screeningsUsed < user.maxScreenings);
+    const prepaidCredits = user.prepaidCredits || 0;
+    const canScreen = prepaidCredits > 0;
 
     if (!canScreen) {
       return NextResponse.json({ 
-        error: "Screening limit reached", 
-        message: "Your trial has ended or you've reached your screening limit. Please upgrade to continue.",
+        error: "No credits available", 
+        message: "You have no assessment credits. Please purchase credits to continue.",
         needsUpgrade: true,
-        screeningsUsed: user.screeningsUsed,
-        maxScreenings: user.maxScreenings
+        prepaidCredits: 0
       }, { status: 403 });
     }
 
@@ -69,13 +65,17 @@ export async function POST(req: Request) {
       });
     }
 
-    // Increment screening count on every start (counts usage even if screening already existed)
-    user.screeningsUsed = (user.screeningsUsed || 0) + 1;
-    await user.save();
-    console.log("Incremented screeningsUsed", {
-      userId,
-      screeningsUsed: user.screeningsUsed,
-    });
+    // Deduct prepaid credit ONLY for new screenings
+    if (isNewScreening) {
+      user.prepaidCredits = (user.prepaidCredits || 0) - 1;
+      user.screeningsUsed = (user.screeningsUsed || 0) + 1;
+      await user.save();
+      console.log("Deducted credit", {
+        userId,
+        prepaidCredits: user.prepaidCredits,
+        screeningsUsed: user.screeningsUsed,
+      });
+    }
 
     // Log the screening start
     try {
@@ -88,27 +88,26 @@ export async function POST(req: Request) {
         metadata: {
           isNewScreening,
           screeningsUsed: user.screeningsUsed,
-          creditsUsed: 1,
+          creditsUsed: isNewScreening ? 1 : 0,
           remainingCredits: user.prepaidCredits || 0,
           accountType: user.accountType,
           userAgent: req.headers.get('user-agent'),
           timestamp: new Date()
         }
       });
-      console.log(`[SCREENING_STARTED] User: ${user.email}, Case ID: ${caseId}, Screening ID: ${screening._id}, Credits Used: 1`);
+      console.log(`[SCREENING_STARTED] User: ${user.email}, Case ID: ${caseId}, Screening ID: ${screening._id}, Credits Used: ${isNewScreening ? 1 : 0}`);
     } catch (logError) {
       console.error('Failed to log screening start:', logError);
     }
 
-    const screeningsRemaining = subscriptionActive ? 'unlimited' : 
-                                Math.max(0, user.maxScreenings - user.screeningsUsed);
+    const screeningsRemaining = user.prepaidCredits || 0;
 
-    console.log("[start] success", { userId, screeningsUsed: user.screeningsUsed });
+    console.log("[start] success", { userId, prepaidCredits: user.prepaidCredits, screeningsUsed: user.screeningsUsed });
 
     return NextResponse.json({ 
       screening,
       screeningsRemaining,
-      subscriptionStatus: user.subscriptionStatus
+      prepaidCredits: user.prepaidCredits
     });
   } catch (err) {
     console.error("Start error:", err);
