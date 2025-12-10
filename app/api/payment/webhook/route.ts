@@ -52,6 +52,17 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Missing metadata" }, { status: 400 });
       }
 
+      console.log(`[WEBHOOK] Processing payment for user ${userId}, adding ${credits} credits`);
+      
+      // Get user before update to log old balance
+      const userBefore = await User.findById(userId);
+      if (!userBefore) {
+        console.error("[WEBHOOK] User not found:", userId);
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
+      }
+      
+      console.log(`[WEBHOOK] Current balance: ${userBefore.prepaidCredits || 0} credits`);
+
       // Add credits to user account
       const user = await User.findByIdAndUpdate(
         userId,
@@ -60,9 +71,12 @@ export async function POST(req: NextRequest) {
       );
 
       if (!user) {
-        console.error("[WEBHOOK] User not found:", userId);
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
+        console.error("[WEBHOOK] Failed to update user:", userId);
+        return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
       }
+
+      console.log(`[WEBHOOK] Successfully added ${credits} credits to user ${user.email} (ID: ${userId})`);
+      console.log(`[WEBHOOK] New balance: ${user.prepaidCredits} credits (was ${userBefore.prepaidCredits || 0})`);
 
       // Log the payment activity
       await ActivityLog.create({
@@ -73,6 +87,8 @@ export async function POST(req: NextRequest) {
           action: "credit_purchase",
           bundleType,
           creditsAdded: credits,
+          oldBalance: userBefore.prepaidCredits || 0,
+          newBalance: user.prepaidCredits,
           amountPaid: session.amount_total,
           currency: session.currency,
           paymentStatus: session.payment_status,
@@ -80,8 +96,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      console.log(`[WEBHOOK] Added ${credits} credits to user ${user.email} (ID: ${userId})`);
-      console.log(`[WEBHOOK] New balance: ${user.prepaidCredits} credits`);
+      console.log(`[WEBHOOK] Activity logged successfully`);
 
       return NextResponse.json({ 
         success: true,

@@ -27,19 +27,45 @@ function AccountContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Check for payment success
-    const paymentStatus = searchParams.get("payment");
-    if (paymentStatus === "success") {
-      setTimeout(() => {
-        alert("Payment successful! Your credits have been added to your account.");
-        // Reload to show updated balance
-        window.location.href = "/protected/account";
-      }, 500);
+    async function handlePaymentReturn() {
+      const paymentStatus = searchParams.get("payment");
+      const sessionId = searchParams.get("session_id");
+      
+      if (paymentStatus === "success" && sessionId) {
+        try {
+          // Verify the payment session and ensure credits are added
+          const verifyRes = await fetch("/api/payment/verify-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId }),
+          });
+          
+          if (verifyRes.ok) {
+            const verifyData = await verifyRes.json();
+            console.log("Payment verified:", verifyData);
+            alert(`Payment successful! ${verifyData.creditsAdded} credit${verifyData.creditsAdded > 1 ? 's have' : ' has'} been added to your account.`);
+          } else {
+            alert("Payment successful! Your credits have been added to your account.");
+          }
+        } catch (error) {
+          console.error("Failed to verify payment:", error);
+          alert("Payment successful! Please refresh the page if credits don't appear.");
+        }
+        
+        // Remove query parameters
+        window.history.replaceState({}, '', '/protected/account');
+      }
     }
 
     async function loadInfo() {
       try {
-        const res = await fetch("/api/subscription/check-limits");
+        // First handle payment return if needed
+        await handlePaymentReturn();
+        
+        // Then load account info with cache busting
+        const res = await fetch(`/api/subscription/check-limits?t=${Date.now()}`, {
+          cache: 'no-store'
+        });
         if (res.ok) {
           const data = await res.json();
           setInfo(data);
