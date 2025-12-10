@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectToDatabase } from '@/lib/db';
-import CampaignAnalytics from '@/models/CampaignAnalytics';
-import Campaign from '@/models/Campaign';
-import { getUserFromToken } from '@/lib/getUserFromToken';
+import { connectToDatabase } from '../../../lib/db';
+import CampaignAnalytics from '../../../models/CampaignAnalytics';
+import Campaign from '../../../models/Campaign';
+import { getUserFromToken } from '../../../lib/getUserFromToken';
 
 export async function GET(request: NextRequest) {
   try {
