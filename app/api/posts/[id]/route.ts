@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
+import { connectToDatabase } from '@/lib/db';
 import SocialPost from '@/models/SocialPost';
 import { getUserFromToken } from '@/lib/getUserFromToken';
 
@@ -14,7 +14,7 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    await dbConnect();
+    await connectToDatabase();
 
     const { id } = await params;
     const post = await SocialPost.findOne({
@@ -46,7 +46,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    await dbConnect();
+    await connectToDatabase();
 
     const { id } = await params;
     const body = await request.json();
@@ -104,7 +104,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    await dbConnect();
+    await connectToDatabase();
 
     const { id } = await params;
     const post = await SocialPost.findOneAndDelete({
