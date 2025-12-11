@@ -1,0 +1,14 @@
+{
+  "name": "skillscan-marketing-automation",
+  "version": "1.0.0",
+  "description": "Automated social media marketing for SkillScan",
+  "main": "twitter-bot.js",
+  "scripts": {
+    "post": "node twitter-bot.js",
+    "test": "node test-connection.js"
+  },
+  "dependencies": {
+    "twitter-api-v2": "^1.17.2",
+    "openai": "^4.69.0"
+  }
+}

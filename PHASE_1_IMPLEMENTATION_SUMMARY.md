@@ -300,3 +300,99 @@
 - ✅ Deployment notes included
 
 **All Phase 1 deliverables complete and ready for testing/deployment.**
+
+---
+
+## Twitter Automation System (Marketing Automation)
+
+### ✅ Completed Features
+
+**1. Twitter Bot - AI-Powered Content Generation**
+- **File:** `marketing-automation/twitter-bot.js` (local testing)
+- **File:** `api/cron/post-tweets.js` (Vercel serverless)
+- Uses OpenAI GPT-4 to generate educational tweets
+- Content mix: 50% educational, 20% promotional, 20% engagement, 10% news/stats
+- Successfully tested: 3 tweets posted to @catignani2025
+
+**2. Vercel Cron Scheduling**
+- **File:** `vercel.json`
+- Schedule: `"0 9,12,16 * * 1-5"` (9am, 12pm, 4pm UTC, Monday-Friday)
+- Posts 1 tweet per execution = 3 tweets daily on weekdays
+- Requires `CRON_SECRET` for authorization
+
+**3. Marketing Dashboard**
+- **File:** `app/protected/marketing/page.tsx`
+- Toggle switch to enable/disable Twitter bot
+- Live status indicator (green pulsing dot when active)
+- Stats display: total tweets posted, posting frequency, schedule
+- Shows posting times as badges: 9:00 AM, 12:00 PM, 4:00 PM
+- "How It Works" section with content strategy details
+
+**4. MongoDB Integration**
+- **Model:** `models/MarketingSettings.ts`
+- Fields:
+  - `twitterBotEnabled` (Boolean) - toggle state
+  - `lastRun` (Date) - last execution timestamp
+  - `totalTweetsPosted` (Number) - cumulative counter
+  - `lastError` (String) - error tracking
+  - `socialLinks` (Object) - Twitter, Facebook, LinkedIn, Instagram URLs
+  - `updatedAt` (Date)
+
+**5. Admin API Routes**
+- **File:** `app/api/marketing/settings/route.ts`
+- GET: Retrieve bot settings (admin only)
+- POST: Update twitterBotEnabled toggle (admin only)
+- Uses `auth_token` cookie for authentication
+- Checks `user.isAdmin` field for authorization
+
+**6. Admin Setup Endpoint**
+- **File:** `app/api/admin/setup/route.ts`
+- One-time endpoint to set admin flag
+- Requires secret: "make-me-admin-2025"
+- Used to make mt@mt.com an admin user
+
+**7. Sidebar Navigation**
+- **File:** `app/components/Sidebar.tsx`
+- Added "SOCIAL MEDIA" section (admin only)
+- Links:
+  - "Twitter Automation" → /protected/marketing (internal)
+  - "→ View Twitter" → https://twitter.com/catignani2025 (external)
+  - "→ View Facebook" → https://facebook.com/skillscan (external)
+  - "→ View LinkedIn" → https://linkedin.com/company/skillscan (external)
+  - "→ View Instagram" → https://instagram.com/skillscan (external)
+
+**8. Environment Variables Required**
+```
+TWITTER_API_KEY=GV7q2bL8WhupxOr3l1kLDKDDp
+TWITTER_API_SECRET=owBHThDAH5fI9UOQNDuImw6Wr54lYEVmiYd58rYn8MtXtO6U62
+TWITTER_ACCESS_TOKEN=1999098032391163904-S8HlJ1Mvt5T1WFzXx91emdJHCkSocx
+TWITTER_ACCESS_SECRET=kqUvB2uDwJnDoiwcmB2hdwdHcb1LJwdKJtYUm7c3ZfuSH
+OPENAI_API_KEY=(existing)
+CRON_SECRET=(create random string)
+MONGODB_URI=(existing)
+```
+
+### 🔄 Pending Deployment
+- [ ] Push code to Git repository
+- [ ] Add environment variables to Vercel dashboard
+- [ ] Test cron job execution on Vercel
+- [ ] Enable bot via marketing dashboard toggle
+- [ ] Monitor first scheduled posts
+
+### 📊 System Ready For
+- Fully automated Twitter marketing (3 tweets/day, weekdays)
+- Admin control via dashboard toggle
+- AI-generated educational content about dyslexia/dyscalculia screening
+- Campaign tracking and analytics
+
+---
+
+## Existing Voucher/Campaign System
+- **File:** `app/admin/vouchers/page.tsx`
+- Create promotional voucher codes
+- Set credits, redemption limits, expiry dates
+- Target specific account types (individual/school)
+- Track redemptions and manage campaigns
+- Activate/deactivate campaigns
+
+**Status: Waiting for client feedback before further enhancements**

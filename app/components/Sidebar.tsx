@@ -107,6 +107,23 @@ export default function Sidebar() {
                 <Link href="/social-media" style={{ color: "white", textDecoration: "none" }}>Social Media</Link>
                 <br />
               </div>
+
+              <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "20px", marginBottom: "10px" }}>
+                SOCIAL MEDIA
+              </div>
+
+              <div>
+                <Link href="/protected/marketing" style={{ color: "white", textDecoration: "none" }}>Twitter Automation</Link>
+                <br />
+                <a href="https://twitter.com/catignani2025" target="_blank" rel="noopener noreferrer" style={{ color: "#93c5fd", textDecoration: "none", fontSize: "14px" }}>→ View Twitter</a>
+                <br />
+                <a href="https://facebook.com/skillscan" target="_blank" rel="noopener noreferrer" style={{ color: "#93c5fd", textDecoration: "none", fontSize: "14px" }}>→ View Facebook</a>
+                <br />
+                <a href="https://linkedin.com/company/skillscan" target="_blank" rel="noopener noreferrer" style={{ color: "#93c5fd", textDecoration: "none", fontSize: "14px" }}>→ View LinkedIn</a>
+                <br />
+                <a href="https://instagram.com/skillscan" target="_blank" rel="noopener noreferrer" style={{ color: "#93c5fd", textDecoration: "none", fontSize: "14px" }}>→ View Instagram</a>
+                <br />
+              </div>
             </>
           )}
         </>
