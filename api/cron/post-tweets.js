@@ -1,14 +1,15 @@
 /**
- * Vercel Cron Job - Auto-posts tweets daily
- * This runs automatically on Vercel's schedule
+ * Vercel Cron Job - Auto-posts tweets from scheduled social media posts
+ * This runs automatically on Vercel's schedule and publishes posts from the social media system
+ * 
+ * Priority:
+ * 1. Check for scheduled posts in social media system
+ * 2. Post those if found
+ * 3. Fall back to AI-generated content if no scheduled posts
  */
 
 const { TwitterApi } = require('twitter-api-v2');
 const OpenAI = require('openai');
-
-// ==========================================
-// CONFIGURATION
-// ==========================================
 
 const CONFIG = {
   postsPerRun: 1,
@@ -54,10 +55,6 @@ const CONTENT_TYPES = {
   ]
 };
 
-// ==========================================
-// INITIALIZE APIs FROM ENVIRONMENT
-// ==========================================
-
 const twitterClient = new TwitterApi({
   appKey: process.env.TWITTER_API_KEY,
   appSecret: process.env.TWITTER_API_SECRET,
@@ -68,10 +65,6 @@ const twitterClient = new TwitterApi({
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-// ==========================================
-// HELPER FUNCTIONS
-// ==========================================
 
 function selectContentType() {
   const rand = Math.random() * 100;
@@ -99,99 +92,166 @@ async function generateTweet(contentType) {
         content: `You are a social media manager for SkillScan, a UK-based dyslexia and dyscalculia screening service. 
         
 Your tweets should be:
-- Professional yet warm and approachable
-- Focused on UK audience (use British spelling)
-- Under 280 characters
-- Include relevant hashtags (2-3 max)
-- Engaging and valuable
+- Professional but friendly
+- Evidence-based
+- Inclusive and supportive
+- UK-focused (mention £, UK schools, etc.)
+- 200-280 characters (leave room for hashtags)
 - If promotional, keep it subtle and value-focused
-- Use emojis sparingly (1-2 max)
 
-Brand voice: Helpful, expert, supportive, professional.
-Website: skillscan.co.uk (mention only when relevant)
-Price: £5 per assessment for individuals, bundled for schools.`
+Include 2-3 relevant hashtags from: #Dyslexia #Dyscalculia #SEND #Education #TeacherTwitter #ParentingUK #LearningDifficulties #InclusiveEducation #Neurodiversity`
       },
       {
         role: 'user',
         content: randomPrompt
       }
     ],
-    max_tokens: 100,
+    max_tokens: 150,
     temperature: 0.8,
   });
-  
+
   return response.choices[0].message.content.trim();
 }
 
 async function postTweet(text) {
-  const tweet = await twitterClient.v2.tweet(text);
-  return tweet;
+  return await twitterClient.v2.tweet(text);
 }
 
-// ==========================================
-// VERCEL SERVERLESS FUNCTION HANDLER
-// ==========================================
+async function getScheduledPosts(mongoose) {
+  const now = new Date();
+  const socialPostSchema = new mongoose.Schema({
+    campaign: { type: mongoose.Schema.Types.ObjectId, ref: 'Campaign' },
+    content: String,
+    platforms: [String],
+    scheduledDate: Date,
+    status: String,
+    publishedAt: Date,
+  }, { timestamps: true });
+  
+  const SocialPost = mongoose.models.SocialPost || mongoose.model('SocialPost', socialPostSchema);
+  
+  // Find posts that are:
+  // 1. Status = 'scheduled'
+  // 2. Include 'twitter' platform
+  // 3. Scheduled time has passed
+  const posts = await SocialPost.find({
+    status: 'scheduled',
+    platforms: 'twitter',
+    scheduledDate: { $lte: now }
+  })
+  .sort({ scheduledDate: 1 })
+  .limit(CONFIG.postsPerRun)
+  .populate('campaign');
+  
+  return { posts, SocialPost };
+}
 
-export default async function handler(req, res) {
-  // Verify cron secret to prevent unauthorized access
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
+module.exports = async function handler(req, res) {
+  // Security: Check for cron secret
+  const authHeader = req.headers.authorization;
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  // Connect to MongoDB to check settings
   const mongoose = require('mongoose');
-  await mongoose.connect(process.env.MONGODB_URI);
   
-  // Load settings model
-  const marketingSettingsSchema = new mongoose.Schema({
-    twitterBotEnabled: Boolean,
-    lastRun: Date,
-    totalTweetsPosted: Number,
-    lastError: String,
-  });
-  const MarketingSettings = mongoose.models.MarketingSettings || mongoose.model('MarketingSettings', marketingSettingsSchema);
-  
-  // Check if bot is enabled
-  let settings = await MarketingSettings.findOne();
-  if (!settings) {
-    settings = await MarketingSettings.create({
-      twitterBotEnabled: false,
-      totalTweetsPosted: 0,
-    });
-  }
-  
-  if (!settings.twitterBotEnabled) {
-    console.log('⏸️  Twitter bot is disabled. Skipping...');
-    return res.status(200).json({
-      success: true,
-      skipped: true,
-      message: 'Twitter bot is disabled in settings',
-    });
-  }
-
-  console.log('🤖 Starting Twitter Bot...');
-  const results = [];
-
   try {
-    for (let i = 0; i < CONFIG.postsPerRun; i++) {
-      const contentType = selectContentType();
-      console.log(`Generating ${contentType} tweet ${i + 1}/${CONFIG.postsPerRun}`);
-      
-      const tweetText = await generateTweet(contentType);
-      console.log(`Generated: ${tweetText}`);
-      
-      const tweet = await postTweet(tweetText);
-      console.log(`Posted tweet ID: ${tweet.data.id}`);
-      
-      results.push({
-        id: tweet.data.id,
-        type: contentType,
-        text: tweetText,
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGODB_URI);
+    
+    // Get marketing settings
+    const marketingSettingsSchema = new mongoose.Schema({
+      twitterBotEnabled: Boolean,
+      lastRun: Date,
+      totalTweetsPosted: Number,
+      lastError: String,
+    });
+    const MarketingSettings = mongoose.models.MarketingSettings || mongoose.model('MarketingSettings', marketingSettingsSchema);
+    
+    let settings = await MarketingSettings.findOne();
+    if (!settings) {
+      settings = await MarketingSettings.create({
+        twitterBotEnabled: false,
+        totalTweetsPosted: 0,
       });
+    }
+
+    // Check if bot is enabled
+    if (!settings.twitterBotEnabled) {
+      return res.status(200).json({
+        success: true,
+        skipped: true,
+        message: 'Twitter bot is disabled',
+      });
+    }
+
+    console.log('🔍 Checking for scheduled posts...');
+    const { posts: scheduledPosts, SocialPost } = await getScheduledPosts(mongoose);
+    
+    const results = [];
+
+    if (scheduledPosts.length > 0) {
+      // POST SCHEDULED POSTS FROM SOCIAL MEDIA SYSTEM
+      console.log(`📅 Found ${scheduledPosts.length} scheduled post(s)`);
       
-      // Wait 2 minutes between tweets
-      if (i < CONFIG.postsPerRun - 1) {
-        await new Promise(resolve => setTimeout(resolve, 2 * 60 * 1000));
+      for (const post of scheduledPosts) {
+        try {
+          console.log(`📤 Posting: "${post.content.substring(0, 50)}..."`);
+          
+          const tweet = await postTweet(post.content);
+          console.log(`✅ Posted tweet ID: ${tweet.data.id}`);
+          
+          // Update post status
+          post.status = 'published';
+          post.publishedAt = new Date();
+          await post.save();
+          
+          results.push({
+            id: tweet.data.id,
+            type: 'scheduled',
+            source: 'social-media-system',
+            campaignName: post.campaign?.name || 'No Campaign',
+            text: post.content,
+          });
+          
+          // Wait 2 minutes between tweets
+          const postIndex = scheduledPosts.indexOf(post);
+          if (postIndex < scheduledPosts.length - 1) {
+            console.log('⏳ Waiting 2 minutes...');
+            await new Promise(resolve => setTimeout(resolve, 2 * 60 * 1000));
+          }
+        } catch (error) {
+          console.error(`❌ Failed to post scheduled content:`, error);
+          post.status = 'failed';
+          await post.save();
+        }
+      }
+    } else {
+      // FALLBACK: Generate AI content if no scheduled posts
+      console.log('🤖 No scheduled posts found. Generating AI content...');
+      
+      for (let i = 0; i < CONFIG.postsPerRun; i++) {
+        const contentType = selectContentType();
+        console.log(`📝 Generating ${contentType} tweet ${i + 1}/${CONFIG.postsPerRun}`);
+        
+        const tweetText = await generateTweet(contentType);
+        console.log(`📄 Generated: ${tweetText}`);
+        
+        const tweet = await postTweet(tweetText);
+        console.log(`✅ Posted tweet ID: ${tweet.data.id}`);
+        
+        results.push({
+          id: tweet.data.id,
+          type: contentType,
+          source: 'ai-generated',
+          text: tweetText,
+        });
+        
+        // Wait 2 minutes between tweets
+        if (i < CONFIG.postsPerRun - 1) {
+          console.log('⏳ Waiting 2 minutes...');
+          await new Promise(resolve => setTimeout(resolve, 2 * 60 * 1000));
+        }
       }
     }
 
@@ -201,6 +261,8 @@ export default async function handler(req, res) {
     settings.lastError = null;
     await settings.save();
 
+    console.log(`✨ Successfully posted ${results.length} tweet(s)`);
+
     return res.status(200).json({
       success: true,
       posted: results.length,
@@ -209,23 +271,26 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('❌ Error:', error);
     
     // Update settings with error
-    const mongoose = require('mongoose');
-    await mongoose.connect(process.env.MONGODB_URI);
-    const marketingSettingsSchema = new mongoose.Schema({
-      twitterBotEnabled: Boolean,
-      lastRun: Date,
-      totalTweetsPosted: Number,
-      lastError: String,
-    });
-    const MarketingSettings = mongoose.models.MarketingSettings || mongoose.model('MarketingSettings', marketingSettingsSchema);
-    const settings = await MarketingSettings.findOne();
-    if (settings) {
-      settings.lastError = error.message;
-      settings.lastRun = new Date();
-      await settings.save();
+    try {
+      await mongoose.connect(process.env.MONGODB_URI);
+      const marketingSettingsSchema = new mongoose.Schema({
+        twitterBotEnabled: Boolean,
+        lastRun: Date,
+        totalTweetsPosted: Number,
+        lastError: String,
+      });
+      const MarketingSettings = mongoose.models.MarketingSettings || mongoose.model('MarketingSettings', marketingSettingsSchema);
+      const settings = await MarketingSettings.findOne();
+      if (settings) {
+        settings.lastError = error.message;
+        settings.lastRun = new Date();
+        await settings.save();
+      }
+    } catch (dbError) {
+      console.error('Failed to update error in database:', dbError);
     }
     
     return res.status(500).json({
@@ -233,4 +298,4 @@ export default async function handler(req, res) {
       error: error.message,
     });
   }
-}
+};
