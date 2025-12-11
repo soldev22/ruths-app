@@ -39,10 +39,50 @@ export default function SocialMediaDashboard() {
   const [recentCampaigns, setRecentCampaigns] = useState<Campaign[]>([]);
   const [upcomingPosts, setUpcomingPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [twitterSettings, setTwitterSettings] = useState<any>(null);
+  const [savingTwitter, setSavingTwitter] = useState(false);
 
   useEffect(() => {
     fetchDashboardData();
+    fetchTwitterSettings();
   }, []);
+
+  const fetchTwitterSettings = async () => {
+    try {
+      const res = await fetch('/api/marketing/settings', {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setTwitterSettings(data);
+      }
+    } catch (error) {
+      console.error('Failed to load Twitter settings:', error);
+    }
+  };
+
+  const toggleTwitterBot = async () => {
+    setSavingTwitter(true);
+    try {
+      const res = await fetch('/api/marketing/settings', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          twitterBotEnabled: !twitterSettings.twitterBotEnabled,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setTwitterSettings(data.settings);
+      }
+    } catch (error) {
+      console.error('Failed to toggle Twitter bot:', error);
+    } finally {
+      setSavingTwitter(false);
+    }
+  };
 
   const fetchDashboardData = async () => {
     try {
@@ -141,6 +181,55 @@ export default function SocialMediaDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Twitter Automation Section */}
+      {twitterSettings && (
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-md p-6 mb-8 border border-blue-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="text-4xl">🐦</div>
+              <div>
+                <h2 className="text-xl font-semibold">Twitter Automation</h2>
+                <p className="text-sm text-gray-600">
+                  {twitterSettings.twitterBotEnabled ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                      Active - Posts at 9am, 12pm, 4pm (Mon-Fri)
+                    </span>
+                  ) : (
+                    <span className="text-gray-500">Paused</span>
+                  )}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={toggleTwitterBot}
+              disabled={savingTwitter}
+              className={`px-6 py-2 rounded-lg font-semibold transition ${
+                twitterSettings.twitterBotEnabled
+                  ? 'bg-red-500 hover:bg-red-600 text-white'
+                  : 'bg-green-500 hover:bg-green-600 text-white'
+              } disabled:opacity-50`}
+            >
+              {savingTwitter ? 'Saving...' : twitterSettings.twitterBotEnabled ? 'Pause Bot' : 'Enable Bot'}
+            </button>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
+            <div className="bg-white rounded p-3">
+              <div className="text-gray-600">Total Tweets</div>
+              <div className="text-2xl font-bold text-blue-600">{twitterSettings.totalTweetsPosted || 0}</div>
+            </div>
+            <div className="bg-white rounded p-3">
+              <div className="text-gray-600">Last Run</div>
+              <div className="text-sm font-semibold">{twitterSettings.lastRun ? new Date(twitterSettings.lastRun).toLocaleDateString() : 'Never'}</div>
+            </div>
+            <div className="bg-white rounded p-3">
+              <div className="text-gray-600">Posts From</div>
+              <div className="text-sm font-semibold">Scheduled or AI</div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg shadow-md p-6">

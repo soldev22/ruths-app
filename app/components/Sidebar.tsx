@@ -113,7 +113,7 @@ export default function Sidebar() {
               </div>
 
               <div>
-                <Link href="/protected/marketing" style={{ color: "white", textDecoration: "none" }}>Twitter Automation</Link>
+                <Link href="/social-media" style={{ color: "white", textDecoration: "none" }}>Social Media Hub</Link>
                 <br />
                 <a href="https://twitter.com/catignani2025" target="_blank" rel="noopener noreferrer" style={{ color: "#93c5fd", textDecoration: "none", fontSize: "14px" }}>→ View Twitter</a>
                 <br />
