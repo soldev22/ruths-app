@@ -176,6 +176,11 @@ export default function Home() {
           </p>
         </div>
       </div>
+        {/* Version label */}
+        <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
+          v1
+        </div>
+      </div>
     </div>
   );
 }
