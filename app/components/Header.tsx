@@ -68,9 +68,6 @@ export default function Header() {
           transform: "translateX(-50%)" 
         }}>
           Logged In: {user.name || user.email}
-          {user.email === 'mike@test.com' && (
-            <> | <Link href="/social-media" style={{ color: "white", textDecoration: "underline", marginLeft: "1rem" }}>Social Media</Link></>
-          )}
         </span>
       )}
 
