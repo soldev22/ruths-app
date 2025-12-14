@@ -1,7 +1,6 @@
 {
   "crons": [
     {
-      "path": "/api/cron/post-tweets",
       "schedule": "0 9,12,16 * * 1-5"
     }
   ]

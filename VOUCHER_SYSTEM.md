@@ -125,7 +125,6 @@ PROMO-{DATE}
 
 ### Multi-Use Vouchers
 Set `maxRedemptions` high for public promotions:
-- Social media campaigns: 500+
 - Newsletter codes: 200
 - Partner codes: 50
 

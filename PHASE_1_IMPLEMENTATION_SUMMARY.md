@@ -5,59 +5,25 @@
 ### 1. User Type Differentiation
 **Models Updated:**
 - `User.ts`: Added `userType` field ('teacher' | 'individual')
-- `Case.ts`: Added `studentIdentifier` (for teachers) and `assessing` field (for individuals)
-
-**Registration Flow:**
-- Updated `app/register/page.tsx` with user type selection
-- Visual distinction: 👩‍🏫 Teacher vs 👨‍👩‍👧‍👦 Parent/Individual
 - Clear messaging for each path
-
 **Homepage Landing:**
 - `app/page.tsx`: Added dual-path user type selector
 - Side-by-side cards explaining benefits for each user type
 - Clear call-to-action for both audiences
 
-### 2. Context-Aware Case Creation
-**File: `app/protected/case/new/page.tsx`**
-- Fetches user type from API on load
 - **Teachers see:** Student identifier field (optional, for privacy)
 - **Individuals see:** "I am assessing..." selector (My Child / Myself / Someone Else)
-- Conditional rendering based on userType
-
-### 3. Encouragement Messages During Assessment
-**Files Updated:**
 - `app/screening/dyslexia/ScreeningWizard.tsx`
 - `app/screening/dyscalculia/start/[caseId]/ScreeningWizard.tsx`
 
-**Feature:**
-- Random encouraging messages between sections
-- 1.5-second display before advancing
-- Messages include:
   - "Great progress! 🎯 Take a break if you need one."
   - "You're doing really well! Keep going! 💪"
-  - "Excellent work! You're halfway there! 🌟"
-  - Plus 5 more variations
-
-**Purpose:** Reduce assessment anxiety, provide positive reinforcement
-
 ### 4. Plain Language Results Pages
 **Files Updated:**
-- `app/screening/dyslexia/overview/inner.tsx`
-- `app/screening/dyscalculia/overview/inner.tsx`
-
-**New Sections Added:**
 
 #### a) "What This Means" Panel
-- Plain language explanation of risk classification
-- No jargon or technical terms
-- Clarifies: "This is a screening, not a diagnosis"
-- Different messages for High/Moderate/Low risk
-
-**Example (High Risk - Dyslexia):**
 > "This screening suggests challenges in some areas related to dyslexia. This is a screening tool, not a diagnosis. We recommend consulting with an educational psychologist or specialist for a full assessment. Early support can make a significant difference."
 
-#### b) "What To Do Next" Panel
-- Actionable recommendations based on risk level
 - 3-step guidance for each classification
 - Specific, practical advice
 
@@ -66,22 +32,10 @@
    - Educational psychologist contact info
    - Typical cost expectations (£300-800)
 2. Talk to School/Teacher
-   - What to request (extra time, accommodations)
-3. Support at Home
-   - Daily activities
-   - Tools and resources
-   - Emotional support tips
 
 **Moderate Risk Steps:**
-1. Monitor Progress
-2. Targeted Support
-3. Talk to Teachers
-
 **Low Risk Steps:**
 1. Continue Regular Practice
-2. If Struggles Persist (alternative explanations)
-3. Re-screen if Needed
-
 ### 5. Dyscalculia-Specific Guidance
 **Math-Focused Recommendations:**
 - Number bonds and times tables practice
