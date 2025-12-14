@@ -104,15 +104,13 @@ export default function Sidebar() {
                 <br />
                 <Link href="/admin/vouchers" style={{ color: "white", textDecoration: "none" }}>Vouchers</Link>
                 <br />
-                <Link href="/social-media" style={{ color: "white", textDecoration: "none" }}>Social Media</Link>
-                <br />
+                
               </div>
 
-              <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "20px", marginBottom: "10px" }}>
-                SOCIAL MEDIA
+              
                   <div>{/* Social Media links removed */}</div>
                 <br />
-              </div>
+            
             </>
           )}
         </>
