@@ -28,7 +28,7 @@ export default function Home() {
           </div>
         </div>
         <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
-          v2
+          v3
         </div>
       </>
     );
@@ -54,7 +54,7 @@ export default function Home() {
         </div>
       </div>
       <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
-        v2
+        v3
       </div>
     </>
   );
