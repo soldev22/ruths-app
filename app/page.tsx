@@ -19,7 +19,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Main landing page content - please ensure your actual content is here, this is a placeholder structure */}
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center justify-center">
         <div className="max-w-2xl w-full p-8 bg-white rounded-xl shadow-lg text-center">
           <h1 className="text-4xl font-bold mb-4">Welcome to SkillScan</h1>
@@ -38,7 +37,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-      {/* Version label - fixed to bottom right */}
       <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
         v2
       </div>
