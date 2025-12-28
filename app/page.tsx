@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// ...existing code...
 
 export default function Home() {
-  const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
+// ...existing code...
 
     return (
       <>
@@ -27,7 +25,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
+        <div className="fixed bottom-2 right-3 z-50 text-gray-500 text-base font-semibold opacity-70">
           v4
         </div>
       </>
@@ -53,7 +51,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div style={{ position: 'fixed', bottom: 8, right: 12, zIndex: 50, color: '#888', fontSize: '1rem', fontWeight: 600, opacity: 0.7 }}>
+      <div className="fixed bottom-2 right-3 z-50 text-gray-500 text-base font-semibold opacity-70">
         v4
       </div>
     </>

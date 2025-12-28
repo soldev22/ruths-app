@@ -14,19 +14,17 @@ type ScreeningType = "dyslexia" | "dyscalculia";
 export default function NewCasePage() {
   const router = useRouter();
 
-  const [caseId, setCaseId] = useState<string>("");
+  const [caseId] = useState<string>(() => generateCaseId());
   const [selected, setSelected] = useState<ScreeningType[]>([]);
   const [readingYear, setReadingYear] = useState<string>("");
   const [userType, setUserType] = useState<"teacher" | "individual">("individual");
   const [studentIdentifier, setStudentIdentifier] = useState<string>("");
-  const [assessing, setAssessing] = useState<"child" | "self" | "other">("child");
+  // const [assessing, setAssessing] = useState<"child" | "self" | "other">("child");
 
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    setCaseId(generateCaseId());
-    
     // Fetch user type
     async function fetchUserType() {
       try {
@@ -96,7 +94,7 @@ export default function NewCasePage() {
           <p className="text-sm font-semibold text-gray-700 mb-2">⚠️ Important: Record this Case ID</p>
           <p className="text-4xl font-mono font-bold text-red-600 mb-3">{caseId || "------"}</p>
           <p className="text-sm text-gray-700 font-medium">
-            Write down this Case ID in your records. This is how you'll track the assessment - it does not store any personal names.
+            Write down this Case ID in your records. This is how you&#39;ll track the assessment - it does not store any personal names.
           </p>
         </div>
 
@@ -108,7 +106,7 @@ export default function NewCasePage() {
             </label>
             <input
               type="text"
-              placeholder="First name or code (e.g., 'Student A', 'JD')"
+              placeholder="First name or code (e.g. Student A)"
               value={studentIdentifier}
               onChange={(e) => setStudentIdentifier(e.target.value)}
               className="w-full border rounded-lg px-3 py-2 text-sm"
@@ -125,13 +123,14 @@ export default function NewCasePage() {
             {userType === "teacher" ? "What school year is the student in?" : "What school year (or how old is the child)?"}
           </label>
           <p className="text-sm text-gray-600 mb-4">
-            💡 We use this to select age-appropriate questions that match the child's developmental stage.
+            💡 We use this to select age-appropriate questions that match the child&#39;s developmental stage.
           </p>
 
           <select
             value={readingYear}
             onChange={(e) => setReadingYear(e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            title="Select school year level"
           >
             <option value="">Choose a year level…</option>
             <option value="S1">S1 (Ages 12-13) - First year of secondary school</option>

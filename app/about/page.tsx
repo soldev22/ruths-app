@@ -120,7 +120,7 @@ export default function AboutPage() {
             <h3 className="text-lg font-semibold mb-2">Teacher Expertise Required</h3>
             <p>
               While SkillScan provides data-driven insights, it is designed to <strong>support</strong>, 
-              not replace, professional judgment. Teachers with knowledge of each student's context, 
+              not replace, professional judgment. Teachers with knowledge of each student&#39;s context,
               strengths, and needs are essential for interpreting results meaningfully.
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function AboutPage() {
           </li>
           <li>
             <strong>Professional Judgment Essential:</strong> Teachers must use their professional knowledge to 
-            interpret results in the context of each student's unique situation.
+            interpret results in the context of each student&#39;s unique situation.
           </li>
         </ul>
       </section>

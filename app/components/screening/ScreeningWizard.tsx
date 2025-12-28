@@ -29,40 +29,30 @@ export default function ScreeningWizard({
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
-  // Teacher MUST pass readingYear
-  if (!readingYear) {
-    return (
-      <p style={{ color: "red" }}>
-        No reading year provided. Please select reading year before starting
-        screening.
-      </p>
-    );
-  }
-
-  // Load the correct reading-year question set
+  // Always call useEffect, but only fetch if readingYear is present
   useEffect(() => {
+    if (!readingYear) return;
     async function load() {
       try {
         setLoading(true);
-
         const res = await fetch(
           `/api/questions?type=${screeningType}&year=${readingYear}`
         );
-
         const data = await res.json();
-
         if (!res.ok || data.error) {
           throw new Error(data.error || "Failed to load questions.");
         }
-
         setQuestions(data.questions);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       } finally {
         setLoading(false);
       }
     }
-
     load();
   }, [screeningType, readingYear]);
 
@@ -93,26 +83,30 @@ export default function ScreeningWizard({
       if (!res.ok) throw new Error("Failed to submit screening");
 
       router.push(`/protected/case/${caseId}`);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setSubmitting(false);
     }
   }
 
-  if (loading) return <p>Loading questions…</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <p className="text-center mt-8">Loading questions…</p>;
+  if (error) return <p className="text-red-600 text-center mt-8">{error}</p>;
 
   return (
-    <div style={{ padding: "1rem", maxWidth: "700px", margin: "0 auto" }}>
-      <h2>
+    <div className="max-w-2xl mx-auto px-4 py-6">
+      <h2 className="text-xl font-semibold mb-6 text-center">
         {screeningType.toUpperCase()} Screening (Reading Year {readingYear})
       </h2>
 
       {questions.map((q) => (
-        <div key={q._id} style={{ marginBottom: "1rem" }}>
-          <p>
-            <strong>{q.section || "Question"}:</strong> {q.text}
+        <div key={q._id} className="mb-6 bg-white rounded-lg border p-4">
+          <p className="font-medium mb-3">
+            <span className="block text-sm text-gray-500">{q.section || "Question"}</span> {q.text}
           </p>
 
           {!q.options || q.options.length === 0 ? (
@@ -120,13 +114,16 @@ export default function ScreeningWizard({
               type="text"
               value={answers[q._id] || ""}
               onChange={(e) => handleAnswer(q._id, e.target.value)}
-              style={{ width: "100%", padding: "0.5rem" }}
+              className="w-full border rounded-md px-3 py-2 text-sm"
+              placeholder={q.text}
+              title={q.text}
             />
           ) : (
             <select
               value={answers[q._id] || ""}
               onChange={(e) => handleAnswer(q._id, e.target.value)}
-              style={{ width: "100%", padding: "0.5rem" }}
+              className="w-full border rounded-md px-3 py-2 text-sm"
+              title={q.text}
             >
               <option value="">Select…</option>
               {q.options.map((opt, idx) => (
@@ -142,13 +139,7 @@ export default function ScreeningWizard({
       <button
         disabled={submitting}
         onClick={handleSubmit}
-        style={{
-          width: "100%",
-          padding: "0.8rem",
-          background: "black",
-          color: "white",
-          borderRadius: "6px",
-        }}
+        className="w-full mt-8 rounded-md bg-black py-3 text-white font-semibold hover:bg-gray-800 disabled:opacity-50"
       >
         {submitting ? "Submitting…" : "Submit Screening"}
       </button>

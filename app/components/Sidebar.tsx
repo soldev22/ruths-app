@@ -24,28 +24,12 @@ export default function Sidebar() {
 
   return (
     <div
-      style={{
-        width: open ? "240px" : "40px",
-        transition: "0.2s ease",
-        background: "#1e3a8a",
-        color: "white",
-        padding: "12px",
-        borderRight: "1px solid #ddd",
-        minHeight: "100vh",
-      }}
+      className={`transition-all duration-200 bg-blue-900 text-white min-h-screen border-r border-gray-200 ${open ? 'w-60 p-3' : 'w-10 p-1'}`}
     >
       {/* TOGGLE BUTTON */}
       <button
         onClick={() => setOpen(!open)}
-        style={{
-          display: "block",
-          marginBottom: "20px",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          fontWeight: "bold",
-          color: "white",
-        }}
+        className="block mb-5 bg-none border-none cursor-pointer font-bold text-white focus:outline-none"
       >
         {open ? "◀ Hide" : "▶"}
       </button>
@@ -53,51 +37,38 @@ export default function Sidebar() {
       {/* MAIN NAV */}
       {open && (
         <>
-          <div style={{ marginBottom: "20px" }}>
+          <div className="mb-5">
             <Link 
               href="/protected/case/new" 
-              style={{ 
-                color: "white", 
-                textDecoration: "none",
-                display: "inline-block",
-                background: "#3b82f6",
-                padding: "8px 12px",
-                borderRadius: "6px",
-                fontWeight: "600",
-                marginBottom: "12px",
-                width: "100%",
-                textAlign: "center"
-              }}
+              className="inline-block w-full bg-blue-600 text-white no-underline rounded-lg font-semibold mb-3 py-2 text-center hover:bg-blue-700 transition"
             >
               ➕ New Assessment
             </Link>
             <br />
-            <Link href="/protected/dashboard" style={{ color: "white", textDecoration: "none" }}>Dashboard</Link>
+            <Link href="/protected/dashboard" className="text-white no-underline hover:underline">Dashboard</Link>
             <br />
-            <Link href="/protected/account" style={{ color: "white", textDecoration: "none" }}>Account & Billing</Link>
+            <Link href="/protected/account" className="text-white no-underline hover:underline">Account & Billing</Link>
             <br />
-            <Link href="/protected/pricing" style={{ color: "white", textDecoration: "none" }}>View Plans & Pricing</Link>
+            <Link href="/protected/pricing" className="text-white no-underline hover:underline">View Plans & Pricing</Link>
             <br />
-            <Link href="/user-guide" style={{ color: "white", textDecoration: "none" }}>User Guide</Link>
+            <Link href="/user-guide" className="text-white no-underline hover:underline">User Guide</Link>
             <br />
-            <Link href="/about" style={{ color: "white", textDecoration: "none" }}>About</Link>
+            <Link href="/about" className="text-white no-underline hover:underline">About</Link>
             <br />
-            <Link href="/faq" style={{ color: "white", textDecoration: "none" }}>FAQ</Link>
+            <Link href="/faq" className="text-white no-underline hover:underline">FAQ</Link>
             <br />
-            <Link href="/scoring-guide" style={{ color: "white", textDecoration: "none" }}>Scoring Guide</Link>
+            <Link href="/scoring-guide" className="text-white no-underline hover:underline">Scoring Guide</Link>
             <br />
-            <Link href="/privacy" style={{ color: "white", textDecoration: "none" }}>Privacy & GDPR</Link>
+            <Link href="/privacy" className="text-white no-underline hover:underline">Privacy & GDPR</Link>
             <br />
-            <Link href="/contact" style={{ color: "white", textDecoration: "none" }}>Contact Us</Link>
+            <Link href="/contact" className="text-white no-underline hover:underline">Contact Us</Link>
             <br />
           </div>
 
           {/* ADMIN - Only visible to admin users */}
           {isAdmin && (
             <>
-              <div style={{ fontSize: "12px", color: "#93c5fd", marginTop: "25px", marginBottom: "10px" }}>
-                ADMIN
-              </div>
+              <div className="text-xs text-blue-200 mt-6 mb-2">ADMIN</div>
 
               <div>
                 <Link href="/admin/activity-logs" style={{ color: "white", textDecoration: "none" }}>Activity Logs</Link>

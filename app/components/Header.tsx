@@ -19,7 +19,7 @@ export default function Header() {
     async function loadUser() {
       try {
         const res = await fetch("/api/auth/me", {
-          credentials: "include", // ← **THIS FIXES THE LOGIN STATE**
+          credentials: "include",
         });
 
         if (res.ok) {
@@ -37,77 +37,48 @@ export default function Header() {
   async function handleLogout() {
     await fetch("/api/auth/logout", {
       method: "POST",
-      credentials: "include", // ← **THIS FIXES LOGOUT**
+      credentials: "include",
     });
 
     window.location.href = "/register";
   }
 
   return (
-    <header style={{ 
-      width: "100%", 
-      background: "#1e3a8a", 
-      color: "white", 
-      padding: "0.75rem 1.5rem", 
-      display: "flex", 
-      justifyContent: "space-between", 
-      alignItems: "center", 
-      boxShadow: "0 2px 4px rgba(0,0,0,0.1)" 
-    }}>
-      <Link href="/" style={{ fontSize: "1.25rem", fontWeight: "bold", color: "white", textDecoration: "none", display: "flex", alignItems: "center" }}>
-        <Logo />
-        SkillScan
-      </Link>
+    <header className="w-full bg-blue-900 text-white shadow-sm">
+      <div className="flex items-center justify-between px-4 py-3">
+        {/* Logo / brand */}
+        <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
+          <Logo />
+          <span>SkillScan</span>
+        </Link>
 
-      {loaded && user && (
-        <span style={{ 
-          fontSize: "1.5rem", 
-          fontWeight: "bold", 
-          position: "absolute", 
-          left: "50%", 
-          transform: "translateX(-50%)" 
-        }}>
-          Logged In: {user.name || user.email}
-        </span>
-      )}
+        {/* User name – desktop only */}
+        {loaded && user && (
+          <div className="hidden md:block max-w-[240px] truncate font-medium">
+            {user.name || user.email}
+          </div>
+        )}
 
-      <div>
-        {loaded && user ? (
-          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+        {/* Actions */}
+        <div>
+          {loaded && user ? (
             <button
               onClick={handleLogout}
-              style={{
-                background: "white",
-                color: "#1e3a8a",
-                padding: "0.25rem 0.75rem",
-                borderRadius: "0.375rem",
-                fontSize: "0.875rem",
-                fontWeight: "600",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="rounded-md bg-white px-3 py-1 text-sm font-medium text-blue-900 hover:bg-neutral-100"
             >
-              Log Out
+              Log out
             </button>
-          </div>
-        ) : (
-          <Link
-            href="/register"
-            style={{
-              background: "white",
-              color: "#1e3a8a",
-              padding: "0.25rem 0.75rem",
-              borderRadius: "0.375rem",
-              fontSize: "0.875rem",
-              fontWeight: "600",
-              textDecoration: "none",
-              display: "inline-block",
-            }}
-          >
-            Login
-          </Link>
-        )}
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-md bg-white px-3 py-1 text-sm font-medium text-blue-900 hover:bg-neutral-100"
+            >
+              Log in
+            </Link>
+          )}
+        </div>
       </div>
+
     </header>
   );
 }

@@ -7,17 +7,14 @@ import "./globals.css";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ display: "flex", flexDirection: "column", minHeight: "100vh", margin: 0 }}>
-        <Header />   {/* CORRECT header */}
-        
-        <div className="layout" style={{ display: "flex", flex: 1 }}>
+      <body className="flex flex-col min-h-screen m-0">
+        <Header />
+        <div className="layout flex flex-1">
           <ConditionalSidebar />
-
-          <main className="main-content" style={{ flex: 1, padding: "2rem", display: "flex", flexDirection: "column" }}>
+          <main className="main-content flex-1 p-8 flex flex-col">
             {children}
           </main>
         </div>
-
         <Footer />
       </body>
     </html>
