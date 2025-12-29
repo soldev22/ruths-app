@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Logo from "./Logo";
 
 interface MeResponse {
@@ -49,25 +49,15 @@ export default function Header() {
         {/* Logo / brand */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-wide">
           <Logo />
-         
         </Link>
-
-        {/* Menu (desktop) */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="/about" className="hover:underline">About</Link>
-          <Link href="/user-guide" className="hover:underline">User guide</Link>
-          <Link href="/faq" className="hover:underline">FAQs</Link>
-        </nav>
-
-        {/* User name – desktop only */}
-        {loaded && user && (
-          <div className="hidden md:block max-w-[240px] truncate font-medium">
+        {/* User info (optional) */}
+        {user && (user.name || user.email) && (
+          <div className="ml-4 text-sm font-medium text-[var(--background)]/80">
             {user.name || user.email}
           </div>
         )}
-
-        {/* Actions */}
-        <div>
+        {/* Actions and Dropdown */}
+        <div className="flex items-center gap-4 ml-auto">
           {loaded && user ? (
             <button
               onClick={handleLogout}
@@ -83,8 +73,74 @@ export default function Header() {
               Log in
             </Link>
           )}
+          {/* Dropdown menu */}
+          <DropdownMenu />
         </div>
       </div>
     </header>
+  );
+}
+
+
+
+function DropdownMenu() {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1 px-3 py-1 rounded-md bg-[var(--background)] text-[var(--secondary)] font-medium text-sm hover:bg-[var(--accent)] hover:text-[var(--background)] transition-colors"
+        aria-haspopup="true"
+        aria-expanded={open}
+      >
+        {/* Hamburger icon on mobile, 'Menu' text on md+ */}
+        <span className="block md:hidden">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <rect x="4" y="6" width="16" height="2" rx="1" />
+            <rect x="4" y="11" width="16" height="2" rx="1" />
+            <rect x="4" y="16" width="16" height="2" rx="1" />
+          </svg>
+        </span>
+        <span className="hidden md:inline">Menu</span>
+      </button>
+      {open && (
+        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[var(--background)] text-[var(--secondary)] z-50 border border-[var(--secondary)]/10">
+          <hr className="my-2 border-[var(--secondary)]/20" />
+          {/* Sidebar links */}
+          <Link href="/protected/dashboard" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Dashboard</Link>
+          <Link href="/protected/account" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Account & Billing</Link>
+          <Link href="/protected/pricing" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">View Plans & Pricing</Link>
+          <Link href="/user-guide" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">User Guide</Link>
+          <Link href="/about" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">About</Link>
+          <Link href="/faq" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">FAQ</Link>
+          <Link href="/scoring-guide" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Scoring Guide</Link>
+          <Link href="/privacy" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Privacy & GDPR</Link>
+          <Link href="/contact" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Contact Us</Link>
+          {/* Admin section */}
+          <div className="px-4 pt-2 pb-1 text-xs text-[var(--secondary)]/70 font-bold">ADMIN</div>
+          <Link href="/admin/activity-logs" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Activity Logs</Link>
+          <Link href="/admin/vouchers" className="block px-4 py-2 hover:bg-[var(--secondary)] hover:text-white transition-colors">Vouchers</Link>
+        </div>
+      )}
+    </div>
   );
 }
