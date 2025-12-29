@@ -7,6 +7,13 @@ const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Allow static files (images, css, js, etc.) to bypass auth
+  if (
+    pathname.match(/^\/(?:_next|favicon|.*\.(?:png|svg|jpg|jpeg|gif|ico|css|js))$/)
+  ) {
+    return NextResponse.next();
+  }
+
   // Public routes
   if (
     pathname === "/" ||

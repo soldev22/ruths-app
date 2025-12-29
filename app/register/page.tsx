@@ -250,7 +250,7 @@ export default function AuthPage() {
           <div className="mt-6 text-center text-sm text-[var(--secondary-text)] font-livvic-medium">
             {mode === "login" ? (
               <p>
-                Don't have an account?{" "}
+                Don&#39;t have an account?{" "}
                 <button
                   type="button"
                   onClick={() => setMode("register")}
