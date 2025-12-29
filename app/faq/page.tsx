@@ -1,31 +1,31 @@
 export default function FAQPage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Frequently Asked Questions</h1>
+        <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Frequently Asked Questions</h1>
         </div>
 
         <div className="space-y-6">
         {/* Getting Started */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)] bg-[var(--secondary)]/10 p-3 rounded">
             Getting Started
           </h2>
 
           <div className="space-y-4">
-            <div className="bg-white shadow-sm rounded-lg p-5">
-              <h3 className="text-lg font-semibold mb-2">How do I create a new screening?</h3>
-              <p className="text-gray-700">
+            <div className="bg-[var(--background)] shadow-sm rounded-lg p-5 border border-[var(--secondary)]/10">
+              <h3 className="text-lg font-livvic-bold mb-2 text-[var(--secondary)]">How do I create a new screening?</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Click "New Case" in the sidebar. You'll be prompted to select a reading year level (e.g., S1, S2). 
                 A unique Case ID will be generated automatically. Record this Case ID alongside the student's name 
                 in your secure records (we don't store student names for GDPR compliance).
               </p>
             </div>
 
-            <div className="bg-white shadow-sm rounded-lg p-5">
-              <h3 className="text-lg font-semibold mb-2">What is a Case ID and why is it important?</h3>
-              <p className="text-gray-700">
+            <div className="bg-[var(--background)] shadow-sm rounded-lg p-5 border border-[var(--secondary)]/10">
+              <h3 className="text-lg font-livvic-bold mb-2 text-[var(--secondary)]">What is a Case ID and why is it important?</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 A Case ID is a randomly generated reference number (e.g., 983079) that identifies a specific 
                 screening. Since SkillScan doesn't store student names, you must keep your own secure record 
                 linking Case IDs to students. This ensures GDPR compliance while allowing you to retrieve 
@@ -33,9 +33,9 @@ export default function FAQPage() {
               </p>
             </div>
 
-            <div className="bg-white shadow-sm rounded-lg p-5">
-              <h3 className="text-lg font-semibold mb-2">How long does a screening take?</h3>
-              <p className="text-gray-700">
+            <div className="bg-[var(--background)] shadow-sm rounded-lg p-5 border border-[var(--secondary)]/10">
+              <h3 className="text-lg font-livvic-bold mb-2 text-[var(--secondary)]">How long does a screening take?</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 A full dyslexia screening typically takes 20-30 minutes, depending on the student's reading 
                 level and the number of sections. The screening is divided into sections that can be completed 
                 over multiple sessions if needed.

@@ -2,16 +2,16 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-[var(--background)] font-sans">
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-5xl font-bold text-[var(--secondary)] mb-4 font-livvic-bold">
           Welcome to SkillScan
         </h1>
-        <p className="text-2xl text-gray-700 mb-8">
+        <p className="text-2xl text-[var(--secondary-text)] mb-8 font-livvic-medium">
           Evidence-Based Dyslexia Screening for Teachers
         </p>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+        <p className="text-lg text-[var(--primary-text)] max-w-3xl mx-auto mb-12 font-livvic-medium">
           Professional online screening tools designed and verified by qualified teaching professionals. 
           Identify learning difficulties early and provide targeted support.
         </p>
@@ -20,23 +20,23 @@ export default function LandingPage() {
         <div className="flex gap-4 justify-center mb-16">
           <Link
             href="/register"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg transition"
+            className="bg-[var(--accent)] hover:bg-[var(--secondary)] text-[var(--background)] font-livvic-bold py-4 px-8 rounded-lg text-xl shadow-lg transition border-2 border-[var(--accent)]"
           >
             Start Free Trial
           </Link>
           <Link
             href="/register"
-            className="bg-white hover:bg-gray-50 text-blue-600 font-bold py-4 px-8 rounded-lg text-xl shadow-lg border-2 border-blue-600 transition"
+            className="bg-[var(--background)] hover:bg-[var(--accent)] text-[var(--accent)] hover:text-[var(--background)] font-livvic-bold py-4 px-8 rounded-lg text-xl shadow-lg border-2 border-[var(--accent)] transition"
           >
             Login
           </Link>
         </div>
 
         {/* Trial Info - More Prominent */}
-        <div className="bg-gradient-to-r from-green-400 to-green-500 text-white rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
+        <div className="bg-[var(--secondary)] text-[var(--background)] rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
           <div className="text-center">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 font-livvic-bold">
               Start Your Free 30-Day Trial Today
             </h2>
             <div className="bg-white text-gray-900 rounded-lg p-6 mb-6">

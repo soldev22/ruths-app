@@ -1,23 +1,24 @@
 export default function PrivacyPage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+
+    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Privacy & Data Protection</h1>
+        <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Privacy & Data Protection</h1>
         </div>
 
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-3 text-blue-900">
+        <div className="bg-[var(--secondary)]/10 border-l-4 border-[var(--secondary)] p-6 mb-8">
+          <h2 className="text-2xl font-livvic-bold mb-3 text-[var(--secondary)]">
             GDPR Compliance Notice
           </h2>
-          <p className="text-lg text-blue-800">
+          <p className="text-lg text-[var(--secondary)] font-livvic-medium">
             SkillScan is designed with privacy at its core. We do not store any personally identifiable student information.
           </p>
         </div>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">What We Do NOT Store</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What We Do NOT Store</h2>
+          <ul className="list-disc list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium">
             <li><strong>Student names</strong> – Names are never saved to our database</li>
             <li><strong>Date of birth</strong> – No personal demographic data is collected</li>
             <li><strong>School information</strong> – Institution details are not recorded</li>
@@ -27,8 +28,8 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">What We DO Store</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What We DO Store</h2>
+          <ul className="list-disc list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium">
             <li><strong>Anonymous Case IDs</strong> – Randomly generated reference numbers</li>
             <li><strong>Screening responses</strong> – Student answers to assessment questions</li>
             <li><strong>Teacher account email</strong> – For login authentication only</li>
@@ -37,7 +38,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8 bg-yellow-50 border-l-4 border-yellow-500 p-6">
-          <h2 className="text-2xl font-semibold mb-4 text-yellow-900">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-yellow-900">
             ⚠️ Important: Record-Keeping Requirement
           </h2>
           <div className="text-gray-800 space-y-3">

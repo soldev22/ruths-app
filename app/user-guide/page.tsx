@@ -1,24 +1,24 @@
 export default function UserGuidePage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">User Guide</h1>
+        <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">User Guide</h1>
         </div>
-        <p className="text-lg text-gray-700 mb-8">
+        <p className="text-lg text-[var(--primary-text)] font-livvic-medium mb-8">
           Step-by-step instructions for using SkillScan effectively
         </p>
 
         <div className="space-y-8">
         {/* Step 1: Creating Your Account */}
-        <section className="bg-white shadow-md rounded-lg p-6">
+        <section className="bg-[var(--background)] shadow-md rounded-lg p-6 border border-[var(--secondary)]/10">
           <div className="flex items-center mb-4">
-            <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
+            <span className="bg-[var(--accent)] text-[var(--background)] font-livvic-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               1
             </span>
-            <h2 className="text-2xl font-semibold">Creating Your Account</h2>
+            <h2 className="text-2xl font-livvic-bold text-[var(--secondary)]">Creating Your Account</h2>
           </div>
-          <div className="ml-13 space-y-3 text-gray-700">
+          <div className="ml-13 space-y-3 text-[var(--primary-text)] font-livvic-medium">
             <p>
               <strong>New Users:</strong> Click the "Login" button in the top right corner, then select 
               "Register" to create your teacher account.
@@ -29,7 +29,7 @@ export default function UserGuidePage() {
               <li>Provide your name (optional but recommended)</li>
               <li>Click "Register" to complete setup</li>
             </ol>
-            <p className="text-sm text-gray-600 mt-3">
+            <p className="text-sm text-[var(--secondary-text)] mt-3 font-livvic-medium">
               💡 <strong>Tip:</strong> Use your school email address so colleagues can identify you if 
               collaborating on cases.
             </p>

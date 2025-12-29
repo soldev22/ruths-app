@@ -2,19 +2,19 @@
 
 export default function ScoringGuidePage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">
+        <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">
             SkillScan Scoring System Guide
           </h1>
         </div>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
             Overview
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
+          <p className="text-[var(--primary-text)] font-livvic-medium leading-relaxed mb-4">
             The SkillScan scoring system is designed to provide educators and
             specialists with a structured assessment of a student's performance
             in literacy screening. Scores are calculated based on responses to
@@ -23,57 +23,57 @@ export default function ScoringGuidePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
             Screening Domains
           </h2>
           <div className="space-y-6">
-            <div className="border-l-4 border-blue-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="border-l-4 border-[var(--accent)] pl-4">
+              <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
                 Phonological Awareness
               </h3>
-              <p className="text-gray-700">
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Measures the student's ability to recognize and manipulate the
                 sound structures of language, including rhyming, syllable
                 segmentation, and phoneme awareness.
               </p>
             </div>
 
-            <div className="border-l-4 border-green-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="border-l-4 border-[var(--accent)]/70 pl-4">
+              <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
                 Letter-Sound Knowledge
               </h3>
-              <p className="text-gray-700">
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Assesses familiarity with the alphabetic principle and the
                 student's ability to associate letters with their corresponding
                 sounds.
               </p>
             </div>
 
-            <div className="border-l-4 border-purple-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="border-l-4 border-[var(--secondary)] pl-4">
+              <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
                 Word Reading Fluency
               </h3>
-              <p className="text-gray-700">
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Evaluates how quickly and accurately a student can decode and
                 read individual words, an indicator of reading automaticity.
               </p>
             </div>
 
-            <div className="border-l-4 border-orange-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="border-l-4 border-[var(--accent)]/40 pl-4">
+              <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
                 Reading Comprehension
               </h3>
-              <p className="text-gray-700">
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Measures the student's understanding of text content and ability
                 to extract meaning from written material.
               </p>
             </div>
 
-            <div className="border-l-4 border-red-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="border-l-4 border-[var(--secondary)]/60 pl-4">
+              <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
                 Spelling and Writing
               </h3>
-              <p className="text-gray-700">
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Assesses phonetic and orthographic knowledge through spelling
                 tasks and written expression capabilities.
               </p>
@@ -82,14 +82,14 @@ export default function ScoringGuidePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
             Interpreting Results
           </h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-4">
-            <h3 className="font-semibold text-gray-900 mb-3">
+          <div className="bg-[var(--secondary)]/10 border border-[var(--secondary)]/20 rounded-lg p-6 mb-4">
+            <h3 className="font-livvic-bold text-[var(--secondary)] mb-3">
               Score Ranges
             </h3>
-            <ul className="space-y-2 text-gray-700">
+            <ul className="space-y-2 text-[var(--primary-text)] font-livvic-medium">
               <li>
                 <strong>80-100:</strong> Proficient — Student demonstrates
                 strong skills in this domain.
@@ -111,11 +111,11 @@ export default function ScoringGuidePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
             Important Disclaimers
           </h2>
-          <div className="bg-amber-50 border border-amber-300 rounded-lg p-6">
-            <ul className="space-y-3 text-gray-700">
+          <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-6">
+            <ul className="space-y-3 text-[var(--primary-text)] font-livvic-medium">
               <li>
                 ✓ Screening scores are <strong>informational only</strong> and
                 should not be used as a standalone diagnostic tool.
@@ -138,13 +138,13 @@ export default function ScoringGuidePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
             Next Steps
           </h2>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-[var(--primary-text)] font-livvic-medium leading-relaxed">
             After reviewing a student's SkillScan scores, consider:
           </p>
-          <ol className="list-decimal list-inside space-y-2 text-gray-700 mt-3">
+          <ol className="list-decimal list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium mt-3">
             <li>Consulting with the student's teacher(s) and family</li>
             <li>
               Comparing results with other classroom assessments and
@@ -164,8 +164,8 @@ export default function ScoringGuidePage() {
           </ol>
         </section>
 
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-600 text-center">
+        <div className="mt-12 pt-8 border-t border-[var(--secondary)]/10">
+          <p className="text-sm text-[var(--secondary-text)] text-center font-livvic-medium">
             For questions or concerns about your SkillScan assessment, please
             contact your school or district administrator.
           </p>

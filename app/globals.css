@@ -1,8 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
+/* Livvic font utility classes */
+.font-livvic-medium {
+  font-family: 'Livvic', Arial, sans-serif;
+  font-weight: 500;
+}
+.font-livvic-bold {
+  font-family: 'Livvic', Arial, sans-serif;
+  font-weight: 700;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f6f3; /* Dominant (light neutral) */
+  --foreground: #1e0022; /* Primary text (black) */
+  --secondary: #5d3653; /* Secondary (deep maroon) */
+  --accent: #f7276c; /* Accent (pink) */
+  --primary-text: #1e0022;
+  --secondary-text: #585563;
+  --link: #f7276c;
+  --link-visited: #5d3653;
+  --link-hover: #a00272;
+  --link-active: #1e0022;
+  --focus: #f7cd00;
+  --focus-text: #1e0022;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,7 +36,7 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--primary-text);
   font-family: Arial, Helvetica, sans-serif;
 }
 /* --- SIDEBAR LAYOUT --- */

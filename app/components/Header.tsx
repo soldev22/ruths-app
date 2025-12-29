@@ -44,13 +44,20 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full bg-blue-900 text-white shadow-sm">
-      <div className="flex items-center justify-between px-4 py-3">
+    <header className="w-full bg-[var(--secondary)] text-[var(--background)] shadow-sm">
+      <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo / brand */}
-        <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-wide">
           <Logo />
           <span>SkillScan</span>
         </Link>
+
+        {/* Menu (desktop) */}
+        <nav className="hidden md:flex items-center gap-6">
+          <Link href="/about" className="hover:underline">About</Link>
+          <Link href="/user-guide" className="hover:underline">User guide</Link>
+          <Link href="/faq" className="hover:underline">FAQs</Link>
+        </nav>
 
         {/* User name – desktop only */}
         {loaded && user && (
@@ -64,21 +71,20 @@ export default function Header() {
           {loaded && user ? (
             <button
               onClick={handleLogout}
-              className="rounded-md bg-white px-3 py-1 text-sm font-medium text-blue-900 hover:bg-neutral-100"
+              className="rounded-md bg-[var(--background)] px-3 py-1 text-sm font-medium text-[var(--secondary)] hover:bg-[var(--accent)] hover:text-[var(--background)] transition-colors"
             >
               Log out
             </button>
           ) : (
             <Link
               href="/login"
-              className="rounded-md bg-white px-3 py-1 text-sm font-medium text-blue-900 hover:bg-neutral-100"
+              className="rounded-md bg-[var(--background)] px-3 py-1 text-sm font-medium text-[var(--secondary)] hover:bg-[var(--accent)] hover:text-[var(--background)] transition-colors"
             >
               Log in
             </Link>
           )}
         </div>
       </div>
-
     </header>
   );
 }

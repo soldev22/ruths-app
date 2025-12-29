@@ -144,45 +144,52 @@ console.log("SCREENINGS:", meData.screenings);
       <div className="w-full min-h-screen bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
           <h1 className="text-2xl font-bold mb-4">SkillScan Dyslexia Reviews</h1>
-          <p>Loading…</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full min-h-screen bg-gray-50">
-        <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-          <h1 className="text-2xl font-bold mb-4">SkillScan Dyslexia Reviews</h1>
-          <p className="text-red-600">{error}</p>
+          {error ? (
+            <p className="text-red-600 font-semibold mb-4">{error}</p>
+          ) : (
+            <p>Loading…</p>
+          )}
+              <Link 
+                href="/protected/case/new"
+                className="inline-block bg-white text-[var(--secondary)] font-livvic-bold px-6 py-3 rounded-lg shadow hover:bg-[var(--background)] transition-colors"
+              >
+                Create Your Assessment
+              </Link>
+              {prepaidCredits <= 2 && (
+                <Link 
+                  href="/protected/account"
+                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--primary)] text-white font-livvic-bold px-6 py-3 rounded-lg shadow transition-colors"
+                >
+                  {prepaidCredits === 0 ? '⚠️ Purchase Credits' : '💡 Buy More Credits'}
+                </Link>
+              )}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8 overflow-y-auto">
         {/* Header - Simple Title Only */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">SkillScan Reviews</h1>
+        <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">SkillScan Reviews</h1>
         </div>
 
         {/* Combined Welcome & Credit Panel - Always visible for prepaid users */}
         {accountType === "individual" && (
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl p-8 mb-8 shadow-lg">
+          <div className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] text-white rounded-xl p-8 mb-8 shadow-lg">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-6 mb-6">
               <div className="flex-1">
-                <h2 className="text-2xl font-bold mb-2">Welcome to SkillScan!</h2>
-                <p className="text-blue-100 text-sm">
+                <h2 className="text-2xl font-livvic-bold mb-2">Welcome to SkillScan!</h2>
+                <p className="text-[var(--primary-text)]/80 text-sm font-livvic-medium">
                   Professional screening tools to identify learning differences quickly and accurately.
                 </p>
               </div>
-              <div className="bg-blue-900 bg-opacity-60 rounded-lg px-8 py-4 min-w-[180px] border-2 border-white border-opacity-30">
+              <div className="bg-[var(--secondary)]/80 rounded-lg px-8 py-4 min-w-[180px] border-2 border-white border-opacity-30">
                 <div className="text-center">
-                  <div className="text-5xl font-bold mb-1 text-white">{prepaidCredits}</div>
-                  <div className="text-sm text-white font-semibold">credits remaining</div>
+                  <div className="text-5xl font-livvic-bold mb-1 text-white">{prepaidCredits}</div>
+                  <div className="text-sm text-white font-livvic-medium">credits remaining</div>
                   <div className="text-xs text-white mt-2 opacity-90">
                     {screeningsUsed} completed
                   </div>
@@ -209,7 +216,7 @@ console.log("SCREENINGS:", meData.screenings);
             </div>
 
             {prepaidCredits === 0 && (
-              <p className="text-amber-200 text-sm mt-4 font-medium">
+              <p className="text-[var(--warning)] text-sm mt-4 font-livvic-medium">
                 ⚠️ You have no credits remaining. Purchase credits to continue assessments.
               </p>
             )}
@@ -218,8 +225,8 @@ console.log("SCREENINGS:", meData.screenings);
 
       {/* Date Filter Section */}
       <div className="flex items-center justify-between mb-6 gap-4">
-        <div className="flex-grow bg-gray-100 p-4 rounded">
-          <h2 className="text-sm font-semibold mb-3">Filter by Date</h2>
+        <div className="flex-grow bg-[var(--background-alt)] p-4 rounded">
+          <h2 className="text-sm font-livvic-bold mb-3 text-[var(--secondary)]">Filter by Date</h2>
           <div className="space-y-3">
             <div className="flex gap-2 flex-wrap">
               <button
@@ -228,10 +235,10 @@ console.log("SCREENINGS:", meData.screenings);
                   setCustomStartDate("");
                   setCustomEndDate("");
                 }}
-                className={`px-3 py-1 rounded text-sm font-medium ${
+                className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "all"
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border border-gray-300"
+                    ? "bg-[var(--secondary)] text-white"
+                    : "bg-white border border-[var(--secondary)]/30"
                 }`}
               >
                 All
@@ -242,10 +249,10 @@ console.log("SCREENINGS:", meData.screenings);
                   setCustomStartDate("");
                   setCustomEndDate("");
                 }}
-                className={`px-3 py-1 rounded text-sm font-medium ${
+                className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "7days"
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border border-gray-300"
+                    ? "bg-[var(--secondary)] text-white"
+                    : "bg-white border border-[var(--secondary)]/30"
                 }`}
               >
                 Last 7 Days
@@ -256,10 +263,10 @@ console.log("SCREENINGS:", meData.screenings);
                   setCustomStartDate("");
                   setCustomEndDate("");
                 }}
-                className={`px-3 py-1 rounded text-sm font-medium ${
+                className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "30days"
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border border-gray-300"
+                    ? "bg-[var(--secondary)] text-white"
+                    : "bg-white border border-[var(--secondary)]/30"
                 }`}
               >
                 Last 30 Days
@@ -269,7 +276,7 @@ console.log("SCREENINGS:", meData.screenings);
             {/* Custom Date Range */}
             <div className="flex gap-2 items-end flex-wrap">
               <div>
-                <label className="block text-xs font-medium mb-1">Start Date</label>
+                <label className="block text-xs font-livvic-medium mb-1">Start Date</label>
                 <input
                   type="date"
                   value={customStartDate}
@@ -277,11 +284,13 @@ console.log("SCREENINGS:", meData.screenings);
                     setCustomStartDate(e.target.value);
                     setDateFilter("all");
                   }}
-                  className="px-2 py-1 border border-gray-300 rounded text-sm"
+                  className="px-2 py-1 border border-[var(--secondary)]/30 rounded text-sm font-livvic-medium"
+                  placeholder="Select start date"
+                  title="Start Date"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1">End Date</label>
+                <label className="block text-xs font-livvic-medium mb-1">End Date</label>
                 <input
                   type="date"
                   value={customEndDate}
@@ -289,7 +298,9 @@ console.log("SCREENINGS:", meData.screenings);
                     setCustomEndDate(e.target.value);
                     setDateFilter("all");
                   }}
-                  className="px-2 py-1 border border-gray-300 rounded text-sm"
+                  className="px-2 py-1 border border-[var(--secondary)]/30 rounded text-sm font-livvic-medium"
+                  placeholder="Select end date"
+                  title="End Date"
                 />
               </div>
               {(customStartDate || customEndDate) && (
@@ -299,7 +310,7 @@ console.log("SCREENINGS:", meData.screenings);
                     setCustomEndDate("");
                     setDateFilter("all");
                   }}
-                  className="px-2 py-1 bg-gray-400 text-white rounded text-sm"
+                  className="px-2 py-1 bg-[var(--secondary)] text-white rounded text-sm font-livvic-medium"
                 >
                   Clear
                 </button>
@@ -311,12 +322,12 @@ console.log("SCREENINGS:", meData.screenings);
 
       {/* In progress */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">
+        <h2 className="text-xl font-livvic-bold mb-3 text-[var(--secondary)]">
           In progress ({filteredInProgress.length})
         </h2>
         {filteredInProgress.length === 0 && (
-          <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
-            <p className="text-gray-600">No assessments in progress.</p>
+          <div className="bg-[var(--background-alt)] border-2 border-dashed border-[var(--secondary)]/30 rounded-xl p-8 text-center">
+            <p className="text-[var(--primary-text)] font-livvic-medium">No assessments in progress.</p>
           </div>
         )}
 
@@ -327,19 +338,19 @@ console.log("SCREENINGS:", meData.screenings);
           return (
             <div
               key={s._id}
-              className="border rounded p-3 mb-3 flex items-center justify-between"
+              className="border border-[var(--secondary)]/20 rounded p-3 mb-3 flex items-center justify-between bg-[var(--background)]"
             >
               <div>
                 <p>
                   <strong>Review ID:</strong> {s.caseId}
-                  <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                  <span className="ml-2 text-xs bg-[var(--secondary)]/10 text-[var(--secondary)] px-2 py-1 rounded font-livvic-medium">
                     {screeningLabel} — {formatReadingYear(s.readingYear)}
                   </span>
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-[var(--primary-text)]/60 font-livvic-medium">
                   Started: {s.createdAt ? new Date(s.createdAt).toLocaleString() : "—"}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-[var(--primary-text)] font-livvic-medium">
                   Sections completed: {completedCount} / {totalSections}
                 </p>
               </div>
@@ -348,7 +359,7 @@ console.log("SCREENINGS:", meData.screenings);
   href={`/screening/${s.screeningType || "dyslexia"}/start/${encodeURIComponent(
     s.caseId ?? ""
   )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
-  className="px-3 py-2 text-sm rounded bg-blue-600 text-white"
+  className="px-3 py-2 text-sm rounded bg-[var(--secondary)] text-white font-livvic-bold"
 >
   Resume
 </a>
@@ -360,12 +371,12 @@ console.log("SCREENINGS:", meData.screenings);
 
       {/* Completed */}
       <section>
-        <h2 className="text-xl font-semibold mb-3">
+        <h2 className="text-xl font-livvic-bold mb-3 text-[var(--secondary)]">
           Completed ({filteredCompleted.length})
         </h2>
         {filteredCompleted.length === 0 && (
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-            <p className="text-gray-600">No completed assessments yet.</p>
+          <div className="bg-[var(--background-alt)] border border-[var(--secondary)]/20 rounded-lg p-6 text-center">
+            <p className="text-[var(--primary-text)] font-livvic-medium">No completed assessments yet.</p>
           </div>
         )}
 
@@ -376,22 +387,22 @@ console.log("SCREENINGS:", meData.screenings);
           return (
             <div
               key={s._id}
-              className="border rounded p-3 mb-3 flex items-center justify-between"
+              className="border border-[var(--secondary)]/20 rounded p-3 mb-3 flex items-center justify-between bg-[var(--background)]"
             >
               <div>
                 <p>
                   <strong>Review ID:</strong> {s.caseId}
-                  <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                  <span className="ml-2 text-xs bg-[var(--primary)]/10 text-[var(--primary)] px-2 py-1 rounded font-livvic-medium">
                     {screeningLabel} — {formatReadingYear(s.readingYear)}
                   </span>
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-[var(--primary-text)]/60 font-livvic-medium">
                   Started: {s.createdAt ? new Date(s.createdAt).toLocaleString() : "—"}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-[var(--primary-text)] font-livvic-medium">
                   Sections completed: {completedCount} / {totalSections}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-[var(--primary-text)]/60 font-livvic-medium">
                   Last updated: {new Date(s.updatedAt).toLocaleString()}
                 </p>
               </div>
@@ -400,7 +411,7 @@ console.log("SCREENINGS:", meData.screenings);
   href={`/screening/${s.screeningType || "dyslexia"}/overview?caseId=${encodeURIComponent(
     s.caseId ?? ""
   )}`}
-  className="px-3 py-2 text-sm rounded bg-gray-700 text-white"
+  className="px-3 py-2 text-sm rounded bg-[var(--primary)] text-white font-livvic-bold"
 >
   Review
 </a>

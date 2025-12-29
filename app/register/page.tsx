@@ -57,30 +57,30 @@ export default function AuthPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <main className="min-h-screen flex items-center justify-center bg-[var(--background)] font-sans">
       <div className="w-full max-w-md">
         {/* Logo/Brand Section */}
         <div className="text-center mb-8">
-          <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-2xl shadow-lg mb-4">
-            <h1 className="text-3xl font-bold">SkillScan</h1>
+          <div className="inline-block bg-[var(--secondary)] text-[var(--background)] px-6 py-3 rounded-2xl shadow-lg mb-4">
+            <h1 className="text-3xl font-livvic-bold">SkillScan</h1>
           </div>
-          <p className="text-gray-600">Professional Dyslexia & Dyscalculia Screening</p>
+          <p className="text-[var(--secondary-text)] font-livvic-medium">Professional Dyslexia & Dyscalculia Screening</p>
         </div>
 
-        <div className="bg-white shadow-2xl rounded-3xl p-8 border border-gray-100">
+        <div className="bg-[var(--background)] shadow-2xl rounded-3xl p-8 border border-[var(--secondary)]/10">
           {/* Title */}
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          <h2 className="text-2xl font-livvic-bold mb-6 text-center text-[var(--secondary)]">
             {mode === "login" ? "Welcome Back" : "Create Account"}
           </h2>
 
           {/* Toggle */}
-          <div className="flex mb-6 bg-gray-100 rounded-xl p-1">
+          <div className="flex mb-6 bg-[var(--secondary)]/10 rounded-xl p-1">
             <button
               type="button"
-              className={`flex-1 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              className={`flex-1 py-3 rounded-lg text-sm font-livvic-bold transition-all duration-200 ${
                 mode === "login"
-                  ? "bg-white text-blue-600 shadow-md"
-                  : "text-gray-600 hover:text-gray-800"
+                  ? "bg-[var(--background)] text-[var(--accent)] shadow-md"
+                  : "text-[var(--secondary-text)] hover:text-[var(--secondary)]"
               }`}
               onClick={() => {
                 setMode("login");
@@ -93,10 +93,10 @@ export default function AuthPage() {
 
             <button
               type="button"
-              className={`flex-1 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              className={`flex-1 py-3 rounded-lg text-sm font-livvic-bold transition-all duration-200 ${
                 mode === "register"
-                  ? "bg-white text-blue-600 shadow-md"
-                  : "text-gray-600 hover:text-gray-800"
+                  ? "bg-[var(--background)] text-[var(--accent)] shadow-md"
+                  : "text-[var(--secondary-text)] hover:text-[var(--secondary)]"
               }`}
               onClick={() => {
                 setMode("register");
@@ -113,11 +113,11 @@ export default function AuthPage() {
             {mode === "register" && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-[var(--secondary)] mb-2 font-livvic-medium">
                     Name (optional)
                   </label>
                   <input
-                    className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                    className="w-full border-2 border-[var(--secondary)]/20 rounded-xl px-4 py-3 text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)] transition-all outline-none font-livvic-medium"
                     placeholder="Your name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -125,61 +125,61 @@ export default function AuthPage() {
                 </div>
                 
                 <div className="space-y-3">
-                  <label className="block text-sm font-semibold text-gray-700">I am a...</label>
+                  <label className="block text-sm font-semibold text-[var(--secondary)] font-livvic-medium">I am a...</label>
                   <div className="flex gap-3">
                     <button
                       type="button"
                       onClick={() => setForm({ ...form, userType: "teacher" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all duration-200 ${
+                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
                         form.userType === "teacher"
-                          ? "bg-green-50 border-green-500 text-green-700 shadow-md"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-green-300 hover:shadow"
+                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
+                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
                       }`}
                     >
-                      <div className="font-semibold">👩‍🏫 Teacher</div>
-                      <div className="text-xs mt-1 opacity-80">Multiple students</div>
+                      <div className="font-livvic-bold">👩‍🏫 Teacher</div>
+                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">Multiple students</div>
                     </button>
                     <button
                       type="button"
                       onClick={() => setForm({ ...form, userType: "individual" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all duration-200 ${
+                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
                         form.userType === "individual"
-                          ? "bg-blue-50 border-blue-500 text-blue-700 shadow-md"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow"
+                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
+                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
                       }`}
                     >
-                      <div className="font-semibold">👤 Parent/Individual</div>
-                      <div className="text-xs mt-1 opacity-80">For my child or me</div>
+                      <div className="font-livvic-bold">👤 Parent/Individual</div>
+                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">For my child or me</div>
                     </button>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
-                  <label className="block text-sm font-semibold text-gray-700">Account Type</label>
+                  <label className="block text-sm font-semibold text-[var(--secondary)] font-livvic-medium">Account Type</label>
                   <div className="flex gap-3">
                     <button
                       type="button"
                       onClick={() => setForm({ ...form, accountType: "individual" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all duration-200 ${
+                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
                         form.accountType === "individual"
-                          ? "bg-blue-50 border-blue-500 text-blue-700 shadow-md"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow"
+                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
+                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
                       }`}
                     >
-                      <div className="font-semibold">Pay Per Use</div>
-                      <div className="text-xs mt-1 opacity-80">£5 per assessment</div>
+                      <div className="font-livvic-bold">Pay Per Use</div>
+                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">£5 per assessment</div>
                     </button>
                     <button
                       type="button"
                       onClick={() => setForm({ ...form, accountType: "school" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all duration-200 ${
+                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
                         form.accountType === "school"
-                          ? "bg-purple-50 border-purple-500 text-purple-700 shadow-md"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-purple-300 hover:shadow"
+                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
+                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
                       }`}
                     >
-                      <div className="font-semibold">School License</div>
-                      <div className="text-xs mt-1 opacity-80">Contact us</div>
+                      <div className="font-livvic-bold">School License</div>
+                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">Contact us</div>
                     </button>
                   </div>
                 </div>
@@ -187,11 +187,11 @@ export default function AuthPage() {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[var(--secondary)] mb-2 font-livvic-medium">
                 Email Address
               </label>
               <input
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                className="w-full border-2 border-[var(--secondary)]/20 rounded-xl px-4 py-3 text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)] transition-all outline-none font-livvic-medium"
                 placeholder="you@example.com"
                 type="email"
                 required
@@ -201,11 +201,11 @@ export default function AuthPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[var(--secondary)] mb-2 font-livvic-medium">
                 Password
               </label>
               <input
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                className="w-full border-2 border-[var(--secondary)]/20 rounded-xl px-4 py-3 text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)] transition-all outline-none font-livvic-medium"
                 placeholder="••••••••"
                 type="password"
                 required
@@ -217,7 +217,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl py-4 font-bold text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-200 mt-6"
+              className="w-full bg-[var(--accent)] hover:bg-[var(--secondary)] text-[var(--background)] rounded-xl py-4 font-livvic-bold text-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-200 mt-6 border-2 border-[var(--accent)]"
             >
               {loading ? (
                 <>
@@ -236,25 +236,25 @@ export default function AuthPage() {
 
           {/* Error / success messages */}
           {error && (
-            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-sm text-red-700 text-center font-medium">{error}</p>
+            <div className="mt-4 p-3 bg-[var(--accent)]/10 border border-[var(--accent)]/40 rounded-lg">
+              <p className="text-sm text-[var(--accent)] text-center font-livvic-bold">{error}</p>
             </div>
           )}
           {message && (
             <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-sm text-green-700 text-center font-medium">{message}</p>
+              <p className="text-sm text-green-700 text-center font-livvic-bold">{message}</p>
             </div>
           )}
 
           {/* Footer */}
-          <div className="mt-6 text-center text-sm text-gray-500">
+          <div className="mt-6 text-center text-sm text-[var(--secondary-text)] font-livvic-medium">
             {mode === "login" ? (
               <p>
                 Don't have an account?{" "}
                 <button
                   type="button"
                   onClick={() => setMode("register")}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
+                  className="text-[var(--accent)] hover:text-[var(--secondary)] font-livvic-bold"
                 >
                   Sign up free
                 </button>
@@ -265,7 +265,7 @@ export default function AuthPage() {
                 <button
                   type="button"
                   onClick={() => setMode("login")}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
+                  className="text-[var(--accent)] hover:text-[var(--secondary)] font-livvic-bold"
                 >
                   Log in
                 </button>
@@ -276,8 +276,8 @@ export default function AuthPage() {
 
         {/* Trust badges */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500 mb-2">Trusted by educators across the UK</p>
-          <div className="flex justify-center gap-4 text-xs text-gray-400">
+          <p className="text-xs text-[var(--secondary-text)] mb-2 font-livvic-medium">Trusted by educators across the UK</p>
+          <div className="flex justify-center gap-4 text-xs text-[var(--secondary-text)]/70 font-livvic-medium">
             <span>🔒 Secure & Private</span>
             <span>✓ GDPR Compliant</span>
             <span>📊 Evidence-Based</span>

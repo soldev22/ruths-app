@@ -24,12 +24,13 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`transition-all duration-200 bg-blue-900 text-white min-h-screen border-r border-gray-200 ${open ? 'w-60 p-3' : 'w-10 p-1'}`}
+      className={`transition-all duration-200 bg-[var(--secondary)] text-[var(--background)] min-h-screen border-r border-[var(--background)]/20 ${open ? 'w-60 p-3' : 'w-10 p-1'}`}
     >
       {/* TOGGLE BUTTON */}
       <button
         onClick={() => setOpen(!open)}
-        className="block mb-5 bg-none border-none cursor-pointer font-bold text-white focus:outline-none"
+        className="block mb-5 bg-none border-none cursor-pointer font-bold text-[var(--background)] focus:outline-none"
+        aria-label={open ? 'Hide sidebar' : 'Show sidebar'}
       >
         {open ? "◀ Hide" : "▶"}
       </button>
@@ -40,48 +41,43 @@ export default function Sidebar() {
           <div className="mb-5">
             <Link 
               href="/protected/case/new" 
-              className="inline-block w-full bg-blue-600 text-white no-underline rounded-lg font-semibold mb-3 py-2 text-center hover:bg-blue-700 transition"
+              className="inline-block w-full bg-[var(--accent)] text-[var(--background)] no-underline rounded-lg font-semibold mb-3 py-2 text-center hover:bg-[var(--background)] hover:text-[var(--secondary)] border-2 border-[var(--accent)] transition"
             >
               ➕ New Assessment
             </Link>
             <br />
-            <Link href="/protected/dashboard" className="text-white no-underline hover:underline">Dashboard</Link>
+            <Link href="/protected/dashboard" className="text-[var(--background)] no-underline hover:underline">Dashboard</Link>
             <br />
-            <Link href="/protected/account" className="text-white no-underline hover:underline">Account & Billing</Link>
+            <Link href="/protected/account" className="text-[var(--background)] no-underline hover:underline">Account & Billing</Link>
             <br />
-            <Link href="/protected/pricing" className="text-white no-underline hover:underline">View Plans & Pricing</Link>
+            <Link href="/protected/pricing" className="text-[var(--background)] no-underline hover:underline">View Plans & Pricing</Link>
             <br />
-            <Link href="/user-guide" className="text-white no-underline hover:underline">User Guide</Link>
+            <Link href="/user-guide" className="text-[var(--background)] no-underline hover:underline">User Guide</Link>
             <br />
-            <Link href="/about" className="text-white no-underline hover:underline">About</Link>
+            <Link href="/about" className="text-[var(--background)] no-underline hover:underline">About</Link>
             <br />
-            <Link href="/faq" className="text-white no-underline hover:underline">FAQ</Link>
+            <Link href="/faq" className="text-[var(--background)] no-underline hover:underline">FAQ</Link>
             <br />
-            <Link href="/scoring-guide" className="text-white no-underline hover:underline">Scoring Guide</Link>
+            <Link href="/scoring-guide" className="text-[var(--background)] no-underline hover:underline">Scoring Guide</Link>
             <br />
-            <Link href="/privacy" className="text-white no-underline hover:underline">Privacy & GDPR</Link>
+            <Link href="/privacy" className="text-[var(--background)] no-underline hover:underline">Privacy & GDPR</Link>
             <br />
-            <Link href="/contact" className="text-white no-underline hover:underline">Contact Us</Link>
+            <Link href="/contact" className="text-[var(--background)] no-underline hover:underline">Contact Us</Link>
             <br />
           </div>
 
           {/* ADMIN - Only visible to admin users */}
           {isAdmin && (
             <>
-              <div className="text-xs text-blue-200 mt-6 mb-2">ADMIN</div>
-
+              <div className="text-xs text-[var(--accent)] mt-6 mb-2">ADMIN</div>
               <div>
-                <Link href="/admin/activity-logs" style={{ color: "white", textDecoration: "none" }}>Activity Logs</Link>
+                <Link href="/admin/activity-logs" className="text-[var(--background)] no-underline hover:underline">Activity Logs</Link>
                 <br />
-                <Link href="/admin/vouchers" style={{ color: "white", textDecoration: "none" }}>Vouchers</Link>
+                <Link href="/admin/vouchers" className="text-[var(--background)] no-underline hover:underline">Vouchers</Link>
                 <br />
-                
               </div>
-
-              
-                  <div>{/* Social Media links removed */}</div>
-                <br />
-            
+              <div>{/* Social Media links removed */}</div>
+              <br />
             </>
           )}
         </>
