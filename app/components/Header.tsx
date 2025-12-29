@@ -49,7 +49,7 @@ export default function Header() {
         {/* Logo / brand */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-wide">
           <Logo />
-          <span>SkillScan</span>
+         
         </Link>
 
         {/* Menu (desktop) */}
