@@ -24,6 +24,7 @@ const DyslexiaScreeningSchema = new Schema(
     caseId: { type: String, required: true },
     readingYear: { type: String, default: null }, // e.g. "819446"
     sections: [SectionAnswersSchema],
+    elapsedSeconds: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

@@ -1,6 +1,7 @@
-"use client";
 
-import { useEffect, useState } from "react";
+
+"use client";
+import { useEffect, useState, useRef } from "react";
 
 type Question = {
   id: string;
@@ -27,11 +28,9 @@ type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
 
-// Helper safely reading JSON from API
 async function safeJson(res: Response) {
   const text = await res.text();
   if (!text) return null;
-
   try {
     return JSON.parse(text);
   } catch (err) {
@@ -48,26 +47,33 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [startError, setStartError] = useState<string | null>(null);
-
+  // Timer state
+  const [timer, setTimer] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+  function formatTime(seconds: number) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
   const currentSection = sections[currentIndex];
   const sectionAnswers = answers[currentSection.id] || {};
 
   // LOAD EXISTING ANSWERS
   useEffect(() => {
     let cancelled = false;
-
     async function load() {
       if (!caseId) {
         setLoading(false);
         return;
       }
-
       try {
         const startedFlag =
           typeof window !== "undefined" &&
           new URLSearchParams(window.location.search).get("started") === "1";
-
-        // Ensure screening start is recorded (increments usage)
         if (!startedFlag) {
           const startRes = await fetch("/api/screening/dyscalculia/start", {
             method: "POST",
@@ -75,19 +81,12 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
             credentials: "include",
             body: JSON.stringify({ caseId }),
           });
-
           const startData = await safeJson(startRes);
-
           if (!startRes.ok) {
             const msg =
               startData?.message ||
               startData?.error ||
               "Unable to start screening.";
-            if (!cancelled) {
-              setStartError(msg);
-              setLoading(false);
-            }
-            return;
           }
         }
       } catch (err) {
@@ -98,38 +97,30 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
         }
         return;
       }
-
       try {
         const res = await fetch(
           `/api/screening/dyscalculia/section?caseId=${encodeURIComponent(caseId)}`
         );
-
         if (!res.ok) {
           console.error("Failed to load screening", res.status);
           if (!cancelled) setLoading(false);
           return;
         }
-
         const data = await safeJson(res);
-
         if (!data || !data.exists) {
           if (!cancelled) setLoading(false);
           return;
         }
-
         const screening = data.screening;
-
         const collected: AnswersState = {};
-        (screening.sections || []).forEach((s: any) => {
+        (screening.sections || []).forEach((s: { sectionId: string; answers?: { [questionId: string]: string } }) => {
           const secId = s.sectionId;
           const ansMap = s.answers || {};
-
           collected[secId] = {};
           Object.keys(ansMap).forEach((qId) => {
             collected[secId][qId] = ansMap[qId];
           });
         });
-
         if (!cancelled) setAnswers(collected);
       } catch (err) {
         console.error("Error loading screening:", err);
@@ -137,15 +128,10 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
         if (!cancelled) setLoading(false);
       }
     }
-
     load();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [caseId]);
 
-  // HANDLE ANSWERS
   function handleChange(questionId: string, value: string) {
     setAnswers((prev) => ({
       ...prev,
@@ -154,27 +140,22 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
         [questionId]: value,
       },
     }));
-
     setError(null);
     setSavedMessage(null);
   }
 
-  // VALIDATION
   function isCurrentSectionComplete() {
     const current = answers[currentSection.id] || {};
     return currentSection.questions.every((q) => !!current[q.id]);
   }
 
-  // SAVE SECTION
   async function saveCurrentSection(showMsg = false) {
     if (!caseId) {
       setError("Missing caseId — cannot save.");
       return;
     }
-
     setSaving(true);
     if (showMsg) setSavedMessage(null);
-
     try {
       const payload = {
         caseId,
@@ -182,16 +163,13 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
         answers: answers[currentSection.id] || {},
         readingYear
       };
-
       const res = await fetch("/api/screening/dyscalculia/section", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-
       const text = await res.text();
       let data = null;
-
       if (text) {
         try {
           data = JSON.parse(text);
@@ -199,11 +177,9 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
           console.error("Invalid JSON from API:", text);
         }
       }
-
       if (!res.ok) {
         throw new Error(data?.error || "Save failed.");
       }
-
       if (showMsg) setSavedMessage("Section saved.");
     } catch (err: any) {
       setError(err.message || "Couldn't save section.");
@@ -212,23 +188,17 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
     }
   }
 
-  // NAVIGATION
   async function handleNext() {
     if (!isCurrentSectionComplete()) {
       setError("Please answer all questions before continuing.");
       return;
     }
-
     await saveCurrentSection(true);
-
     const last = currentIndex === sections.length - 1;
-
     if (last) {
       window.location.href = `/screening/dyscalculia/overview?caseId=${caseId}`;
       return;
     }
-
-    // Show encouragement message between sections
     const encouragementMessages = [
       "Great progress! 🎯 Take a break if you need one.",
       "You're doing really well! Keep going! 💪",
@@ -239,10 +209,8 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
       "Well done! Take a moment to rest if needed. ☕",
       "Brilliant work so far! Nearly finished! 🎉"
     ];
-    
     const randomMessage = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
     setSavedMessage(randomMessage);
-    
     setTimeout(() => {
       setCurrentIndex((i) => i + 1);
       setSavedMessage(null);
@@ -259,9 +227,7 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
       setError("Please complete this section before finishing.");
       return;
     }
-
     await saveCurrentSection(true);
-
     window.location.href = `/screening/dyscalculia/overview?caseId=${caseId}`;
   }
 
@@ -269,7 +235,6 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
   if (startError) return <p style={{ color: "red" }}>{startError}</p>;
   if (!caseId) return <p>No caseId provided.</p>;
 
-  // RENDER
   return (
     <div style={{ marginTop: "2rem" }}>
       {/* SECTION NAVIGATION BOX */}
@@ -287,13 +252,11 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
           {sections.map((section, idx) => {
             const sectionAnswers = answers[section.id] || {};
             const isSectionComplete = section.questions.every((q) => !!sectionAnswers[q.id]);
-            
             const prevSectionsComplete = sections.slice(0, idx).every((sec) => {
               const secAnswers = answers[sec.id] || {};
               return sec.questions.every((q) => !!secAnswers[q.id]);
             });
             const canAccess = idx === currentIndex || idx === 0 || prevSectionsComplete;
-
             return (
               <button
                 key={section.id}
@@ -324,22 +287,17 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
           })}
         </div>
       </div>
-
       <h2>
         {currentSection.title} ({currentIndex + 1} of {sections.length})
       </h2>
-
       {currentSection.description && <p>{currentSection.description}</p>}
-
       <form onSubmit={(e) => e.preventDefault()}>
         {currentSection.questions.map((q) => {
-          // Check if this is a passage confirmation question (typically in Section 5)
-          const isPassageConfirmation = q.text.toLowerCase().includes('read the passage') || 
-                                       q.text.toLowerCase().includes('i have read') ||
-                                       (currentSection.id.includes('5') && q.options?.some(opt => 
-                                         opt.toLowerCase().includes('yes') || opt.toLowerCase().includes('no')
-                                       ));
-          
+          const isPassageConfirmation = q.text.toLowerCase().includes('read the passage') ||
+            q.text.toLowerCase().includes('i have read') ||
+            (currentSection.id.includes('5') && q.options?.some(opt =>
+              opt.toLowerCase().includes('yes') || opt.toLowerCase().includes('no')
+            ));
           return (
             <div
               key={q.id}
@@ -351,7 +309,7 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
                 backgroundColor: isPassageConfirmation ? "#fef2f2" : "white",
               }}
             >
-              <p style={{ 
+              <p style={{
                 fontWeight: isPassageConfirmation ? "bold" : "normal",
                 fontSize: isPassageConfirmation ? "1.1rem" : "1rem",
                 color: isPassageConfirmation ? "#dc2626" : "inherit",
@@ -359,12 +317,11 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
               }}>
                 {isPassageConfirmation && "⚠️ "}{q.text}
               </p>
-
               {q.options?.map((opt, i) => (
                 <label
                   key={`${q.id}_${i}`}
-                  style={{ 
-                    display: "block", 
+                  style={{
+                    display: "block",
                     marginBottom: "0.8rem",
                     padding: isPassageConfirmation ? "0.75rem" : "0.4rem",
                     backgroundColor: isPassageConfirmation && sectionAnswers[q.id] === opt ? "#fee2e2" : "transparent",
@@ -393,11 +350,9 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
             </div>
           );
         })}
-
         {error && <p style={{ color: "red" }}>{error}</p>}
         {savedMessage && <p style={{ color: "green" }}>{savedMessage}</p>}
         {saving && <p>Saving…</p>}
-
         <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
           <button
             type="button"
@@ -406,13 +361,11 @@ export default function ScreeningWizard({ sections, caseId, readingYear }: Props
           >
             Previous
           </button>
-
           {currentIndex < sections.length - 1 && (
             <button type="button" onClick={handleNext} disabled={saving}>
               Save and continue
             </button>
           )}
-
           {currentIndex === sections.length - 1 && (
             <button type="button" onClick={handleFinish} disabled={saving}>
               Save and finish

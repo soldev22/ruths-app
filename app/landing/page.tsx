@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] font-sans">
+    <div className="min-h-screen bg-[var(--background)] font-livvic">
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-5xl font-bold text-[var(--secondary)] mb-4 font-livvic-bold">
+        <h1 className="text-5xl font-livvic-bold text-[var(--secondary)] mb-4">
           Welcome to SkillScan
         </h1>
         <p className="text-2xl text-[var(--secondary-text)] mb-8 font-livvic-medium">
@@ -36,40 +36,40 @@ export default function LandingPage() {
         <div className="bg-[var(--secondary)] text-[var(--background)] rounded-xl p-8 max-w-3xl mx-auto mb-16 shadow-2xl">
           <div className="text-center">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold mb-4 font-livvic-bold">
+            <h2 className="text-3xl font-livvic-bold mb-4">
               Start Your Free 30-Day Trial Today
             </h2>
-            <div className="bg-white text-gray-900 rounded-lg p-6 mb-6">
+            <div className="bg-[var(--background)] text-[var(--primary-text)] rounded-lg p-6 mb-6">
               <div className="flex items-center justify-center gap-8 mb-4">
                 <div>
-                  <div className="text-4xl font-bold text-green-600">30</div>
+                  <div className="text-4xl font-livvic-bold text-[var(--success)]">30</div>
                   <div className="text-sm">Days Free</div>
                 </div>
-                <div className="text-3xl text-gray-300">+</div>
+                <div className="text-3xl text-[var(--secondary)]/30">+</div>
                 <div>
-                  <div className="text-4xl font-bold text-green-600">20</div>
-                  <div className="text-sm">Free Screenings</div>
+                  <div className="text-4xl font-livvic-bold text-[var(--success)]">20</div>
+                  <div className="text-sm">Free screenings</div>
                 </div>
               </div>
-              <p className="text-lg text-gray-700 font-semibold">
+              <p className="text-lg text-[var(--primary-text)] font-livvic-bold">
                 ✓ No credit card required
               </p>
-              <p className="text-md text-gray-600">
+              <p className="text-md text-[var(--secondary-text)]">
                 ✓ Full access to all features
               </p>
-              <p className="text-md text-gray-600">
+              <p className="text-md text-[var(--secondary-text)]">
                 ✓ AI-powered reports included
               </p>
             </div>
             <Link
               href="/register"
-              className="inline-block bg-white text-green-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
+              className="inline-block bg-[var(--background)] text-[var(--success)] hover:bg-[var(--background-alt)] font-livvic-bold py-4 px-12 rounded-lg text-2xl shadow-lg transition transform hover:scale-105"
             >
               Get Started - It's Free! →
             </Link>
-            <p className="text-sm text-green-100 mt-4">
+            <p className="text-sm text-[var(--success)]/60 mt-4">
               Already have an account?{" "}
-              <Link href="/register" className="underline font-semibold hover:text-white">
+              <Link href="/register" className="underline font-livvic-medium hover:text-[var(--success)]">
                 Login here
               </Link>
             </p>
@@ -78,28 +78,28 @@ export default function LandingPage() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-white py-16">
+      <div className="bg-[var(--background)] py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Teachers Choose SkillScan</h2>
+          <h2 className="text-3xl font-livvic-bold text-center mb-12">Why teachers choose SkillScan</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6">
               <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold mb-3">Fast & Easy</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-livvic-bold mb-3">Fast and easy</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Complete screenings in 20-30 minutes. Results available immediately with AI-powered reports.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-semibold mb-3">Evidence-Based</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-livvic-bold mb-3">Evidence-based</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 Grounded in peer-reviewed research and validated by specialist teachers with dyslexia expertise.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-xl font-semibold mb-3">GDPR Compliant</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-livvic-bold mb-3">GDPR compliant</h3>
+              <p className="text-[var(--primary-text)] font-livvic-medium">
                 No student names stored. Complete privacy protection designed for UK schools.
               </p>
             </div>

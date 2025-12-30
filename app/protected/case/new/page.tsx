@@ -15,7 +15,7 @@ export default function NewCasePage() {
   const router = useRouter();
 
   const [caseId] = useState<string>(() => generateCaseId());
-  const [selected, setSelected] = useState<ScreeningType[]>([]);
+  const [selected, setSelected] = useState<ScreeningType | null>(null);
   const [readingYear, setReadingYear] = useState<string>("");
   const [userType, setUserType] = useState<"teacher" | "individual">("individual");
   const [studentIdentifier, setStudentIdentifier] = useState<string>("");
@@ -40,27 +40,22 @@ export default function NewCasePage() {
     fetchUserType();
   }, []);
 
-  function toggleSelection(type: ScreeningType) {
+  function selectScreening(type: ScreeningType) {
     setError(null);
     setMessage(null);
-
-    setSelected((prev) =>
-      prev.includes(type)
-        ? prev.filter((t) => t !== type)
-        : [...prev, type]
-    );
+    setSelected(type);
   }
 
   function isSelected(type: ScreeningType) {
-    return selected.includes(type);
+    return selected === type;
   }
 
   function handleStart() {
     setError(null);
     setMessage(null);
 
-    if (selected.length === 0) {
-      setError("Please select at least one screening to begin.");
+    if (!selected) {
+      setError("Please select a screening to begin.");
       return;
     }
 
@@ -69,12 +64,12 @@ export default function NewCasePage() {
       return;
     }
 
-    if (selected.includes("dyslexia")) {
+    if (selected === "dyslexia") {
       router.push(`/screening/dyslexia/start/${caseId}?year=${readingYear}`);
       return;
     }
 
-    if (selected.includes("dyscalculia")) {
+    if (selected === "dyscalculia") {
       router.push(`/screening/dyscalculia/start/${caseId}?year=${readingYear}`);
       return;
     }
@@ -153,7 +148,7 @@ export default function NewCasePage() {
         {/* SCREENING TYPE PICKER */}
         <div className="space-y-3">
           <p className="text-sm text-gray-700 text-center">
-            Choose which screenings to include (you can select more than one):
+            Choose which screening to include (only one can be selected):
           </p>
 
           <div className="grid gap-6 md:grid-cols-2 justify-center items-center">
@@ -161,7 +156,7 @@ export default function NewCasePage() {
             {/* Dyslexia */}
             <button
               type="button"
-              onClick={() => toggleSelection("dyslexia")}
+              onClick={() => selectScreening("dyslexia")}
               className={`border rounded-xl px-4 py-6 transition flex flex-col items-center justify-center ${
                 isSelected("dyslexia")
                   ? "bg-blue-50 border-blue-500"
@@ -182,7 +177,7 @@ export default function NewCasePage() {
             {/* Dyscalculia */}
             <button
               type="button"
-              onClick={() => toggleSelection("dyscalculia")}
+              onClick={() => selectScreening("dyscalculia")}
               className={`border rounded-xl px-4 py-6 transition flex flex-col items-center justify-center ${
                 isSelected("dyscalculia")
                   ? "bg-blue-50 border-blue-500"

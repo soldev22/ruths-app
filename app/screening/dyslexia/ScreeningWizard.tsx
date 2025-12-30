@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Question = {
   id: string;
@@ -28,11 +28,7 @@ type AnswersState = {
   [sectionId: string]: { [questionId: string]: string };
 };
 
-// GET readingYear from URL
-const readingYear =
-  typeof window !== "undefined"
-    ? new URLSearchParams(window.location.search).get("year") || null
-    : null;
+// (readingYear is now passed as a prop; remove unused local variable)
 
 
 // Helper safely reading JSON from API
@@ -48,7 +44,7 @@ async function safeJson(res: Response) {
   }
 }
 
-export default function ScreeningWizard({ sections, caseId,readingYear }: Props) {
+export default function ScreeningWizard({ sections, caseId, readingYear }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswersState>({});
   const [saving, setSaving] = useState(false);
@@ -56,7 +52,18 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [startError, setStartError] = useState<string | null>(null);
-
+  // Timer state
+  const [timer, setTimer] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+  function formatTime(seconds: number) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
   const currentSection = sections[currentIndex];
   const sectionAnswers = answers[currentSection.id] || {};
 
@@ -130,7 +137,7 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
         const screening = data.screening;
 
         const collected: AnswersState = {};
-        (screening.sections || []).forEach((s: any) => {
+        (screening.sections || []).forEach((s: { sectionId: string; answers?: { [questionId: string]: string } }) => {
           const secId = s.sectionId;
           const ansMap = s.answers || {};
 
@@ -221,8 +228,12 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
       }
 
       if (showMsg) setSavedMessage("Section saved.");
-    } catch (err: any) {
-      setError(err.message || "Couldn't save section.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Couldn't save section.");
+      } else {
+        setError("Couldn't save section.");
+      }
     } finally {
       setSaving(false);
     }
@@ -278,32 +289,72 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
       return;
     }
 
-    await saveCurrentSection(true);
+    // Save the final section and include elapsed time
+    if (!caseId) {
+      setError("Missing caseId — cannot save.");
+      return;
+    }
 
-    window.location.href = `/screening/dyslexia/overview?caseId=${caseId}`;
+    setSaving(true);
+    setSavedMessage(null);
+    try {
+      const payload = {
+        caseId,
+        sectionId: currentSection.id,
+        answers: answers[currentSection.id] || {},
+        readingYear,
+        elapsedSeconds: timer // Capture the final timer value
+      };
+      const res = await fetch("/api/screening/dyslexia/section", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const text = await res.text();
+      let data = null;
+      if (text) {
+        try {
+          data = JSON.parse(text);
+        } catch {
+          console.error("Invalid JSON from API:", text);
+        }
+      }
+      if (!res.ok) {
+        throw new Error(data?.error || "Save failed.");
+      }
+      setSavedMessage("Section saved.");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || "Couldn't save section.");
+      } else {
+        setError("Couldn't save section.");
+      }
+      setSaving(false);
+      return;
+    }
+    setSaving(false);
+    // Now redirect to review/overview page, where you can feed elapsedSeconds to OpenAI if needed
+    window.location.href = `/screening/dyslexia/overview?caseId=${caseId}&elapsedSeconds=${timer}`;
   }
 
   if (loading) return <p>Loading screening…</p>;
-  if (startError) return <p style={{ color: "red" }}>{startError}</p>;
+  if (startError) return <p className="text-red-600 font-semibold">{startError}</p>;
   if (!caseId) return <p>No caseId provided.</p>;
 
   //
   // RENDER
   //
   return (
-    <div style={{ marginTop: "2rem" }}>
+    <>
+      {/* Timer bar below main header */}
+      <div className="w-full bg-gray-900 text-white text-lg font-mono text-center py-2 tracking-wider shadow-md">
+        Assessment time: {formatTime(timer)}
+      </div>
+      <div className="mt-8">
       {/* SECTION NAVIGATION BOX */}
-      <div
-        style={{
-          background: "#f5f5f5",
-          border: "1px solid #ddd",
-          borderRadius: "6px",
-          padding: "1rem",
-          marginBottom: "2rem",
-        }}
-      >
-        <p style={{ fontWeight: "bold", marginBottom: "0.8rem" }}>Jump to Section:</p>
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+      <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 mb-8">
+        <p className="font-bold mb-2">Jump to Section:</p>
+        <div className="flex flex-wrap gap-2">
           {sections.map((section, idx) => {
             const sectionAnswers = answers[section.id] || {};
             const isSectionComplete = section.questions.every((q) => !!sectionAnswers[q.id]);
@@ -328,16 +379,13 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
                 }}
                 disabled={!canAccess}
                 title={!canAccess ? "Complete previous sections first" : ""}
-                style={{
-                  padding: "0.5rem 1rem",
-                  background: idx === currentIndex ? "black" : isSectionComplete ? "#90EE90" : canAccess ? "#ddd" : "#ccc",
-                  color: idx === currentIndex ? "white" : "black",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: canAccess ? "pointer" : "not-allowed",
-                  fontWeight: idx === currentIndex ? "bold" : "normal",
-                  opacity: canAccess ? 1 : 0.6,
-                }}
+                className={[
+                  'px-4 py-2 rounded',
+                  idx === currentIndex ? 'bg-black text-white font-bold' : isSectionComplete ? 'bg-green-200 text-black' : canAccess ? 'bg-gray-300 text-black' : 'bg-gray-200 text-black',
+                  'border-none',
+                  'transition',
+                  canAccess ? 'cursor-pointer opacity-100' : 'cursor-not-allowed opacity-60',
+                ].join(' ')}
               >
                 {idx + 1}. {section.title} {isSectionComplete ? "✓" : ""}
               </button>
@@ -346,56 +394,38 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
         </div>
       </div>
 
-      <h2>
+      <h2 className="text-xl font-bold mb-2">
         {currentSection.title} ({currentIndex + 1} of {sections.length})
       </h2>
-
-      {currentSection.description && <p>{currentSection.description}</p>}
-
+      {currentSection.description && <p className="mb-4 text-gray-700">{currentSection.description}</p>}
       <form onSubmit={(e) => e.preventDefault()}>
         {currentSection.questions.map((q) => {
-          // Check if this is a passage confirmation question (typically in Section 5)
           const isPassageConfirmation = q.text.toLowerCase().includes('read the passage') || 
-                                       q.text.toLowerCase().includes('i have read') ||
-                                       (currentSection.id.includes('5') && q.options?.some(opt => 
-                                         opt.toLowerCase().includes('yes') || opt.toLowerCase().includes('no')
-                                       ));
-          
+            q.text.toLowerCase().includes('i have read') ||
+            (currentSection.id.includes('5') && q.options?.some(opt => 
+              opt.toLowerCase().includes('yes') || opt.toLowerCase().includes('no')
+            ));
           return (
             <div
               key={q.id}
-              style={{
-                border: isPassageConfirmation ? "3px solid #dc2626" : "1px solid #ddd",
-                borderRadius: "8px",
-                padding: isPassageConfirmation ? "1.5rem" : "1rem",
-                marginBottom: "1rem",
-                backgroundColor: isPassageConfirmation ? "#fef2f2" : "white",
-              }}
+              className={[
+                'rounded-lg mb-4',
+                isPassageConfirmation ? 'border-4 border-red-600 bg-red-50 p-6' : 'border border-gray-300 bg-white p-4',
+              ].join(' ')}
             >
-              <p style={{ 
-                fontWeight: isPassageConfirmation ? "bold" : "normal",
-                fontSize: isPassageConfirmation ? "1.1rem" : "1rem",
-                color: isPassageConfirmation ? "#dc2626" : "inherit",
-                marginBottom: "1rem"
-              }}>
-                {isPassageConfirmation && "⚠️ "}{q.text}
+              <p className={[
+                isPassageConfirmation ? 'font-bold text-red-600 text-lg mb-4' : 'mb-4',
+              ].join(' ')}>
+                {isPassageConfirmation && '⚠️ '}{q.text}
               </p>
-
-              {/* FIXED: unique key using index */}
               {q.options?.map((opt, i) => (
                 <label
                   key={`${q.id}_${i}`}
-                  style={{ 
-                    display: "block", 
-                    marginBottom: "0.8rem",
-                    padding: isPassageConfirmation ? "0.75rem" : "0.4rem",
-                    backgroundColor: isPassageConfirmation && sectionAnswers[q.id] === opt ? "#fee2e2" : "transparent",
-                    borderRadius: "6px",
-                    border: isPassageConfirmation ? "2px solid #fca5a5" : "none",
-                    cursor: "pointer",
-                    fontSize: isPassageConfirmation ? "1.05rem" : "1rem",
-                    fontWeight: isPassageConfirmation ? "600" : "normal"
-                  }}
+                  className={[
+                    'block mb-2 rounded',
+                    isPassageConfirmation && sectionAnswers[q.id] === opt ? 'bg-red-100 border-2 border-red-300' : '',
+                    isPassageConfirmation ? 'p-3 font-semibold text-base' : 'p-2',
+                  ].join(' ')}
                 >
                   <input
                     type="radio"
@@ -403,45 +433,51 @@ export default function ScreeningWizard({ sections, caseId,readingYear }: Props)
                     value={opt}
                     checked={sectionAnswers[q.id] === opt}
                     onChange={(e) => handleChange(q.id, e.target.value)}
-                    style={{
-                      width: isPassageConfirmation ? "20px" : "auto",
-                      height: isPassageConfirmation ? "20px" : "auto",
-                      marginRight: "0.75rem"
-                    }}
-                  />{" "}
+                    className={[
+                      isPassageConfirmation ? 'w-5 h-5 mr-3' : 'mr-2',
+                    ].join(' ')}
+                  />
                   {opt}
                 </label>
               ))}
             </div>
           );
         })}
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {savedMessage && <p style={{ color: "green" }}>{savedMessage}</p>}
+        {error && <p className="text-red-600 font-semibold">{error}</p>}
+        {savedMessage && <p className="text-green-600 font-semibold">{savedMessage}</p>}
         {saving && <p>Saving…</p>}
-
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+        <div className="flex gap-4 mt-6">
           <button
             type="button"
             onClick={handlePrevious}
             disabled={currentIndex === 0 || saving}
+            className="px-4 py-2 rounded bg-gray-200 text-black font-medium disabled:opacity-60 disabled:cursor-not-allowed"
           >
             Previous
           </button>
-
           {currentIndex < sections.length - 1 && (
-            <button type="button" onClick={handleNext} disabled={saving}>
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={saving}
+              className="px-4 py-2 rounded bg-blue-600 text-white font-bold disabled:opacity-60 disabled:cursor-not-allowed"
+            >
               Save and continue
             </button>
           )}
-
           {currentIndex === sections.length - 1 && (
-            <button type="button" onClick={handleFinish} disabled={saving}>
+            <button
+              type="button"
+              onClick={handleFinish}
+              disabled={saving}
+              className="px-4 py-2 rounded bg-green-600 text-white font-bold disabled:opacity-60 disabled:cursor-not-allowed"
+            >
               Save and finish
             </button>
           )}
         </div>
       </form>
-    </div>
+      </div>
+    </>
   );
 }

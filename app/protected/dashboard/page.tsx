@@ -141,24 +141,24 @@ console.log("SCREENINGS:", meData.screenings);
 
   if (loading) {
     return (
-      <div className="w-full min-h-screen bg-gray-50">
+      <div className="w-full min-h-screen bg-[var(--background)] font-livvic">
         <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
-          <h1 className="text-2xl font-bold mb-4">SkillScan Dyslexia Reviews</h1>
+          <h1 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">SkillScan dyslexia reviews</h1>
           {error ? (
-            <p className="text-red-600 font-semibold mb-4">{error}</p>
+            <p className="text-[var(--error)] font-livvic-bold mb-4">{error}</p>
           ) : (
             <p>Loading…</p>
           )}
               <Link 
                 href="/protected/case/new"
-                className="inline-block bg-white text-[var(--secondary)] font-livvic-bold px-6 py-3 rounded-lg shadow hover:bg-[var(--background)] transition-colors"
+                className="inline-block bg-[var(--background)] text-[var(--secondary)] font-livvic-bold px-6 py-3 rounded-lg shadow hover:bg-[var(--background-alt)] transition-colors"
               >
                 Create Your Assessment
               </Link>
               {prepaidCredits <= 2 && (
                 <Link 
                   href="/protected/account"
-                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--primary)] text-white font-livvic-bold px-6 py-3 rounded-lg shadow transition-colors"
+                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--primary)] text-[var(--background)] font-livvic-bold px-6 py-3 rounded-lg shadow transition-colors"
                 >
                   {prepaidCredits === 0 ? '⚠️ Purchase Credits' : '💡 Buy More Credits'}
                 </Link>
@@ -169,16 +169,16 @@ console.log("SCREENINGS:", meData.screenings);
   }
 
   return (
-    <div className="w-full min-h-screen bg-[var(--background)] font-sans">
+    <div className="w-full min-h-screen bg-[var(--background)] font-livvic">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8 overflow-y-auto">
         {/* Header - Simple Title Only */}
         <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
-          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">SkillScan Reviews</h1>
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">SkillScan reviews</h1>
         </div>
 
         {/* Combined Welcome & Credit Panel - Always visible for prepaid users */}
         {accountType === "individual" && (
-          <div className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] text-white rounded-xl p-8 mb-8 shadow-lg">
+          <div className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] text-[var(--background)] rounded-xl p-8 mb-8 shadow-lg">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-6 mb-6">
               <div className="flex-1">
                 <h2 className="text-2xl font-livvic-bold mb-2">Welcome to SkillScan!</h2>
@@ -186,11 +186,11 @@ console.log("SCREENINGS:", meData.screenings);
                   Professional screening tools to identify learning differences quickly and accurately.
                 </p>
               </div>
-              <div className="bg-[var(--secondary)]/80 rounded-lg px-8 py-4 min-w-[180px] border-2 border-white border-opacity-30">
+              <div className="bg-[var(--secondary)]/80 rounded-lg px-8 py-4 min-w-[180px] border-2 border-[var(--background)] border-opacity-30">
                 <div className="text-center">
-                  <div className="text-5xl font-livvic-bold mb-1 text-white">{prepaidCredits}</div>
-                  <div className="text-sm text-white font-livvic-medium">credits remaining</div>
-                  <div className="text-xs text-white mt-2 opacity-90">
+                  <div className="text-5xl font-livvic-bold mb-1 text-[var(--background)]">{prepaidCredits}</div>
+                  <div className="text-sm text-[var(--background)] font-livvic-medium">credits remaining</div>
+                  <div className="text-xs text-[var(--background)] mt-2 opacity-90">
                     {screeningsUsed} completed
                   </div>
                 </div>
@@ -200,7 +200,7 @@ console.log("SCREENINGS:", meData.screenings);
             <div className="flex flex-wrap gap-4 items-center">
               <Link 
                 href="/protected/case/new"
-                className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition-colors"
+                className="inline-block bg-[var(--background)] text-[var(--secondary)] font-livvic-bold px-6 py-3 rounded-lg shadow hover:bg-[var(--background-alt)] transition-colors"
               >
                 Create Your Assessment
               </Link>
@@ -208,7 +208,7 @@ console.log("SCREENINGS:", meData.screenings);
               {prepaidCredits <= 2 && (
                 <Link 
                   href="/protected/account"
-                  className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg shadow transition-colors"
+                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--primary)] text-[var(--background)] font-livvic-bold px-6 py-3 rounded-lg shadow transition-colors"
                 >
                   {prepaidCredits === 0 ? '⚠️ Purchase Credits' : '💡 Buy More Credits'}
                 </Link>
@@ -226,7 +226,7 @@ console.log("SCREENINGS:", meData.screenings);
       {/* Date Filter Section */}
       <div className="flex items-center justify-between mb-6 gap-4">
         <div className="flex-grow bg-[var(--background-alt)] p-4 rounded">
-          <h2 className="text-sm font-livvic-bold mb-3 text-[var(--secondary)]">Filter by Date</h2>
+          <h2 className="text-sm font-livvic-bold mb-3 text-[var(--secondary)]">Filter by date</h2>
           <div className="space-y-3">
             <div className="flex gap-2 flex-wrap">
               <button
@@ -237,8 +237,8 @@ console.log("SCREENINGS:", meData.screenings);
                 }}
                 className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "all"
-                    ? "bg-[var(--secondary)] text-white"
-                    : "bg-white border border-[var(--secondary)]/30"
+                    ? "bg-[var(--secondary)] text-[var(--background)]"
+                    : "bg-[var(--background)] border border-[var(--secondary)]/30"
                 }`}
               >
                 All
@@ -251,8 +251,8 @@ console.log("SCREENINGS:", meData.screenings);
                 }}
                 className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "7days"
-                    ? "bg-[var(--secondary)] text-white"
-                    : "bg-white border border-[var(--secondary)]/30"
+                    ? "bg-[var(--secondary)] text-[var(--background)]"
+                    : "bg-[var(--background)] border border-[var(--secondary)]/30"
                 }`}
               >
                 Last 7 Days
@@ -265,8 +265,8 @@ console.log("SCREENINGS:", meData.screenings);
                 }}
                 className={`px-3 py-1 rounded text-sm font-livvic-medium ${
                   dateFilter === "30days"
-                    ? "bg-[var(--secondary)] text-white"
-                    : "bg-white border border-[var(--secondary)]/30"
+                    ? "bg-[var(--secondary)] text-[var(--background)]"
+                    : "bg-[var(--background)] border border-[var(--secondary)]/30"
                 }`}
               >
                 Last 30 Days
@@ -310,7 +310,7 @@ console.log("SCREENINGS:", meData.screenings);
                     setCustomEndDate("");
                     setDateFilter("all");
                   }}
-                  className="px-2 py-1 bg-[var(--secondary)] text-white rounded text-sm font-livvic-medium"
+                  className="px-2 py-1 bg-[var(--secondary)] text-[var(--background)] rounded text-sm font-livvic-medium"
                 >
                   Clear
                 </button>
@@ -359,7 +359,7 @@ console.log("SCREENINGS:", meData.screenings);
   href={`/screening/${s.screeningType || "dyslexia"}/start/${encodeURIComponent(
     s.caseId ?? ""
   )}?year=${encodeURIComponent(s.readingYear ?? "NotSet")}`}
-  className="px-3 py-2 text-sm rounded bg-[var(--secondary)] text-white font-livvic-bold"
+  className="px-3 py-2 text-sm rounded bg-[var(--secondary)] text-[var(--background)] font-livvic-bold"
 >
   Resume
 </a>
@@ -411,7 +411,7 @@ console.log("SCREENINGS:", meData.screenings);
   href={`/screening/${s.screeningType || "dyslexia"}/overview?caseId=${encodeURIComponent(
     s.caseId ?? ""
   )}`}
-  className="px-3 py-2 text-sm rounded bg-[var(--primary)] text-white font-livvic-bold"
+  className="px-3 py-2 text-sm rounded bg-[var(--primary)] text-[var(--background)] font-livvic-bold"
 >
   Review
 </a>

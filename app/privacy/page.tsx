@@ -4,12 +4,12 @@ export default function PrivacyPage() {
     <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
-          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Privacy & Data Protection</h1>
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Privacy and data protection</h1>
         </div>
 
         <div className="bg-[var(--secondary)]/10 border-l-4 border-[var(--secondary)] p-6 mb-8">
           <h2 className="text-2xl font-livvic-bold mb-3 text-[var(--secondary)]">
-            GDPR Compliance Notice
+            GDPR compliance notice
           </h2>
           <p className="text-lg text-[var(--secondary)] font-livvic-medium">
             SkillScan is designed with privacy at its core. We do not store any personally identifiable student information.
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         </div>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What We Do NOT Store</h2>
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What we do not store</h2>
           <ul className="list-disc list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium">
             <li><strong>Student names</strong> – Names are never saved to our database</li>
             <li><strong>Date of birth</strong> – No personal demographic data is collected</li>
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What We DO Store</h2>
+          <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">What we do store</h2>
           <ul className="list-disc list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium">
             <li><strong>Anonymous Case IDs</strong> – Randomly generated reference numbers</li>
             <li><strong>Screening responses</strong> – Student answers to assessment questions</li>
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
 
         <section className="mb-8 bg-yellow-50 border-l-4 border-yellow-500 p-6">
           <h2 className="text-2xl font-livvic-bold mb-4 text-yellow-900">
-            ⚠️ Important: Record-Keeping Requirement
+            ⚠️ Important: record-keeping requirement
           </h2>
           <div className="text-gray-800 space-y-3">
             <p className="font-semibold text-lg">
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">How to Use Case IDs</h2>
+          <h2 className="text-2xl font-semibold mb-4">How to use case IDs</h2>
           <ol className="list-decimal list-inside space-y-3 text-gray-700">
             <li>
               <strong>When creating a new screening:</strong> Note the generated Case ID (e.g., 983079) immediately
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Data Retention</h2>
+          <h2 className="text-2xl font-semibold mb-4">Data retention</h2>
           <p className="text-gray-700 mb-3">
             Screening data (responses and scores) is retained indefinitely unless you request deletion. 
             However, since no personal identifiers are stored, the data cannot be traced back to individual students without your Case ID records.
@@ -90,7 +90,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Word Report Export</h2>
+          <h2 className="text-2xl font-semibold mb-4">Word report export</h2>
           <p className="text-gray-700 mb-3">
             When you export a Word report, you have the option to enter a student name. This name:
           </p>

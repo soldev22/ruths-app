@@ -14,7 +14,7 @@ export default function AIReportPage() {
     try {
       const params = new URLSearchParams(window.location.search);
       setCaseId(params.get("caseId"));
-    } catch (e) {
+    } catch {
       setCaseId(null);
     }
   }, []);
@@ -51,68 +51,43 @@ export default function AIReportPage() {
       const cleaned = sanitizeReport(data.report);
 
       setReport(cleaned);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      if (typeof err === "object" && err && "message" in err) {
+        setError((err as { message?: string }).message || "Something went wrong");
+      } else {
+        setError("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div style={{ padding: "40px", maxWidth: "900px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
-        AI Generated Dyslexia Report
-      </h1>
+    <div className="px-4 py-10 max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold mb-8">AI generated dyslexia report</h1>
 
       {!caseId && (
-        <p style={{ marginTop: "20px", color: "red" }}>
-          No caseId was provided Add caseIdXXXXXX to the URL
-        </p>
+        <p className="mt-5 text-red-600">No caseId was provided. Add caseId=XXXXXX to the URL.</p>
       )}
 
       <button
         onClick={generateReport}
         disabled={loading || !caseId}
-        style={{
-          marginTop: "25px",
-          padding: "12px 20px",
-          fontSize: "18px",
-          fontWeight: "bold",
-          backgroundColor: "#005bbb",
-          color: "white",
-          border: "none",
-          borderRadius: "6px",
-          cursor: loading ? "not-allowed" : "pointer",
-        }}
+        className={`mt-6 px-6 py-3 text-lg font-bold rounded bg-blue-700 text-white transition ${loading ? "opacity-60 cursor-not-allowed" : "hover:bg-blue-800"}`}
       >
-        {loading ? "Generating report" : "Generate AI Report"}
+        {loading ? "Generating report" : "Generate AI report"}
       </button>
 
       {loading && (
-        <p style={{ marginTop: "20px", fontSize: "18px" }}>
-          This will take 3 to 4 minutes as we are giving it our deepest consideration
-        </p>
+        <p className="mt-5 text-lg">This will take 3 to 4 minutes as we are giving it our deepest consideration</p>
       )}
 
       {error && (
-        <p style={{ marginTop: "20px", color: "red", fontSize: "18px" }}>
-          {error}
-        </p>
+        <p className="mt-5 text-red-600 text-lg">{error}</p>
       )}
 
       {report && (
-        <div
-          style={{
-            marginTop: "30px",
-            padding: "25px",
-            border: "2px solid #ccc",
-            borderRadius: "8px",
-            backgroundColor: "#f9f9f9",
-            lineHeight: "1.6",
-            whiteSpace: "pre-wrap",
-            fontSize: "18px",
-          }}
-        >
+        <div className="mt-8 p-6 border-2 border-gray-300 rounded-lg bg-gray-50 leading-relaxed whitespace-pre-wrap text-lg">
           {report}
         </div>
       )}

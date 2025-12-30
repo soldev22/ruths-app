@@ -3,14 +3,14 @@ export default function FAQPage() {
     <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
-          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Frequently Asked Questions</h1>
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">Frequently asked questions</h1>
         </div>
 
         <div className="space-y-6">
         {/* Getting Started */}
         <section>
           <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)] bg-[var(--secondary)]/10 p-3 rounded">
-            Getting Started
+            Getting started
           </h2>
 
           <div className="space-y-4">
@@ -47,7 +47,7 @@ export default function FAQPage() {
         {/* Using the Screening Tool */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Using the Screening Tool
+            Using the screening tool
           </h2>
 
           <div className="space-y-4">
@@ -90,7 +90,7 @@ export default function FAQPage() {
         {/* Understanding Results */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Understanding Results
+            Understanding results
           </h2>
 
           <div className="space-y-4">
@@ -141,7 +141,7 @@ export default function FAQPage() {
         {/* Reports and Export */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Reports and Export
+            Reports and export
           </h2>
 
           <div className="space-y-4">
@@ -177,7 +177,7 @@ export default function FAQPage() {
         {/* Data and Privacy */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Data and Privacy
+            Data and privacy
           </h2>
 
           <div className="space-y-4">
@@ -220,7 +220,7 @@ export default function FAQPage() {
         {/* Technical Issues */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Technical Issues
+            Technical issues
           </h2>
 
           <div className="space-y-4">
@@ -263,7 +263,7 @@ export default function FAQPage() {
         {/* Billing and Subscriptions */}
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-blue-900 bg-blue-50 p-3 rounded">
-            Billing and Subscriptions
+            Billing and subscriptions
           </h2>
 
           <div className="space-y-4">
@@ -287,7 +287,7 @@ export default function FAQPage() {
 
         {/* Still Have Questions? */}
         <section className="bg-green-50 border-l-4 border-green-500 p-6 rounded mt-8">
-          <h2 className="text-2xl font-semibold mb-4 text-green-900">Still Have Questions?</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-green-900">Still have questions?</h2>
           <p className="text-gray-800 mb-3">
             Can't find the answer you're looking for? We're here to help!
           </p>

@@ -50,12 +50,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-wide">
           <Logo />
         </Link>
-        {/* User info (optional) */}
-        {user && (user.name || user.email) && (
-          <div className="ml-4 text-sm font-medium text-[var(--background)]/80">
-            {user.name || user.email}
-          </div>
-        )}
+        {/* User info removed as requested */}
         {/* Actions and Dropdown */}
         <div className="flex items-center gap-4 ml-auto">
           {loaded && user ? (

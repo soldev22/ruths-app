@@ -6,7 +6,7 @@ export default function ScoringGuidePage() {
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
           <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">
-            SkillScan Scoring System Guide
+            SkillScan scoring system guide
           </h1>
         </div>
 
@@ -24,12 +24,12 @@ export default function ScoringGuidePage() {
 
         <section className="mb-8">
           <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
-            Screening Domains
+            Screening domains
           </h2>
           <div className="space-y-6">
             <div className="border-l-4 border-[var(--accent)] pl-4">
               <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
-                Phonological Awareness
+                Phonological awareness
               </h3>
               <p className="text-[var(--primary-text)] font-livvic-medium">
                 Measures the student's ability to recognize and manipulate the
@@ -40,7 +40,7 @@ export default function ScoringGuidePage() {
 
             <div className="border-l-4 border-[var(--accent)]/70 pl-4">
               <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
-                Letter-Sound Knowledge
+                Letter-sound knowledge
               </h3>
               <p className="text-[var(--primary-text)] font-livvic-medium">
                 Assesses familiarity with the alphabetic principle and the
@@ -51,7 +51,7 @@ export default function ScoringGuidePage() {
 
             <div className="border-l-4 border-[var(--secondary)] pl-4">
               <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
-                Word Reading Fluency
+                Word reading fluency
               </h3>
               <p className="text-[var(--primary-text)] font-livvic-medium">
                 Evaluates how quickly and accurately a student can decode and
@@ -61,7 +61,7 @@ export default function ScoringGuidePage() {
 
             <div className="border-l-4 border-[var(--accent)]/40 pl-4">
               <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
-                Reading Comprehension
+                Reading comprehension
               </h3>
               <p className="text-[var(--primary-text)] font-livvic-medium">
                 Measures the student's understanding of text content and ability
@@ -71,7 +71,7 @@ export default function ScoringGuidePage() {
 
             <div className="border-l-4 border-[var(--secondary)]/60 pl-4">
               <h3 className="text-lg font-livvic-bold text-[var(--secondary)] mb-2">
-                Spelling and Writing
+                Spelling and writing
               </h3>
               <p className="text-[var(--primary-text)] font-livvic-medium">
                 Assesses phonetic and orthographic knowledge through spelling
@@ -83,7 +83,7 @@ export default function ScoringGuidePage() {
 
         <section className="mb-8">
           <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">
-            Interpreting Results
+            Interpreting results
           </h2>
           <div className="bg-[var(--secondary)]/10 border border-[var(--secondary)]/20 rounded-lg p-6 mb-4">
             <h3 className="font-livvic-bold text-[var(--secondary)] mb-3">

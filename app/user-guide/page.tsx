@@ -3,7 +3,7 @@ export default function UserGuidePage() {
     <div className="w-full min-h-screen bg-[var(--background)] font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-8">
         <div className="bg-[var(--background)] rounded-2xl shadow-sm p-6 mb-8 border border-[var(--secondary)]/10">
-          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">User Guide</h1>
+          <h1 className="text-4xl font-livvic-bold text-[var(--secondary)]">User guide</h1>
         </div>
         <p className="text-lg text-[var(--primary-text)] font-livvic-medium mb-8">
           Step-by-step instructions for using SkillScan effectively
@@ -16,7 +16,7 @@ export default function UserGuidePage() {
             <span className="bg-[var(--accent)] text-[var(--background)] font-livvic-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               1
             </span>
-            <h2 className="text-2xl font-livvic-bold text-[var(--secondary)]">Creating Your Account</h2>
+            <h2 className="text-2xl font-livvic-bold text-[var(--secondary)]">Creating your account</h2>
           </div>
           <div className="ml-13 space-y-3 text-[var(--primary-text)] font-livvic-medium">
             <p>
@@ -42,7 +42,7 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               2
             </span>
-            <h2 className="text-2xl font-semibold">Creating a New Case</h2>
+            <h2 className="text-2xl font-semibold">Creating a new case</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
             <ol className="list-decimal list-inside ml-4 space-y-2">
@@ -76,12 +76,12 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               3
             </span>
-            <h2 className="text-2xl font-semibold">Completing the Screening</h2>
+            <h2 className="text-2xl font-semibold">Completing the screening</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
             <p>The screening is divided into sections (e.g., Phonological Awareness, Letter-Sound Knowledge).</p>
             
-            <h3 className="font-semibold mt-4">Navigation Box</h3>
+            <h3 className="font-semibold mt-4">Navigation box</h3>
             <ul className="list-disc list-inside ml-4 space-y-1">
               <li>At the top of the page, you'll see buttons for all sections</li>
               <li>The <strong>current section</strong> is highlighted in black</li>
@@ -89,7 +89,7 @@ export default function UserGuidePage() {
               <li><strong>Gray sections</strong> are locked until previous sections are complete</li>
             </ul>
 
-            <h3 className="font-semibold mt-4">Answering Questions</h3>
+            <h3 className="font-semibold mt-4">Answering questions</h3>
             <ol className="list-decimal list-inside ml-4 space-y-2">
               <li>Read each question to the student (or have them read it)</li>
               <li>Select their answer using the radio buttons</li>
@@ -122,14 +122,14 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               4
             </span>
-            <h2 className="text-2xl font-semibold">Viewing Results (Overview Page)</h2>
+            <h2 className="text-2xl font-semibold">Viewing results (overview page)</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
             <p>
               After completing all sections, you'll automatically be taken to the <strong>Overview page</strong>.
             </p>
 
-            <h3 className="font-semibold mt-4">What You'll See</h3>
+            <h3 className="font-semibold mt-4">What you'll see</h3>
             <ol className="list-decimal list-inside ml-4 space-y-2">
               <li>
                 <strong>Section Navigation Box:</strong> Quick links to jump to specific sections
@@ -151,7 +151,7 @@ export default function UserGuidePage() {
               </li>
             </ol>
 
-            <h3 className="font-semibold mt-4">Expanding Sections</h3>
+            <h3 className="font-semibold mt-4">Expanding sections</h3>
             <p>Click on any section card to see:</p>
             <ul className="list-disc list-inside ml-4 space-y-1">
               <li>Each question text</li>
@@ -172,10 +172,10 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               5
             </span>
-            <h2 className="text-2xl font-semibold">Generating Reports</h2>
+            <h2 className="text-2xl font-semibold">Generating reports</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
-            <h3 className="font-semibold">Option 1: Word Report</h3>
+            <h3 className="font-semibold">Option 1: Word report</h3>
             <ol className="list-decimal list-inside ml-4 space-y-2">
               <li>On the Overview page, scroll to the "Student Name" field</li>
               <li>
@@ -186,7 +186,7 @@ export default function UserGuidePage() {
               <li>A formatted .docx file will download to your computer</li>
             </ol>
 
-            <h3 className="font-semibold mt-4">Option 2: AI-Generated Report</h3>
+            <h3 className="font-semibold mt-4">Option 2: AI-generated report</h3>
             <ol className="list-decimal list-inside ml-4 space-y-2">
               <li>Scroll down to the "AI Report Generator" section</li>
               <li>Click "Generate AI Report"</li>
@@ -214,12 +214,12 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               6
             </span>
-            <h2 className="text-2xl font-semibold">Managing Your Dashboard</h2>
+            <h2 className="text-2xl font-semibold">Managing your dashboard</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
             <p>Click <strong>"Dashboard"</strong> in the sidebar to see all your screenings.</p>
 
-            <h3 className="font-semibold mt-4">Date Filtering</h3>
+            <h3 className="font-semibold mt-4">Date filtering</h3>
             <ul className="list-disc list-inside ml-4 space-y-1">
               <li>Click <strong>"All"</strong> to see all screenings</li>
               <li>Click <strong>"Last 7 Days"</strong> to see recent cases</li>
@@ -251,10 +251,10 @@ export default function UserGuidePage() {
             <span className="bg-blue-600 text-white font-bold text-xl rounded-full w-10 h-10 flex items-center justify-center mr-3">
               7
             </span>
-            <h2 className="text-2xl font-semibold">Interpreting Results</h2>
+            <h2 className="text-2xl font-semibold">Interpreting results</h2>
           </div>
           <div className="ml-13 space-y-3 text-gray-700">
-            <h3 className="font-semibold">Understanding Risk Levels</h3>
+            <h3 className="font-semibold">Understanding risk levels</h3>
             <div className="space-y-2 ml-4">
               <div className="flex items-start">
                 <span className="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded mr-2">LOW</span>
@@ -270,7 +270,7 @@ export default function UserGuidePage() {
               </div>
             </div>
 
-            <h3 className="font-semibold mt-4">Next Steps Based on Results</h3>
+            <h3 className="font-semibold mt-4">Next steps based on results</h3>
             <div className="space-y-3 ml-4">
               <div>
                 <p className="font-semibold text-green-700">Low Risk:</p>
@@ -310,10 +310,10 @@ export default function UserGuidePage() {
 
         {/* Quick Reference */}
         <section className="bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-300 rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4 text-blue-900">Quick Reference</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-blue-900">Quick reference</h2>
           <div className="grid md:grid-cols-2 gap-4 text-sm">
             <div>
-              <h3 className="font-semibold text-blue-800 mb-2">Key Reminders</h3>
+              <h3 className="font-semibold text-blue-800 mb-2">Key reminders</h3>
               <ul className="space-y-1 text-gray-700">
                 <li>✓ Always record Case IDs with student names</li>
                 <li>✓ Complete all questions in a section before moving on</li>
@@ -323,7 +323,7 @@ export default function UserGuidePage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-blue-800 mb-2">Need Help?</h3>
+              <h3 className="font-semibold text-blue-800 mb-2">Need help?</h3>
               <ul className="space-y-1 text-gray-700">
                 <li>📧 <a href="mailto:contact@solutionsdeveloped.co.uk" className="text-blue-600 hover:underline">contact@solutionsdeveloped.co.uk</a></li>
                 <li>📞 <a href="tel:07739870670" className="text-blue-600 hover:underline">07739 870670</a></li>

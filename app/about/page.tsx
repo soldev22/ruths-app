@@ -7,7 +7,7 @@ export default function AboutPage() {
         </div>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">The Science Behind Online Screeners</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">The science behind online screeners</h2>
         <p className="text-[var(--primary-text)] font-livvic-medium mb-4">
           Online screening tools like SkillScan are grounded in decades of research into learning difficulties, 
           cognitive assessment, and educational psychology. Digital screeners have become increasingly effective 
@@ -17,7 +17,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-8 bg-[var(--secondary)]/10 border-l-4 border-[var(--secondary)] p-6">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Why Online Screeners Are Effective</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Why online screeners are effective</h2>
         <div className="space-y-4 text-[var(--primary-text)] font-livvic-medium">
           <div>
             <h3 className="text-lg font-livvic-bold mb-2">1. Standardized Assessment</h3>
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       <section className="mb-8 bg-[var(--accent)]/10 border-l-4 border-[var(--accent)] p-6">
         <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--accent)]">
-          ✓ Professional Oversight & Verification
+          ✓ Professional oversight and verification
         </h2>
         <div className="text-[var(--primary-text)] space-y-4 font-livvic-medium">
           <p className="font-livvic-bold text-lg">
@@ -127,7 +127,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">The Role of AI in Report Generation</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">The role of AI in report generation</h2>
         <p className="text-[var(--primary-text)] font-livvic-medium mb-4">
           SkillScan uses artificial intelligence to analyze screening results and generate narrative reports. 
           The AI has been trained to:
@@ -146,7 +146,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-8 bg-yellow-50 border-l-4 border-yellow-500 p-6">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-yellow-900">Important Limitations</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-yellow-900">Important limitations</h2>
         <ul className="list-disc list-inside space-y-2 text-[var(--primary-text)] font-livvic-medium">
           <li>
             <strong>Not a Diagnostic Tool:</strong> SkillScan is a screener, not a diagnostic assessment. 
@@ -168,7 +168,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Research Foundations</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Research foundations</h2>
         <p className="text-[var(--primary-text)] font-livvic-medium mb-4">
           SkillScan is informed by research into:
         </p>
@@ -183,7 +183,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Commitment to Best Practice</h2>
+        <h2 className="text-2xl font-livvic-bold mb-4 text-[var(--secondary)]">Commitment to best practice</h2>
         <p className="text-[var(--primary-text)] font-livvic-medium mb-4">
           SkillScan is committed to:
         </p>

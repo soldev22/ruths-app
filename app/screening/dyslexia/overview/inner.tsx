@@ -21,18 +21,45 @@ type FlatAnswer = {
   correctAnswer?: string | string[];
 };
 
-export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
+type OverviewInnerProps = {
+  caseIdx?: string | null;
+};
+
+export default function OverviewInner({ caseIdx }: OverviewInnerProps = {}) {
   const [loading, setLoading] = useState(true);
-  const [details, setDetails] = useState<any>(null);
+  type Details = {
+    screening: unknown;
+    scoring: {
+      classification: string;
+      overallPercent: number;
+    };
+    sectionScores: SectionScore[];
+    flatAnswers: FlatAnswer[];
+    // Add other fields as needed
+  };
+
+  const [details, setDetails] = useState<Details | null>(null);
   const [openSection, setOpenSection] = useState<string | null>(null);
   const [studentName, setStudentName] = useState("");
   const [teacherNotes, setTeacherNotes] = useState("");
   const [generating, setGenerating] = useState(false);
   const [aiReport, setAiReport] = useState<string | null>(null);
-  const caseId =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("caseId")
-      : null;
+  let caseId: string | null = caseIdx ?? null;
+  let elapsedSeconds: number | null = null;
+  if (!caseId && typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    caseId = params.get("caseId");
+    const elapsed = params.get("elapsedSeconds");
+    if (elapsed && !isNaN(Number(elapsed))) {
+      elapsedSeconds = Number(elapsed);
+    }
+  }
+
+  function formatTime(seconds: number) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
 
   useEffect(() => {
     async function load() {
@@ -53,28 +80,12 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
   const { scoring, sectionScores, flatAnswers } = details;
   console.log("Section Scores:", sectionScores);
 
-  const handleGenerateAiReport = async () => {
-    setGenerating(true);
-    try {
-      const response = await fetch("/api/screening/dyslexia/generate-ai-report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseId, scoring, sectionScores, flatAnswers }),
-      });
-      const data = await response.json();
-      setAiReport(data.report);
-    } catch (error) {
-      console.error("Error generating AI report:", error);
-    } finally {
-      setGenerating(false);
-    }
-  };
+  // Removed unused handleGenerateAiReport
 
-
-  const ragColours: any = {
-    green: "#c6f6d5",
-    amber: "#fefcbf",
-    red: "#fed7d7",
+  const ragColours: Record<string, string> = {
+    green: "bg-green-100 border-green-400",
+    amber: "bg-yellow-100 border-yellow-400",
+    red: "bg-red-100 border-red-400",
   };
 
   const ragLabels: Record<string, string> = {
@@ -87,27 +98,29 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
     <div className="w-full p-6">
       <h1 className="text-3xl font-bold mb-4">Dyslexia Review — Overview</h1>
 
+      {/* Show elapsed time if available */}
+      {typeof elapsedSeconds === 'number' && !isNaN(elapsedSeconds) && (
+        <div className="mb-3">
+          <span className="inline-block bg-gray-900 text-white text-base font-mono px-4 py-2 rounded shadow">
+            Total time taken: {formatTime(elapsedSeconds)}
+          </span>
+        </div>
+      )}
+
       <p className="text-lg mb-1">
         <strong>Case ID:</strong> {caseId}
       </p>
 
       {/* Risk overview panel */}
       <div
-        className="mb-6 p-4 rounded border"
-        style={{
-          background:
-            scoring.classification === "High Risk"
-              ? "#fed7d7"
-              : scoring.classification === "Moderate Risk"
-                ? "#fefcbf"
-                : "#c6f6d5",
-          borderColor:
-            scoring.classification === "High Risk"
-              ? "#f56565"
-              : scoring.classification === "Moderate Risk"
-                ? "#d69e2e"
-                : "#38a169",
-        }}
+        className={[
+          "mb-6 p-4 rounded border",
+          scoring.classification === "High Risk"
+            ? "bg-red-100 border-red-400"
+            : scoring.classification === "Moderate Risk"
+              ? "bg-yellow-100 border-yellow-400"
+              : "bg-green-100 border-green-400"
+        ].join(' ')}
       >
         <h2 className="text-xl font-semibold mb-1">
           Overall Result: <span className="uppercase">{scoring.classification}</span>
@@ -150,7 +163,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
 
                 const data = await res.json();
                 setAiReport(data.report);
-              } catch (err: any) {
+              } catch (err: unknown) {
                 console.error("AI Report Error:", err);
                 alert("Could not generate AI report. See console for details.");
               } finally {
@@ -199,18 +212,17 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
         return (
           <div
             key={sec.sectionId}
-            className="mb-4 border rounded-lg overflow-hidden"
-            style={{
-              display: "flex",
-              background: ragColours[sec.rag] + "55",
-            }}
+            className={[
+              "mb-4 border rounded-lg overflow-hidden flex",
+              ragColours[sec.rag]
+            ].join(' ')}
           >
             {/* RAG side bar */}
             <div
-              style={{
-                width: "10px",
-                background: ragColours[sec.rag],
-              }}
+              className={[
+                sec.rag === "red" ? "bg-red-400" : sec.rag === "amber" ? "bg-yellow-400" : "bg-green-400",
+                "w-2"
+              ].join(' ')} 
             />
 
             {/* Main section */}
@@ -242,12 +254,11 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
                     {ragLabels[sec.rag]}
                   </span>
                   <span
-                    style={{
-                      display: "inline-block",
-                      transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
-                      transition: "transform 0.2s ease",
-                      fontSize: "1.2rem",
-                    }}
+                    className={[
+                      "inline-block transition-transform",
+                      isOpen ? "rotate-0" : "-rotate-90",
+                      "text-xl"
+                    ].join(' ')}
                   >
                     ▶
                   </span>
@@ -308,7 +319,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
 
                 const data = await res.json();
                 setAiReport(data.report);
-              } catch (err: any) {
+              } catch (err) {
                 console.error("AI Report Error:", err);
                 alert("Could not generate AI report. See console for details.");
               } finally {
@@ -383,7 +394,7 @@ export default function OverviewInner(caseIdx: { caseIdx: string | null }) {
                     
                     // Close modal after download
                     setAiReport(null);
-                  } catch (err: any) {
+                  } catch (err) {
                     console.error("Export Error:", err);
                     alert("Could not export report to Word. See console for details.");
                   }

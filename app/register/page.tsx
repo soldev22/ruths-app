@@ -41,8 +41,8 @@ export default function AuthPage() {
       } else {
         if (mode === "login") {
           setMessage("✅ Login successful. Redirecting…");
-          // Instant redirect to home (which will greet the user)
-          window.location.href = "/";
+          // Redirect to dashboard after login
+          window.location.href = "/protected/dashboard";
         } else {
           setMessage("✅ Account created! Switch to Log In and sign in.");
           setMode("login");
@@ -62,16 +62,28 @@ export default function AuthPage() {
         {/* Logo/Brand Section */}
         <div className="text-center mb-8">
           <div className="inline-block bg-[var(--secondary)] text-[var(--background)] px-6 py-3 rounded-2xl shadow-lg mb-4">
-            <h1 className="text-3xl font-livvic-bold">SkillScan</h1>
+            <h1 className="text-3xl font-livvic-bold">Skillscan</h1>
           </div>
-          <p className="text-[var(--secondary-text)] font-livvic-medium">Professional Dyslexia & Dyscalculia Screening</p>
+          <p className="text-[var(--secondary-text)] font-livvic-medium">Professional dyslexia and dyscalculia screening</p>
         </div>
 
         <div className="bg-[var(--background)] shadow-2xl rounded-3xl p-8 border border-[var(--secondary)]/10">
           {/* Title */}
           <h2 className="text-2xl font-livvic-bold mb-6 text-center text-[var(--secondary)]">
-            {mode === "login" ? "Welcome Back" : "Create Account"}
+            {mode === "login" ? "Welcome back" : "Create account"}
           </h2>
+
+          {/* Pricing info for login mode */}
+          {mode === "login" && (
+            <div className="mb-6 bg-[var(--secondary)]/5 rounded-lg p-4 text-[var(--secondary-text)] text-sm">
+              <h3 className="font-bold text-[var(--secondary)] mb-2">Pricing and packages</h3>
+              <ul className="mb-2 list-disc list-inside">
+                <li><span className="font-semibold">Pay Per Use:</span> £5 per assessment</li>
+                <li><span className="font-semibold">School Licence:</span> Contact us for a yearly fee</li>
+              </ul>
+              <div className="text-xs text-[var(--secondary-text)]">All plans include full access to dyslexia and dyscalculia screening tools. No hidden fees. Credits never expire.</div>
+            </div>
+          )}
 
           {/* Toggle */}
           <div className="flex mb-6 bg-[var(--secondary)]/10 rounded-xl p-1">
@@ -111,79 +123,17 @@ export default function AuthPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name only for register */}
             {mode === "register" && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium text-[var(--secondary)] mb-2 font-livvic-medium">
-                    Name (optional)
-                  </label>
-                  <input
-                    className="w-full border-2 border-[var(--secondary)]/20 rounded-xl px-4 py-3 text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)] transition-all outline-none font-livvic-medium"
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  />
-                </div>
-                
-                <div className="space-y-3">
-                  <label className="block text-sm font-semibold text-[var(--secondary)] font-livvic-medium">I am a...</label>
-                  <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setForm({ ...form, userType: "teacher" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
-                        form.userType === "teacher"
-                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
-                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
-                      }`}
-                    >
-                      <div className="font-livvic-bold">👩‍🏫 Teacher</div>
-                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">Multiple students</div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setForm({ ...form, userType: "individual" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
-                        form.userType === "individual"
-                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
-                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
-                      }`}
-                    >
-                      <div className="font-livvic-bold">👤 Parent/Individual</div>
-                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">For my child or me</div>
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <label className="block text-sm font-semibold text-[var(--secondary)] font-livvic-medium">Account Type</label>
-                  <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setForm({ ...form, accountType: "individual" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
-                        form.accountType === "individual"
-                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
-                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
-                      }`}
-                    >
-                      <div className="font-livvic-bold">Pay Per Use</div>
-                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">£5 per assessment</div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setForm({ ...form, accountType: "school" })}
-                      className={`flex-1 py-3 px-4 rounded-xl border-2 text-sm font-livvic-medium transition-all duration-200 ${
-                        form.accountType === "school"
-                          ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--secondary)] shadow-md"
-                          : "bg-[var(--background)] border-[var(--secondary)]/20 text-[var(--secondary-text)] hover:border-[var(--accent)]/50 hover:shadow"
-                      }`}
-                    >
-                      <div className="font-livvic-bold">School License</div>
-                      <div className="text-xs mt-1 opacity-80 font-livvic-medium">Contact us</div>
-                    </button>
-                  </div>
-                </div>
-              </>
+              <div>
+                <label className="block text-sm font-medium text-[var(--secondary)] mb-2 font-livvic-medium">
+                  Name (optional)
+                </label>
+                <input
+                  className="w-full border-2 border-[var(--secondary)]/20 rounded-xl px-4 py-3 text-sm focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)] transition-all outline-none font-livvic-medium"
+                  placeholder="Your name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </div>
             )}
 
             <div>

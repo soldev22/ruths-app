@@ -1,0 +1,72 @@
+.account-bg {
+  background: var(--background);
+}
+.account-surface {
+  background: var(--surface);
+}
+.account-text-primary {
+  color: var(--text-primary);
+}
+.account-text-secondary {
+  color: var(--text-secondary);
+}
+.account-text-tertiary {
+  color: var(--text-tertiary);
+}
+.account-on-primary {
+  color: var(--on-primary);
+}
+.account-on-secondary {
+  color: var(--on-secondary);
+}
+.account-on-success {
+  color: var(--on-success);
+}
+.account-on-accent-alt {
+  color: var(--on-accent-alt);
+}
+.account-success {
+  background: var(--success);
+}
+.account-success-light {
+  background: var(--success-light);
+}
+.account-error-light {
+  background: var(--error-light);
+}
+.account-info-light {
+  background: var(--info-light);
+}
+.account-border {
+  border-color: var(--border);
+}
+.account-border-success {
+  border-color: var(--success);
+}
+.account-border-accent-alt {
+  border-color: var(--accent-alt);
+}
+.account-border-info {
+  border-left: 4px solid var(--info);
+}
+.account-accent {
+  color: var(--accent);
+}
+.account-accent-alt {
+  color: var(--accent-alt);
+}
+.account-success-color {
+  color: var(--success);
+}
+.account-error-color {
+  color: var(--error);
+}
+.account-background-alt {
+  background: var(--background-alt);
+}
+.account-secondary {
+  background: var(--secondary);
+}
+.account-secondary-light {
+  background: var(--secondary-light);
+}

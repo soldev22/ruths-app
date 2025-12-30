@@ -7,7 +7,9 @@ interface DyslexiaStartPageProps {
   searchParams: { year?: string };
 }
 
-export default async function DyslexiaStartPage({ params, searchParams }: DyslexiaStartPageProps) {
+export default async function DyslexiaStartPage(props: DyslexiaStartPageProps) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   try {
     const caseId = params?.caseId;
     const year = searchParams?.year;
